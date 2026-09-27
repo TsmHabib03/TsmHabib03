@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="600" height="204" viewBox="0 0 600 204" role="img" aria-labelledby="title description">
-<title id="title">RepCore Fitness</title>
-<desc id="description">Fitness membership and QR attendance.</desc>
+<title id="title">Manila City Council HRIS</title>
+<desc id="description">Employee records and leave management.</desc>
 <defs><linearGradient id="background" x2="1" y2="1"><stop stop-color="#24283B"/><stop offset="1" stop-color="#263151"/></linearGradient></defs><rect x="1" y="1" width="598" height="186" rx="18" fill="url(#background)" stroke="#414868"/>
-<text x="28" y="33" fill="#BB9AF7" font-family="Consolas, 'Liberation Mono', monospace" font-size="14" font-weight="400" letter-spacing="1">03 / MEMBERSHIP SYSTEM</text>
-<text x="28" y="77" fill="#D5DEFB" font-family="'Segoe UI', Arial, sans-serif" font-size="30" font-weight="600" >RepCore Fitness</text>
-<text x="28" y="115" fill="#A9B1D6" font-family="'Segoe UI', Arial, sans-serif" font-size="21" font-weight="400" >Fitness membership and QR attendance.</text>
+<text x="28" y="33" fill="#BB9AF7" font-family="Consolas, 'Liberation Mono', monospace" font-size="14" font-weight="400" letter-spacing="1">04 / INFORMATION SYSTEM</text>
+<text x="28" y="77" fill="#D5DEFB" font-family="'Segoe UI', Arial, sans-serif" font-size="30" font-weight="600" >Manila City Council HRIS</text>
+<text x="28" y="115" fill="#A9B1D6" font-family="'Segoe UI', Arial, sans-serif" font-size="21" font-weight="400" >Employee records and leave management.</text>
 <text x="28" y="162" fill="#7DCFFF" font-family="Consolas, 'Liberation Mono', monospace" font-size="14" font-weight="400" >VIEW REPOSITORY</text>
 <text x="558" y="164" fill="#7AA2F7" font-family="'Segoe UI', Arial, sans-serif" font-size="26" font-weight="400" >↗</text>
 </svg>

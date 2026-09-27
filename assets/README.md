@@ -1,39 +1,53 @@
-# Profile artwork
+# Profile assets
 
-Regenerate the SVGs after editing their text or layout:
+All artwork uses a TokyoNight Storm palette: navy panels, blue/cyan accents, muted purple, and pale text. Images are stored in this repository; visitors do not depend on a third-party statistics or icon service.
+
+## Static artwork
+
+Edit `scripts/generate-profile-assets.py` and regenerate:
 
 ```sh
 python scripts/generate-profile-assets.py
 ```
 
-The generator uses only Python's standard library. All assets are local, with no external fonts, scripts, trackers, or statistics services.
+Shared SVG helpers and colors live in `scripts/profile_theme.py`. The hero, grouped technology wall, project cards, and portfolio CTA have no animation. Mobile picture sources preserve readable type and icons. Card images wrap from two columns to one without tables.
 
-## GitHub presentation
+## Contribution data
 
-- `hero.svg` and `hero-mobile.svg`: identity, terminal detail, and a slow cursor pulse.
-- `tech-stack.svg` and `tech-stack-mobile.svg`: a 42-second CSS animation moves two identical icon sequences horizontally. Local SVG symbols keep the image self-contained and the loop seamless.
-- `tech-stack-static.svg` and `tech-stack-static-mobile.svg`: all 13 icons remain visible for visitors who prefer reduced motion. The README selects these through `<picture>`; animations also honor reduced motion inside the SVG.
-- `project-*.svg`: four cards wrapped in ordinary repository links. Their 400px display width allows two columns on a wide profile and one on a narrow screen, without tables.
-- `portfolio.svg` and `portfolio-mobile.svg`: linked portfolio call to action.
+`.github/workflows/update-activity.yml` refreshes the calendar daily at 02:17 UTC, on relevant code changes, and through **Run workflow**. It uses GitHub's built-in `GITHUB_TOKEN` with repository contents write permission; no personal access token or third-party service is needed. The workflow starts after these files reach the repository's default `main` branch, with Actions enabled. Branch protection and repository workflow policies can prevent the generated commit; the workflow log reports any such failure.
 
-GitHub-compatible image markup carries the visuals. README text provides the introduction, study topics, web development areas, and status. Every image has alternative text. No JavaScript runs in the README. SVG animations run when the client supports animated SVG images; static clients retain a readable first frame.
+The official GitHub GraphQL `contributionCalendar` supplies actual daily counts, intensity levels, and the rolling-year total. The generator checks the total against all daily counts, requires a complete consecutive calendar, and rejects stale or malformed responses. Failed refreshes leave the last successful images in place. Both images show their reporting dates and last update date.
 
-## Icon sources
+- `assets/github-activity.svg`: full contribution calendar, total contributions, active days, and busiest-day count.
+- `assets/github-activity-mobile.svg`: the same full year split into two chronological calendar blocks.
+- `assets/activity-data.json`: the verified source snapshot used for both images.
 
-The icons in `icons/` are the generator's inputs. Brand marks belong to their respective owners.
+The graphic complements the native GitHub profile contribution UI. It is a dated, generated image, not a live embed. No count is hardcoded into the README or generator. Counts reflect data visible to the API; GitHub determines which contributions qualify. Statistics are computed only from those returned counts.
 
-- **Devicon:** HTML5, CSS3, JavaScript, Tailwind CSS, Bootstrap, PHP, MySQL, Java, Git, GitHub, and VS Code. [Pinned source](https://github.com/devicons/devicon/tree/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons) · [MIT license](icons/LICENSE-devicon.txt).
-- **Simple Icons:** Google Apps Script and Google Sheets. [Pinned source](https://github.com/simple-icons/simple-icons/tree/d4e6ba93e48f178898707f0145ec285f28b64b38/icons) · [CC0 license](icons/LICENSE-simple-icons.txt).
+Refresh locally using existing GitHub CLI authentication:
 
-The icons use pale backplates for contrast. Simple Icons marks use brand colors. SVG definition IDs are namespaced when combining icons.
+```sh
+python scripts/update_activity.py --github-cli
+```
 
-## Content sources
+Or run the script with `GITHUB_TOKEN` already set in the environment. Do not place credentials in repository files.
 
-Project links and the portfolio were rechecked on 2026-09-27. Descriptions come from the public repository documentation and source inspected in this session:
+## Icon attribution
 
-- [QCU Schedule](https://github.com/TsmHabib03/QCU-Schedule-Web-App): landing page, architecture, and Google integration documentation.
-- [RepCore Fitness](https://github.com/TsmHabib03/Repcorefitness): membership and QR attendance workflows.
-- [ASJ Attendance Checker](https://github.com/TsmHabib03/ASJ-Attendance-Checker): QR attendance, PHP, and MySQL.
-- [Event Registration](https://github.com/TsmHabib03/Event-Registration-with-QR-Tickets-System): JavaScript, Google Apps Script, Google Sheets, and QR registration.
+The 13 local icon inputs are in `assets/icons/`. Brand marks belong to their respective owners.
 
-Update age and year level in the README as needed. Project-card text lives in `PROJECTS` in the generator; repository links live in the README. No employment, client relationships, usage numbers, or expert-level claims are inferred from project names.
+- **Devicon:** HTML5, CSS3, JavaScript, PHP, Java, Tailwind CSS, Bootstrap, MySQL, Git, GitHub, VS Code, PowerShell. [Pinned source](https://github.com/devicons/devicon/tree/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons) · [MIT license](icons/LICENSE-devicon.txt).
+- **Simple Icons:** XAMPP. [Pinned source](https://github.com/simple-icons/simple-icons/tree/d4e6ba93e48f178898707f0145ec285f28b64b38/icons) · [CC0 license](icons/LICENSE-simple-icons.txt).
+
+Source icons use pale backplates. Definition IDs are namespaced when combining them into the technology wall.
+
+## Project sources
+
+Public repositories and links were checked on 2026-09-27:
+
+- [QCU Schedule](https://github.com/TsmHabib03/QCU-Schedule-Web-App): student schedule platform.
+- [ASJ Attendance Checker](https://github.com/TsmHabib03/ASJ-Attendance-Checker): QR attendance and role-based dashboards.
+- [RepCore Fitness](https://github.com/TsmHabib03/Repcorefitness): membership and attendance workflows.
+- [Manila City Council HRIS](https://github.com/TsmHabib03/Manila-City-Council-HRIS): employee records and leave management, documented in its README.
+
+No employment, client relationship, adoption, or expert-level claims are inferred from repository names.

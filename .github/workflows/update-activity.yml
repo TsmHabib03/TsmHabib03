@@ -1,0 +1,42 @@
+name: Refresh GitHub activity
+
+on:
+  schedule:
+    - cron: "17 2 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/update-activity.yml"
+      - "scripts/update_activity.py"
+      - "scripts/profile_theme.py"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: profile-activity
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Generate activity graphics from GitHub data
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 scripts/update_activity.py --username TsmHabib03
+      - name: Save refreshed graphics
+        run: |
+          git add assets/github-activity.svg assets/github-activity-mobile.svg assets/activity-data.json
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Refresh GitHub contribution activity"
+          git push origin HEAD:main
