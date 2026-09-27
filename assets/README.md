@@ -10,7 +10,7 @@ Edit `scripts/generate-profile-assets.py` and regenerate:
 python scripts/generate-profile-assets.py
 ```
 
-Shared SVG helpers and colors live in `scripts/profile_theme.py`. The hero, grouped technology wall, project cards, and portfolio CTA have no animation. Mobile picture sources preserve readable type and icons. Card images wrap from two columns to one without tables.
+Shared SVG helpers and colors live in `scripts/profile_theme.py`. The pixel-art hero, centered technology icon wall, project cards, and portfolio CTA have no animation. Mobile picture sources preserve readable type and icons. Card images wrap from two columns to one without tables.
 
 ## Contribution data
 
@@ -34,12 +34,12 @@ Or run the script with `GITHUB_TOKEN` already set in the environment. Do not pla
 
 ## Icon attribution
 
-The 13 local icon inputs are in `assets/icons/`. Brand marks belong to their respective owners.
+The 14 local icon inputs are in `assets/icons/`, stored as raw brand SVGs. Brand marks belong to their respective owners.
 
-- **Devicon:** HTML5, CSS3, JavaScript, PHP, Java, Tailwind CSS, Bootstrap, MySQL, Git, GitHub, VS Code, PowerShell. [Pinned source](https://github.com/devicons/devicon/tree/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons) · [MIT license](icons/LICENSE-devicon.txt).
-- **Simple Icons:** XAMPP. [Pinned source](https://github.com/simple-icons/simple-icons/tree/d4e6ba93e48f178898707f0145ec285f28b64b38/icons) · [CC0 license](icons/LICENSE-simple-icons.txt).
+- **Devicon:** HTML5, CSS3, JavaScript, PHP, Java, Tailwind CSS, Bootstrap, MySQL, Git, GitHub, VS Code, Docker. [Pinned source](https://github.com/devicons/devicon/tree/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons) · [MIT license](icons/LICENSE-devicon.txt).
+- **Simple Icons:** Laragon, Google Apps Script. [Pinned source](https://github.com/simple-icons/simple-icons/tree/d4e6ba93e48f178898707f0145ec285f28b64b38/icons) · [CC0 license](icons/LICENSE-simple-icons.txt).
 
-Source icons use pale backplates. Definition IDs are namespaced when combining them into the technology wall.
+Definition IDs are namespaced when combining them into the technology wall. Laragon and Google Apps Script icons are tinted to `#0E83CD` and `#4285F4` (Simple Icons brand colors) inside the generator, because Simple Icons ships single-path glyphs without colors.
 
 ## Project sources
 

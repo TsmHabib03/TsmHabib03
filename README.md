@@ -1,7 +1,7 @@
 <h1 align="center">
   <picture>
     <source media="(max-width: 600px)" srcset="assets/hero-mobile.svg">
-    <img src="assets/hero.svg" width="100%" alt="Habib D. Jaudian">
+    <img src="assets/hero.svg" width="100%" alt="Habib Jaudian D. — pixel-art night skyline banner">
   </picture>
 </h1>
 
@@ -12,10 +12,12 @@
 
 ### Tech Stack
 
-<picture>
-  <source media="(max-width: 600px)" srcset="assets/tech-stack-mobile.svg">
-  <img src="assets/tech-stack.svg" width="100%" alt="Languages: HTML5, CSS3, JavaScript, PHP, Java. Frameworks / UI: Tailwind CSS, Bootstrap. Database: MySQL. Tools: Git, GitHub, VS Code, XAMPP, PowerShell.">
-</picture>
+<p align="center">
+  <picture>
+    <source media="(max-width: 660px)" srcset="assets/tech-stack-mobile.svg">
+    <img src="assets/tech-stack.svg" width="440" alt="HTML5, CSS3, JavaScript, PHP, Java, Tailwind CSS, Bootstrap, MySQL, Git, GitHub, VS Code, Docker, Laragon, Google Apps Script">
+  </picture>
+</p>
 
 ### GitHub Activity
 
