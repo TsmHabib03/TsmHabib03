@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="480" height="148" viewBox="0 0 480 148" role="img" aria-labelledby="title description">
+<title id="title">Explore my work — Interactive Portfolio</title>
+<desc id="description">Explore my work — Interactive Portfolio</desc>
+<rect x="1" y="1" width="478" height="146" rx="18" fill="#091426" stroke="#233D5B"/>
+<path d="M1 25V123" stroke="#5795FF" stroke-width="4"/>
+<text x="24" y="59" fill="#F3F7FF" font-family="Consolas, 'Liberation Mono', monospace" font-size="25" font-weight="700" >&gt;_ EXPLORE MY WORK</text>
+<text x="25" y="105" fill="#76D9EF" font-family="'Segoe UI', Arial, sans-serif" font-size="22" font-weight="400" >Interactive Portfolio</text>
+<circle cx="423" cy="74" r="25" fill="#152F52" stroke="#5795FF"/>
+<path d="M414 83L432 65M414 65H432V83" fill="none" stroke="#76D9EF" stroke-width="2"/>
+</svg>

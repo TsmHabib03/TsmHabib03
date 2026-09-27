@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="600" height="376" viewBox="0 0 600 376" role="img" aria-labelledby="title description">
+<title id="title">Habib D. Jaudian</title>
+<desc id="description">BSCS student, web developer, and aspiring software engineer. Quezon City University, Philippines. Building web apps.</desc>
+<rect x="1" y="1" width="598" height="374" rx="18" fill="#091426" stroke="#233D5B"/>
+<defs><pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse">
+      <path d="M28 0H0V28" fill="none" stroke="#172B45" stroke-width="1"/>
+    </pattern></defs>
+<rect x="348.0" y="18" width="240.0" height="340" rx="12" fill="url(#grid)"/>
+<style>@keyframes breathe{0%,100%{opacity:.3}50%{opacity:1}}.cursor{animation:breathe 3s ease-in-out infinite}@media(prefers-reduced-motion:reduce){.cursor{animation:none}}</style>
+<path d="M32 1H140" stroke="#5795FF" stroke-width="3"/>
+<text x="36" y="44" fill="#A6B8D0" font-family="Consolas, 'Liberation Mono', monospace" font-size="14" font-weight="400" letter-spacing="1">QCU / COMPUTER SCIENCE / PHILIPPINES</text>
+<text x="34" y="119" fill="#F3F7FF" font-family="'Segoe UI', Arial, sans-serif" font-size="57" font-weight="700" >HABIB D.</text>
+<text x="34" y="183" fill="#F3F7FF" font-family="'Segoe UI', Arial, sans-serif" font-size="57" font-weight="700" >JAUDIAN</text>
+<text x="36" y="227" fill="#76D9EF" font-family="Consolas, 'Liberation Mono', monospace" font-size="18" font-weight="400" >BSCS STUDENT // WEB DEVELOPER</text>
+<text x="36" y="254" fill="#76D9EF" font-family="Consolas, 'Liberation Mono', monospace" font-size="18" font-weight="400" >ASPIRING SOFTWARE ENGINEER</text>
+<text x="36" y="329" fill="#F3F7FF" font-family="Consolas, 'Liberation Mono', monospace" font-size="23" font-weight="400" >&gt; building_web_apps();</text>
+<rect class="cursor" x="340" y="310" width="10" height="24" fill="#5795FF"/>
+</svg>
