@@ -3,7 +3,9 @@ from argparse import Namespace
 from copy import deepcopy
 from datetime import date, timedelta
 from pathlib import Path
+import json
 import sys
+from tempfile import TemporaryDirectory
 import unittest
 from unittest.mock import patch
 import xml.etree.ElementTree as ET
@@ -71,11 +73,42 @@ class CalendarIntegrity(unittest.TestCase):
             self.assertEqual(set(dates), {day["date"] for day in data["days"]})
 
     def test_network_failure_does_not_replace_existing_artwork(self):
-        with patch("argparse.ArgumentParser.parse_args", return_value=Namespace(username="fixture", github_cli=False)), \
+        with patch("argparse.ArgumentParser.parse_args", return_value=Namespace(username="fixture", github_cli=False, render_snapshot=False)), \
              patch.object(activity, "fetch_calendar", side_effect=RuntimeError("Network unavailable")), \
              patch.object(activity, "write_assets") as write:
             with self.assertRaisesRegex(RuntimeError, "Network unavailable"):
                 activity.main()
+            write.assert_not_called()
+
+    def test_offline_redraw_preserves_saved_dates_and_never_fetches(self):
+        data = activity.normalize_calendar(self.calendar, self.today)
+        data.update(username="fixture", updated=self.today.isoformat())
+        with TemporaryDirectory() as directory:
+            snapshot = Path(directory) / "activity-data.json"
+            original = json.dumps(data)
+            snapshot.write_text(original, encoding="utf-8")
+            with patch.object(activity, "ASSETS", Path(directory)), \
+                 patch("sys.argv", ["update_activity.py", "--render-snapshot"]), \
+                 patch.object(activity, "fetch_calendar") as fetch, \
+                 patch.object(activity, "write_assets") as write:
+                activity.main()
+            fetch.assert_not_called()
+            self.assertEqual(snapshot.read_text(encoding="utf-8"), original)
+            outputs = write.call_args.args[0]
+            self.assertEqual(len(outputs), 2)
+            for output in outputs.values():
+                self.assertIn("Updated 2025-12-31 UTC", output)
+
+    def test_offline_redraw_rejects_inflated_snapshot_without_writing(self):
+        data = activity.normalize_calendar(self.calendar, self.today)
+        data.update(username="fixture", updated=self.today.isoformat(), total=999)
+        with TemporaryDirectory() as directory:
+            (Path(directory) / "activity-data.json").write_text(json.dumps(data), encoding="utf-8")
+            with patch.object(activity, "ASSETS", Path(directory)), \
+                 patch("sys.argv", ["update_activity.py", "--render-snapshot"]), \
+                 patch.object(activity, "write_assets") as write:
+                with self.assertRaisesRegex(ValueError, "total"):
+                    activity.main()
             write.assert_not_called()
 
     def test_partial_month_does_not_hide_the_next_month_label(self):

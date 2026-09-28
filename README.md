@@ -15,7 +15,7 @@
 <p align="center">
   <picture>
     <source media="(max-width: 660px)" srcset="assets/tech-stack-mobile.svg">
-    <img src="assets/tech-stack.svg" width="440" alt="HTML5, CSS3, JavaScript, PHP, Java, Tailwind CSS, Bootstrap, MySQL, Git, GitHub, VS Code, Docker, Laragon, Google Apps Script">
+    <img src="assets/tech-stack.svg" width="480" alt="Languages: HTML5, CSS3, JavaScript, PHP, Java. UI and data: Tailwind CSS, Bootstrap, MySQL. Tools: Git, GitHub, VS Code, Docker, Laragon, Google Apps Script.">
   </picture>
 </p>
 
@@ -33,14 +33,36 @@
 ### Featured Projects
 
 <p align="center">
-  <a href="https://github.com/TsmHabib03/QCU-Schedule-Web-App"><img src="assets/project-qcu-schedule.svg" width="400" alt="QCU Schedule — class schedules and student tools for QCU. View repository."></a>
-  <a href="https://github.com/TsmHabib03/ASJ-Attendance-Checker"><img src="assets/project-asj-attendance.svg" width="400" alt="ASJ Attendance Checker — QR attendance with role-based dashboards. View repository."></a>
-  <a href="https://github.com/TsmHabib03/Repcorefitness"><img src="assets/project-repcore-fitness.svg" width="400" alt="RepCore Fitness — fitness membership and QR attendance. View repository."></a>
-  <a href="https://github.com/TsmHabib03/Manila-City-Council-HRIS"><img src="assets/project-manila-hris.svg" width="400" alt="Manila City Council HRIS — employee records and leave management. View repository."></a>
+  <a href="https://github.com/TsmHabib03/QCU-Schedule-Web-App">
+    <picture>
+      <source media="(max-width: 660px)" srcset="assets/project-qcu-schedule-mobile.svg">
+      <img src="assets/project-qcu-schedule.svg" width="100%" alt="QCU Schedule — class schedules and student tools for QCU. HTML, CSS, JavaScript. View repository.">
+    </picture>
+  </a>
+  <a href="https://github.com/TsmHabib03/ASJ-Attendance-Checker">
+    <picture>
+      <source media="(max-width: 660px)" srcset="assets/project-asj-attendance-mobile.svg">
+      <img src="assets/project-asj-attendance.svg" width="100%" alt="ASJ Attendance Checker — QR attendance with role-based dashboards. PHP, MySQL, JavaScript. View repository.">
+    </picture>
+  </a>
+  <a href="https://github.com/TsmHabib03/Repcorefitness">
+    <picture>
+      <source media="(max-width: 660px)" srcset="assets/project-repcore-fitness-mobile.svg">
+      <img src="assets/project-repcore-fitness.svg" width="100%" alt="RepCore Fitness — fitness membership and QR attendance. PHP, MySQL, JavaScript. View repository.">
+    </picture>
+  </a>
+  <a href="https://github.com/TsmHabib03/Manila-City-Council-HRIS">
+    <picture>
+      <source media="(max-width: 660px)" srcset="assets/project-manila-hris-mobile.svg">
+      <img src="assets/project-manila-hris.svg" width="100%" alt="Manila City Council HRIS — employee records and leave management. Java, Spring Boot, MySQL. View repository.">
+    </picture>
+  </a>
 </p>
 
 <a href="https://my-portfolio.jaudianhabib879.workers.dev/">
   <picture>
+    <source media="(prefers-reduced-motion: reduce) and (max-width: 600px)" srcset="assets/portfolio-mobile-still.svg">
+    <source media="(prefers-reduced-motion: reduce)" srcset="assets/portfolio-still.svg">
     <source media="(max-width: 600px)" srcset="assets/portfolio-mobile.svg">
     <img src="assets/portfolio.svg" width="100%" alt="View portfolio — explore my work.">
   </picture>

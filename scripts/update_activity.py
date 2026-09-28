@@ -8,7 +8,7 @@ import json
 import os
 import subprocess
 from urllib.request import Request, urlopen
-from profile_theme import ASSETS, MUTED, BLUE, CYAN, PURPLE, text, rect, frame, svg, write_assets
+from profile_theme import ASSETS, NAVY, MUTED, BLUE, CYAN, text, rect, frame, svg, write_assets, city_scene
 
 QUERY = """query($login: String!) {
   user(login: $login) {
@@ -78,7 +78,7 @@ def weeks_from_days(days):
     return list(weeks.values())
 
 
-def calendar_grid(weeks, x, y, step):
+def calendar_grid(weeks, x, y, step, mobile=False):
     body = []
     previous_month, labels = None, []
     for column, week in enumerate(weeks):
@@ -96,39 +96,42 @@ def calendar_grid(weeks, x, y, step):
             if day is not None:
                 body.append(f'<g><title>{day["date"]}: {day["count"]} contributions</title>'
                             + rect(x + column * step, y + row * step, step - 4, step - 4,
-                                   COLORS[day["level"]], 3, "none") + "</g>")
+                                   COLORS[day["level"]], 1, "none") + "</g>")
     for offset, month in labels:
-        body.append(text(x + offset, y - 13, month, 12, MUTED, True))
+        body.append(text(x + offset, y - 13, month, 15 if mobile else 12, MUTED, True))
     for row, label in [(1, "Mon"), (3, "Wed"), (5, "Fri")]:
-        body.append(text(x - 40, y + row * step + 12, label, 11, MUTED, True))
+        body.append(text(x - 40, y + row * step + 10, label, 13 if mobile else 11, MUTED, True))
     return "\n".join(body)
 
 
 def render_activity(data, mobile=False):
-    w, h = (640, 628) if mobile else (1200, 386)
+    w, h = (480, 504) if mobile else (840, 296)
     total = data["total"]
     active = sum(day["count"] > 0 for day in data["days"])
     busiest = max(day["count"] for day in data["days"])
-    body = [frame(w, h), text(32, 35, "Contribution activity", 18, PURPLE, True),
-            text(32, 99, f"{total:,}", 52, weight=700),
-            text(32, 129, "contributions in the last year", 17, MUTED),
-            text(350 if mobile else 722, 94, active, 32, CYAN, True),
-            text(350 if mobile else 722, 122, "ACTIVE DAYS", 13, MUTED, True),
-            text(490 if mobile else 961, 94, busiest, 32, BLUE, True),
-            text(490 if mobile else 961, 122, "BUSIEST DAY", 13, MUTED, True)]
+    body = [frame(w, h), city_scene(w, h, .38),
+            text(24, 46, f"{total:,}", 36, weight=700),
+            text(24, 70, "contributions in the last year", 15 if mobile else 14, MUTED),
+            text(270 if mobile else 554, 43, active, 28, CYAN, True),
+            text(270 if mobile else 554, 66, "Active days", 14, MUTED),
+            text(374 if mobile else 710, 43, busiest, 28, BLUE, True),
+            text(374 if mobile else 710, 66, "Busiest day", 14, MUTED)]
     weeks = weeks_from_days(data["days"])
     if mobile:
-        body += [calendar_grid(weeks[:27], 88, 191, 18), calendar_grid(weeks[27:], 88, 389, 18)]
+        # Opaque sky behind the data keeps windows from competing with day cells.
+        body += [rect(16, 102, w - 32, 304, NAVY, 0, "none"),
+                 calendar_grid(weeks[:27], 64, 134, 14, True),
+                 calendar_grid(weeks[27:], 64, 298, 14, True)]
     else:
-        body.append(calendar_grid(weeks, 78, 182, 20))
+        body += [rect(16, 94, w - 32, 130, NAVY, 0, "none"), calendar_grid(weeks, 64, 122, 14)]
     period = f'{data["days"][0]["date"]} to {data["days"][-1]["date"]}'
-    body += [text(32, 555 if mobile else 349, period, 13, MUTED, True),
-             text(32, 580 if mobile else 372, f'Updated {data["updated"]} UTC · GitHub data', 12, MUTED, True)]
-    legend_x, legend_y = (378, 595) if mobile else (970, 346)
-    body.append(text(legend_x - 38, legend_y + 12, "Less", 11, MUTED, True))
+    body += [text(24, 436 if mobile else 252, period, 15 if mobile else 12, MUTED, True),
+             text(24, 460 if mobile else 276, f'Updated {data["updated"]} UTC · GitHub data', 14 if mobile else 11, MUTED, True)]
+    legend_x, legend_y = (292, 477) if mobile else (682, 263)
+    body.append(text(legend_x - 42, legend_y + 10, "Less", 13 if mobile else 11, MUTED, True))
     for index, color in enumerate(COLORS):
-        body.append(rect(legend_x + index * 20, legend_y, 14, 14, color, 3, "none"))
-    body.append(text(legend_x + 106, legend_y + 12, "More", 11, MUTED, True))
+        body.append(rect(legend_x + index * 18, legend_y, 10, 10, color, 1, "none"))
+    body.append(text(legend_x + 94, legend_y + 10, "More", 13 if mobile else 11, MUTED, True))
     description = (f"{total} contributions in the last year, {active} active days, and {busiest} contributions on the busiest day. "
                    f"{period}. Updated {data['updated']} UTC. Generated from GitHub contribution data; not the native profile interface.")
     return svg(w, h, f"GitHub Activity — {data['username']}", "\n".join(body), description)
@@ -137,8 +140,23 @@ def render_activity(data, mobile=False):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--username", default="TsmHabib03")
-    parser.add_argument("--github-cli", action="store_true")
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--github-cli", action="store_true")
+    mode.add_argument("--render-snapshot", action="store_true",
+                      help="Redraw the saved snapshot offline, preserving its reporting and update dates.")
     args = parser.parse_args()
+    if args.render_snapshot:
+        data = json.loads((ASSETS / "activity-data.json").read_text(encoding="utf-8"))
+        if any(type(day["level"]) is not int or not 0 <= day["level"] < len(LEVELS) for day in data["days"]):
+            raise ValueError("Invalid contribution level in saved snapshot.")
+        # Apply the same integrity checks, relative to the recorded update date.
+        calendar = {"totalContributions": data["total"], "weeks": [{"contributionDays": [
+            {"date": day["date"], "contributionCount": day["count"], "contributionLevel": LEVELS[day["level"]]}
+            for day in data["days"]]}]}
+        normalize_calendar(calendar, date.fromisoformat(data["updated"]))
+        write_assets({"github-activity.svg": render_activity(data), "github-activity-mobile.svg": render_activity(data, True)})
+        print(f"Redrew the verified snapshot dated {data['updated']}; no data or dates changed.")
+        return
     data = normalize_calendar(fetch_calendar(args.username, args.github_cli))
     data.update(username=args.username, updated=datetime.now(timezone.utc).date().isoformat(),
                 source="https://docs.github.com/en/graphql/reference/objects#contributioncalendar")

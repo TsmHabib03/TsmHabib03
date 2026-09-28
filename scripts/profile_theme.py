@@ -1,6 +1,7 @@
 """Shared TokyoNight Storm palette and SVG helpers."""
 from html import escape
 from pathlib import Path
+import random
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -22,9 +23,37 @@ def rect(x, y, w, h, fill=PANEL, radius=12, stroke=BORDER):
 
 
 def frame(w, h):
-    return ('<defs><linearGradient id="background" x2="1" y2="1">'
-            '<stop stop-color="#24283B"/><stop offset="1" stop-color="#263151"/>'
-            '</linearGradient></defs>' + rect(1, 1, w - 2, h - 2, "url(#background)", 18))
+    return rect(0, 0, w, h, NAVY, 0, "none")
+
+
+def city_tile(width=420, height=112, seed=27):
+    """A repeatable pixel skyline. Flat colors; all geometry stays inside the tile."""
+    rng = random.Random(seed)
+    parts = []
+    for layer, fill in enumerate(("#2F3956", "#3B4666")):
+        x = 0
+        while x < width - 12:
+            bw = min(rng.randrange(24, 49, 4), width - x)
+            bh = rng.randrange(32, 81 if layer else 101, 4)
+            top = height - bh
+            parts.append(rect(x, top, bw, bh, fill, 0, "none"))
+            if not layer and bw >= 32:
+                parts.append(rect(x + 12, top - 12, 4, 12, fill, 0, "none"))
+                parts.append(rect(x + 12, top - 16, 4, 4, BLUE, 0, "none"))
+            if layer:
+                for wy in range(top + 8, height - 8, 12):
+                    for wx in range(x + 8, x + bw - 4, 12):
+                        if rng.random() < .22:
+                            parts.append(rect(wx, wy, 4, 4, rng.choice((BLUE, CYAN, PURPLE)), 0, "none"))
+            x += bw + rng.choice((4, 8))
+    return "\n".join(parts)
+
+
+def city_scene(w, baseline, opacity=.3):
+    tile = city_tile()
+    return (f'<g opacity="{opacity}" shape-rendering="crispEdges" aria-hidden="true">'
+            + "".join(f'<g transform="translate({x} {baseline - 112})">{tile}</g>'
+                      for x in range(0, w, 420)) + '</g>')
 
 
 def svg(w, h, title, body, description=""):

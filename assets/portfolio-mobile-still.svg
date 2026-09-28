@@ -1,8 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="480" height="152" viewBox="0 0 480 152" role="img" aria-labelledby="title description">
 <title id="title">View portfolio — explore my work</title>
-<desc id="description">View portfolio. A pixel skyline with a stationary label. The city scrolls softly; a static picture source supports reduced-motion preferences.</desc>
+<desc id="description">View portfolio. A pixel skyline with a stationary label. Static version for reduced-motion preferences.</desc>
 <rect x="0" y="0" width="480" height="152" rx="0" fill="#24283B" stroke="none"/>
-<style>@keyframes city-run { to { transform: translateX(-420px); } }.city-run { animation: city-run 42s linear infinite; }@media (prefers-reduced-motion: reduce) { .city-run { animation: none; } }</style>
 <defs><clipPath id="city-clip"><rect width="480" height="152"/></clipPath><g id="city-tile"><rect x="0" y="20" width="44" height="92" rx="0" fill="#2F3956" stroke="none"/>
 <rect x="12" y="8" width="4" height="12" rx="0" fill="#2F3956" stroke="none"/>
 <rect x="12" y="4" width="4" height="4" rx="0" fill="#7AA2F7" stroke="none"/>

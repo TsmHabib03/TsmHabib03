@@ -1,9 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="480" height="152" viewBox="0 0 480 152" role="img" aria-labelledby="title description">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="840" height="140" viewBox="0 0 840 140" role="img" aria-labelledby="title description">
 <title id="title">View portfolio — explore my work</title>
-<desc id="description">View portfolio. A pixel skyline with a stationary label. The city scrolls softly; a static picture source supports reduced-motion preferences.</desc>
-<rect x="0" y="0" width="480" height="152" rx="0" fill="#24283B" stroke="none"/>
-<style>@keyframes city-run { to { transform: translateX(-420px); } }.city-run { animation: city-run 42s linear infinite; }@media (prefers-reduced-motion: reduce) { .city-run { animation: none; } }</style>
-<defs><clipPath id="city-clip"><rect width="480" height="152"/></clipPath><g id="city-tile"><rect x="0" y="20" width="44" height="92" rx="0" fill="#2F3956" stroke="none"/>
+<desc id="description">View portfolio. A pixel skyline with a stationary label. Static version for reduced-motion preferences.</desc>
+<rect x="0" y="0" width="840" height="140" rx="0" fill="#24283B" stroke="none"/>
+<defs><clipPath id="city-clip"><rect width="840" height="140"/></clipPath><g id="city-tile"><rect x="0" y="20" width="44" height="92" rx="0" fill="#2F3956" stroke="none"/>
 <rect x="12" y="8" width="4" height="12" rx="0" fill="#2F3956" stroke="none"/>
 <rect x="12" y="4" width="4" height="4" rx="0" fill="#7AA2F7" stroke="none"/>
 <rect x="52" y="56" width="32" height="56" rx="0" fill="#2F3956" stroke="none"/>
@@ -61,15 +60,15 @@
 <rect x="380" y="100" width="4" height="4" rx="0" fill="#BB9AF7" stroke="none"/>
 <rect x="396" y="52" width="24" height="60" rx="0" fill="#3B4666" stroke="none"/></g></defs>
 <g clip-path="url(#city-clip)" aria-hidden="true">
-<g transform="translate(0 36)" opacity=".65" shape-rendering="crispEdges">
+<g transform="translate(0 24)" opacity=".65" shape-rendering="crispEdges">
 <g class="city-run">
 <use href="#city-tile" x="0"/>
 <use href="#city-tile" x="420"/>
 <use href="#city-tile" x="840"/>
 </g></g></g>
-<rect x="0" y="148" width="480" height="4" rx="0" fill="#414868" stroke="none"/>
-<path d="M76.0 20H404.0v8h8v64h-8v8H76.0v-8h-8V28h8Z" fill="#24283B" stroke="#7AA2F7" stroke-width="2"/>
-<text x="228.0" y="55" fill="#D5DEFB" font-family="Consolas, 'Liberation Mono', monospace" font-size="24" font-weight="700" text-anchor="middle">VIEW PORTFOLIO</text>
-<text x="240.0" y="82" fill="#7DCFFF" font-family="'Segoe UI', Arial, sans-serif" font-size="18" font-weight="400" text-anchor="middle">Explore my work</text>
-<path d="M365.0 56h4v-4h4v-4h4v-4h-12v-4h20v20h-4V48h-4v4h-4v4h-4v4h-4Z" fill="#7DCFFF"/>
+<rect x="0" y="136" width="840" height="4" rx="0" fill="#414868" stroke="none"/>
+<path d="M256.0 20H584.0v8h8v64h-8v8H256.0v-8h-8V28h8Z" fill="#24283B" stroke="#7AA2F7" stroke-width="2"/>
+<text x="408.0" y="55" fill="#D5DEFB" font-family="Consolas, 'Liberation Mono', monospace" font-size="24" font-weight="700" text-anchor="middle">VIEW PORTFOLIO</text>
+<text x="420.0" y="82" fill="#7DCFFF" font-family="'Segoe UI', Arial, sans-serif" font-size="18" font-weight="400" text-anchor="middle">Explore my work</text>
+<path d="M545.0 56h4v-4h4v-4h4v-4h-12v-4h20v20h-4V48h-4v4h-4v4h-4v4h-4Z" fill="#7DCFFF"/>
 </svg>

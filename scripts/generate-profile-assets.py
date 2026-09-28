@@ -1,7 +1,7 @@
-"""Generate the profile's static TokyoNight artwork. No external dependencies."""
+"""Generate self-contained TokyoNight SVG artwork. No external dependencies."""
 import random
 import re
-from profile_theme import ASSETS, NAVY, PANEL, BORDER, WHITE, MUTED, BLUE, CYAN, PURPLE, text, rect, frame, svg, write_assets
+from profile_theme import ASSETS, NAVY, BORDER, WHITE, MUTED, BLUE, CYAN, PURPLE, text, rect, frame, svg, write_assets, city_tile
 
 GROUPS = [
     ("Languages", [("html5", "HTML5"), ("css3", "CSS3"), ("javascript", "JavaScript"), ("php", "PHP"), ("java", "Java")]),
@@ -9,17 +9,18 @@ GROUPS = [
     ("Database", [("mysql", "MySQL")]),
     ("Tools", [("git", "Git"), ("github", "GitHub"), ("vscode", "VS Code"), ("docker", "Docker"), ("laragon", "Laragon"), ("googleappsscript", "Google Apps Script")]),
 ]
-# Compact centered icon wall: rows only, no cards, labels, or table.
+# The same 14 technologies, grouped by purpose without tiles or containers.
 WALL_ROWS = [
-    ["html5", "css3", "javascript", "php", "java"],
-    ["tailwindcss", "bootstrap", "mysql", "git", "github"],
-    ["vscode", "docker", "laragon", "googleappsscript"],
+    ("LANGUAGES", ["html5", "css3", "javascript", "php", "java"]),
+    ("UI & DATA", ["tailwindcss", "bootstrap", "mysql"]),
+    ("TOOLS & AUTOMATION", ["git", "github", "vscode", "docker", "laragon", "googleappsscript"]),
 ]
+# Stacks checked against public repository languages and READMEs, 2026-09-28.
 PROJECTS = [
-    ("qcu-schedule", "01 / STUDENT PLATFORM", "QCU Schedule", "Class schedules and student tools for QCU."),
-    ("asj-attendance", "02 / ATTENDANCE SYSTEM", "ASJ Attendance Checker", "QR attendance with role-based dashboards."),
-    ("repcore-fitness", "03 / MEMBERSHIP SYSTEM", "RepCore Fitness", "Fitness membership and QR attendance."),
-    ("manila-hris", "04 / INFORMATION SYSTEM", "Manila City Council HRIS", "Employee records and leave management."),
+    ("qcu-schedule", "QCU Schedule", "Class schedules and student tools for QCU.", "HTML · CSS · JavaScript"),
+    ("asj-attendance", "ASJ Attendance Checker", "QR attendance with role-based dashboards.", "PHP · MySQL · JavaScript"),
+    ("repcore-fitness", "RepCore Fitness", "Fitness membership and QR attendance.", "PHP · MySQL · JavaScript"),
+    ("manila-hris", "Manila City Council HRIS", "Employee records and leave management.", "Java · Spring Boot · MySQL"),
 ]
 
 NAME = "HABIB JAUDIAN D."
@@ -149,7 +150,7 @@ def hero(mobile=False):
 
 
 # Simple Icons ships single-path glyphs without colors; tint them to their brand colors here.
-# GitHub and MySQL get their official on-dark renderings (white mark, brand blue) for contrast on navy tiles.
+# GitHub and MySQL get their on-dark renderings for contrast on navy.
 BRAND_TINT = {"laragon": "#0E83CD", "googleappsscript": "#4285F4", "github": "#D5DEFB", "mysql": "#4479A1"}
 
 
@@ -176,43 +177,61 @@ def icon_symbols():
 
 def tech_wall(mobile=False):
     names = {slug: name for _, icons in GROUPS for slug, name in icons}
-    w = 600 if mobile else 640
-    tile = 54 if mobile else 68
-    gap_x, gap_y = 16 if mobile else 20, 18 if mobile else 22
-    pad = 20 if mobile else 24
-    inner = tile - (18 if mobile else 24)
-    h = 2 * pad + 3 * tile + 2 * gap_y
-    body = [frame(w, h), "<defs>" + icon_symbols() + "</defs>"]
-    y = pad
-    for row in WALL_ROWS:
-        row_w = len(row) * tile + (len(row) - 1) * gap_x
-        x = (w - row_w) // 2
+    w, h = (360, 252) if mobile else (480, 252)
+    icon_size, step = (36, 54) if mobile else (40, 68)
+    body = ["<defs>" + icon_symbols() + "</defs>"]
+    for index, (label, row) in enumerate(WALL_ROWS):
+        y = 16 + index * 84
+        body.append(text(w / 2, y, label, 11, MUTED, True, text_anchor="middle", letter_spacing=1.2))
+        x = (w - ((len(row) - 1) * step + icon_size)) / 2
         for slug in row:
-            body.append(f'<rect x="{x}" y="{y}" width="{tile}" height="{tile}" rx="15" fill="#FFFFFF" opacity=".05"/>')
-            offset = (tile - inner) // 2
-            body.append(f'<use href="#icon-{slug}" x="{x + offset}" y="{y + offset}" width="{inner}" height="{inner}"/>')
-            x += tile + gap_x
-        y += tile + gap_y
-    description = ", ".join(names[slug] for row in WALL_ROWS for slug in row)
+            body.append(f'<use href="#icon-{slug}" x="{x}" y="{y + 16}" width="{icon_size}" height="{icon_size}"/>')
+            x += step
+    description = ", ".join(names[slug] for _, row in WALL_ROWS for slug in row)
     return svg(w, h, "Tech Stack", "\n".join(body), "Technologies: " + description)
 
 
-def project_card(eyebrow, title, description):
-    body = [frame(600, 188), text(28, 33, eyebrow, 14, PURPLE, True, letter_spacing=1),
-            text(28, 77, title, 30, weight=600), text(28, 115, description, 21, MUTED),
-            text(28, 162, "VIEW REPOSITORY", 14, CYAN, True), text(558, 164, "↗", 26, BLUE)]
-    return svg(600, 204, title, "\n".join(body), description)
+def project_row(title, description, stack, mobile=False):
+    w, h = (480, 164) if mobile else (840, 118)
+    body = [text(24, 38, title, 28 if mobile else 25, weight=600),
+            text(24, 76 if mobile else 67, description, 21 if mobile else 16, MUTED),
+            text(24, 112 if mobile else 96, stack, 18 if mobile else 13, CYAN, True)]
+    # A thin rule and a few pixels carry the city motif without making a card.
+    body.append(f'<path d="M24 {h - 1}H{w - 24}" stroke="{BORDER}"/>')
+    body.append(text(24 if mobile else w - 155, 144 if mobile else 96, "Repository", 16 if mobile else 13, MUTED))
+    x, y = (118, 132) if mobile else (w - 55, 84)
+    body.append(f'<path d="M{x} {y + 12}l12 -12m-12 0h12v12" fill="none" stroke="{CYAN}" stroke-width="2"/>')
+    body.append(f'<path d="M{w - 71} {h - 1}v-8h8v-8h8v16h8v-24h8v24" fill="none" stroke="{BORDER}" stroke-width="2" shape-rendering="crispEdges"/>')
+    return svg(w, h, title, "\n".join(body), f"{description} Built with {stack}. View repository.")
 
 
-def portfolio(mobile=False):
-    w, h = (480, 148) if mobile else (1200, 154)
-    x = 423 if mobile else 1110
-    body = [frame(w, h), f'<path d="M1 25V{h-25}" stroke="{PURPLE}" stroke-width="4"/>',
-            text(24 if mobile else 38, 59 if mobile else 64, ">_ VIEW PORTFOLIO", 25 if mobile else 34, WHITE, True, weight=700),
-            text(25 if mobile else 39, 105 if mobile else 111, "Explore my work", 22 if mobile else 25, CYAN),
-            f'<circle cx="{x}" cy="74" r="{25 if mobile else 34}" fill="#293758" stroke="{BLUE}"/>',
-            f'<path d="M{x-9} 83L{x+9} 65M{x-9} 65H{x+9}V83" fill="none" stroke="{CYAN}" stroke-width="2"/>']
-    return svg(w, h, "View portfolio — explore my work", "\n".join(body))
+def portfolio(mobile=False, animated=True):
+    w, h = (480, 152) if mobile else (840, 140)
+    tile_width = 420
+    body = [frame(w, h)]
+    if animated:
+        body.append('<style>'
+            '@keyframes city-run { to { transform: translateX(-420px); } }'
+            '.city-run { animation: city-run 42s linear infinite; }'
+            '@media (prefers-reduced-motion: reduce) { .city-run { animation: none; } }'
+                    '</style>')
+    body += [f'<defs><clipPath id="city-clip"><rect width="{w}" height="{h}"/></clipPath>'
+            f'<g id="city-tile">{city_tile()}</g></defs>',
+            '<g clip-path="url(#city-clip)" aria-hidden="true">',
+            f'<g transform="translate(0 {h - 116})" opacity=".65" shape-rendering="crispEdges">',
+            '<g class="city-run">']
+    for x in range(0, w + tile_width, tile_width):
+        body.append(f'<use href="#city-tile" x="{x}"/>')
+    body += ['</g></g></g>', rect(0, h - 4, w, 4, BORDER, 0, "none")]
+    left, right = (w - 344) / 2, (w + 344) / 2
+    body.append(f'<path d="M{left + 8} 20H{right - 8}v8h8v64h-8v8H{left + 8}v-8h-8V28h8Z" fill="{NAVY}" stroke="{BLUE}" stroke-width="2"/>')
+    body.append(text(w / 2 - 12, 55, "VIEW PORTFOLIO", 24, WHITE, True, weight=700, text_anchor="middle"))
+    body.append(text(w / 2, 82, "Explore my work", 18, CYAN, text_anchor="middle"))
+    x = w / 2 + 125
+    body.append(f'<path d="M{x} 56h4v-4h4v-4h4v-4h-12v-4h20v20h-4V48h-4v4h-4v4h-4v4h-4Z" fill="{CYAN}"/>')
+    return svg(w, h, "View portfolio — explore my work", "\n".join(body),
+               "View portfolio. A pixel skyline with a stationary label. "
+               + ("The city scrolls softly; a static picture source supports reduced-motion preferences." if animated else "Static version for reduced-motion preferences."))
 
 
 if __name__ == "__main__":
@@ -222,7 +241,10 @@ if __name__ == "__main__":
         outputs[f"hero{suffix}.svg"] = hero(mobile)
         outputs[f"tech-stack{suffix}.svg"] = tech_wall(mobile)
         outputs[f"portfolio{suffix}.svg"] = portfolio(mobile)
-    for slug, eyebrow, title, description in PROJECTS:
-        outputs[f"project-{slug}.svg"] = project_card(eyebrow, title, description)
+        outputs[f"portfolio{suffix}-still.svg"] = portfolio(mobile, animated=False)
+    for slug, title, description, stack in PROJECTS:
+        for mobile in (False, True):
+            suffix = "-mobile" if mobile else ""
+            outputs[f"project-{slug}{suffix}.svg"] = project_row(title, description, stack, mobile)
     write_assets(outputs)
-    print("Generated 10 static TokyoNight profile assets.")
+    print(f"Generated {len(outputs)} TokyoNight profile assets.")

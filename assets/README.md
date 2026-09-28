@@ -2,7 +2,7 @@
 
 All artwork uses a TokyoNight Storm palette: navy panels, blue/cyan accents, muted purple, and pale text. Images are stored in this repository; visitors do not depend on a third-party statistics or icon service.
 
-## Static artwork
+## Profile artwork
 
 Edit `scripts/generate-profile-assets.py` and regenerate:
 
@@ -10,7 +10,9 @@ Edit `scripts/generate-profile-assets.py` and regenerate:
 python scripts/generate-profile-assets.py
 ```
 
-Shared SVG helpers and colors live in `scripts/profile_theme.py`. The pixel-art hero, centered technology icon wall, project cards, and portfolio CTA have no animation. Mobile picture sources preserve readable type and icons. Card images wrap from two columns to one without tables.
+Shared SVG helpers and colors live in `scripts/profile_theme.py`. The existing hero and its city background are preserved. New section backgrounds use flat colors. The technology wall has three centered groups, with no outer container or individual tiles. Projects use compact full-width rows with names, descriptions, verified stacks, and repository links; mobile picture sources preserve the reading order and legibility.
+
+The portfolio CTA contains a repeating pixel skyline moving at 10 SVG pixels per second. The label stays stationary on an opaque navy sign. Animation is internal SVG CSS, so it works when GitHub displays the file as an image: no JavaScript, external fonts, or external resources. The README's picture element selects `portfolio-still.svg` or `portfolio-mobile-still.svg` for `prefers-reduced-motion: reduce`; these contain no animation rules. An internal media query also supports standalone SVG viewing. Renderers without SVG CSS animation show the complete static scene. Links live in the README's outer HTML anchors because links inside an SVG image are not interactive.
 
 ## Contribution data
 
@@ -21,6 +23,12 @@ The official GitHub GraphQL `contributionCalendar` supplies actual daily counts,
 - `assets/github-activity.svg`: full contribution calendar, total contributions, active days, and busiest-day count.
 - `assets/github-activity-mobile.svg`: the same full year split into two chronological calendar blocks.
 - `assets/activity-data.json`: the verified source snapshot used for both images.
+
+A muted pixel skyline sits behind the activity scene; opaque navy beneath the calendar keeps decorative windows separate from actual contribution cells. To redraw the saved snapshot after an artwork change without calling GitHub or changing its dates:
+
+```sh
+python scripts/update_activity.py --render-snapshot
+```
 
 The graphic complements the native GitHub profile contribution UI. It is a dated, generated image, not a live embed. No count is hardcoded into the README or generator. Counts reflect data visible to the API; GitHub determines which contributions qualify. Statistics are computed only from those returned counts.
 
@@ -43,11 +51,11 @@ Definition IDs are namespaced when combining them into the technology wall. Lara
 
 ## Project sources
 
-Public repositories and links were checked on 2026-09-27:
+Public repository languages and README stack descriptions were checked on 2026-09-28:
 
-- [QCU Schedule](https://github.com/TsmHabib03/QCU-Schedule-Web-App): student schedule platform.
-- [ASJ Attendance Checker](https://github.com/TsmHabib03/ASJ-Attendance-Checker): QR attendance and role-based dashboards.
-- [RepCore Fitness](https://github.com/TsmHabib03/Repcorefitness): membership and attendance workflows.
-- [Manila City Council HRIS](https://github.com/TsmHabib03/Manila-City-Council-HRIS): employee records and leave management, documented in its README.
+- [QCU Schedule](https://github.com/TsmHabib03/QCU-Schedule-Web-App): student schedule platform. HTML, CSS, JavaScript (repository language data).
+- [ASJ Attendance Checker](https://github.com/TsmHabib03/ASJ-Attendance-Checker): QR attendance and role-based dashboards. PHP, MySQL, JavaScript (README).
+- [RepCore Fitness](https://github.com/TsmHabib03/Repcorefitness): membership and attendance workflows. PHP, MySQL, JavaScript (README).
+- [Manila City Council HRIS](https://github.com/TsmHabib03/Manila-City-Council-HRIS): employee records and leave management. Java, Spring Boot, MySQL (README).
 
 No employment, client relationship, adoption, or expert-level claims are inferred from repository names.
