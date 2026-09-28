@@ -1,22 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="840" height="184" viewBox="0 0 840 184" role="img" aria-labelledby="title description">
 <title id="title">QCU Schedule</title>
-<desc id="description">Class schedules and student tools for QCU. Built with HTML · CSS · JavaScript. View repository. Illustrative pixel-city location with gentle train, traffic and window animation.</desc>
+<desc id="description">Class schedules and student tools for QCU. Built with HTML · CSS · JavaScript. View repository. Illustrative pixel-city location with no animation.</desc>
 <defs><clipPath id="card-clip"><path d="M9 1H831V9H839V167H831V175H9V167H1V9H9Z"/></clipPath></defs>
 <path d="M9 1H831V9H839V167H831V175H9V167H1V9H9Z" fill="#24283B"/>
 <g clip-path="url(#card-clip)">
-<style>
-@keyframes rail-pass { from { transform:translateX(-180px) } to { transform:translateX(1020px) } }
-@keyframes street-pass { from { transform:translateX(900px) } to { transform:translateX(-60px) } }
-@keyframes cloud-drift { from { transform:translateX(-12px) } to { transform:translateX(18px) } }
-@keyframes window-light { 0%,100% { opacity:.35 } 50% { opacity:.85 } }
-@keyframes wet-light { from { opacity:.14 } to { opacity:.3 } }
-.train { animation:rail-pass 30s linear infinite; animation-delay:-7s }
-.car { animation:street-pass 39s linear infinite; animation-delay:-12s }
-.clouds { animation:cloud-drift 32s ease-in-out infinite alternate }
-.window-light { animation:window-light 15s ease-in-out infinite }
-.reflection { animation:wet-light 8s ease-in-out infinite alternate }
-@media (prefers-reduced-motion:reduce) { .train,.car,.clouds,.window-light,.reflection { animation:none } }
-</style>
+
 <defs><clipPath id="scene-clip"><path d="M0 0H840V176H0Z"/></clipPath></defs>
 <g clip-path="url(#scene-clip)" shape-rendering="crispEdges" aria-hidden="true">
 <path fill="#4A5779" d="M710 22h2v2h-2zM542 46h2v2h-2zM774 33h2v2h-2zM710 23h2v2h-2zM555 12h2v2h-2z"/>

@@ -10,9 +10,15 @@ Edit `scripts/generate-profile-assets.py` and regenerate:
 python scripts/generate-profile-assets.py
 ```
 
-Shared SVG helpers and colors live in `scripts/profile_theme.py`. The existing hero and its city background are preserved. New section backgrounds use flat colors. The technology wall has three centered groups, with no outer container or individual tiles. Projects use compact full-width rows with names, descriptions, verified stacks, and repository links; mobile picture sources preserve the reading order and legibility.
+Shared SVG helpers and colors live in `scripts/profile_theme.py`; detailed city geometry and motion live in `scripts/pixel_city.py`. The hero keeps the original name, pixel lettering, cursor, identity text, and navy palette. Its expanded skyline adds three depth layers, rooftop equipment, an observation tower, windows, a crescent moon, clouds, an elevated train, road traffic, and restrained wet-street reflections. Backgrounds use flat colors, with sharp pixel edges and no gradients or glow filters. Geometry is grouped into paths by color to keep the SVGs small.
 
-The portfolio CTA contains a repeating pixel skyline moving at 10 SVG pixels per second. The label stays stationary on an opaque navy sign. Animation is internal SVG CSS, so it works when GitHub displays the file as an image: no JavaScript, external fonts, or external resources. The README's picture element selects `portfolio-still.svg` or `portfolio-mobile-still.svg` for `prefers-reduced-motion: reduce`; these contain no animation rules. An internal media query also supports standalone SVG viewing. Renderers without SVG CSS animation show the complete static scene. Links live in the README's outer HTML anchors because links inside an SVG image are not interactive.
+The four project cards show distinct illustrative locations in the same city: a campus, an entrance building, a gym storefront, and a civic arcade. These are artwork, not depictions of real project premises. Each card retains the verified project name, description, stack, and repository link. Desktop layouts place the landmark beside the information; mobile layouts move the city below the copy. The technology wall and contribution graphics are unchanged.
+
+The portfolio CTA is a raised arcade button with pixel lettering, stepped borders, a solid depth edge, and a moving train and car behind it. The label stays stationary. Animation is internal SVG CSS: no JavaScript, external fonts, external assets, or animated raster files. Trains and cars loop beyond the clipped scene edges; cloud, window and reflection motion is slow and subtle.
+
+Every animated hero, project, and portfolio asset has a matching `-still.svg` version. The README's picture sources select the mobile or desktop still image for `prefers-reduced-motion: reduce`; these contain no animation rules. Internal media queries also support standalone SVG viewing. Renderers without SVG CSS animation show a complete static scene.
+
+GitHub embeds SVGs as images and does not forward hover, focus, or click events into their contents. README links use outer HTML anchors, preserving native keyboard and pointer behavior. The portfolio button's short hover/press effect and inner link work only when its animated SVG is opened directly; the README does not claim a custom hover effect. The pixel-game appearance and ambient motion remain visible when embedded.
 
 ## Contribution data
 
