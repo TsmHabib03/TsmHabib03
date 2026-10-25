@@ -3,12 +3,12 @@ import argparse
 import random
 import re
 from profile_theme import ASSETS, NAVY, BORDER, WHITE, MUTED, BLUE, CYAN, PURPLE, AFTER_HOURS, text, rect, frame, svg, write_assets
-from pixel_city import Pixels, city, step_outline, after_hours_city
+from pixel_city import Pixels, city, step_outline, after_hours_city, pixel_moon, rooftop_cat, workstation, skyline_accent
 
 GROUPS = [
-    ("Languages", [("html5", "HTML5"), ("css3", "CSS3"), ("javascript", "JavaScript"), ("php", "PHP"), ("java", "Java")]),
-    ("Frameworks / UI", [("springboot", "Spring Boot"), ("tailwindcss", "Tailwind CSS"), ("bootstrap", "Bootstrap")]),
-    ("Database", [("mysql", "MySQL")]),
+    ("Languages", [("javascript", "JavaScript"), ("php", "PHP"), ("java", "Java")]),
+    ("Frontend", [("html5", "HTML5"), ("css3", "CSS3"), ("tailwindcss", "Tailwind CSS"), ("bootstrap", "Bootstrap")]),
+    ("Backend and databases", [("springboot", "Spring Boot"), ("mysql", "MySQL")]),
     ("Tools", [("git", "Git"), ("github", "GitHub"), ("vscode", "VS Code"), ("docker", "Docker"), ("laragon", "Laragon"), ("googleappsscript", "Google Apps Script")]),
 ]
 # Stacks checked against public repository languages and READMEs, 2026-09-28.
@@ -20,9 +20,17 @@ PROJECTS = [
 ]
 
 NAME = "HABIB JAUDIAN D."
+IDENTITY = "BSCS · WEB DEVELOPER"
+HERO_LAYOUTS = {
+    False: (1200, 440, 140),
+    True: (600, 464, 188),
+}
+SOCIALS = [("portfolio", "Portfolio"), ("github", "GitHub"), ("facebook", "Facebook"),
+           ("instagram", "Instagram"), ("tiktok", "TikTok"), ("email", "Email")]
 PIXEL_FONT = {
     " ": ["000"],
     ".": ["00", "00", "00", "00", "11"],
+    "·": ["000", "000", "010", "000", "000"],
     "-": ["000", "000", "111", "000", "000"],
     "A": ["01110", "10001", "11111", "10001", "10001"],
     "B": ["11110", "10001", "11110", "10001", "11110"],
@@ -88,28 +96,28 @@ def stars(w, y_min, y_max, avoid, seed=11):
 
 def hero(mobile=False, animated=True):
     c = AFTER_HOURS
+    w, h, sky_y = HERO_LAYOUTS[mobile]
     if mobile:
-        w, h, sky_y = 600, 464, 188
         names = [("HABIB", 32, 32, 9), ("JAUDIAN D.", 32, 98, 9)]
-        label_y, label_cell = 160, 3
+        label_y, label_cell = 160, 4
     else:
-        w, h, sky_y = 1200, 440, 140
         names = [(NAME, 32, 36, 10)]
         label_y, label_cell = 104, 3
     body = [f'<path d="{step_outline(0, 0, w, h)}" fill="{c["sky"]}"/>',
             '<g shape-rendering="crispEdges">']
     for value, x, y, cell in names:
         body.append(pixel_text(value, x, y, cell, c["text"]))
-    body.append(pixel_text("TOKYO AFTER HOURS", 32, label_y, label_cell, c["cyan"]))
+    body.append(pixel_text(IDENTITY, 32, label_y, label_cell, c["cyan"]))
+    body.append(pixel_moon(516 if mobile else 1080, 30, cell=3 if mobile else 4))
     body.append(f'<g transform="translate(0 {sky_y})">'
                 + after_hours_city(w, h-sky_y, mobile=mobile, animated=animated)
                 + '</g>')
     body.append('</g>')
     return svg(w, h, "Habib Jaudian D.", "\n".join(body),
-               "Tokyo After Hours. Stationary pixel lettering above a layered dark-blue skyline, "
-               "Tokyo Tower, sparse warm windows and an elevated three-car train with a cyan stripe. "
-               + ("Only the train moves; reduced motion shows the complete stationary train."
-                  if animated else "Static edition with the complete train visible."))
+               "BSCS · Web Developer. Stationary pixel lettering above a midnight-blue Tokyo skyline, "
+               "a pixel moon, Tokyo Tower, illuminated buildings, a rooftop cat and an elevated three-car train. "
+               + ("The train passes and the cat occasionally moves its tail; reduced motion freezes both."
+                  if animated else "Static edition with the complete train and seated cat visible."))
 
 
 # Local source icons retain their provenance. Display tints improve dark contrast.
@@ -118,11 +126,20 @@ BRAND_TINT = {"laragon": "#7DCFFF", "googleappsscript": "#7AA2F7",
               "instagram": PURPLE, "tiktok": CYAN, "linkedin": BLUE}
 
 
-def icon_symbol(slug):
+def icon_symbol(slug, *, flat=False):
     raw = (ASSETS / "icons" / f"{slug}.svg").read_text(encoding="utf-8")
     view = re.search(r'viewBox="([^"]+)"', raw).group(1)
     inner = re.sub(r'^.*?<svg\b[^>]*>', '', raw, count=1, flags=re.S)
     inner = re.sub(r'</svg>\s*$', '', inner)
+    if flat:
+        # Keep the upstream silhouettes, but render small marks without shading.
+        gradient_colors = {"php": {"a": "#AEB2D5"},
+                           "bootstrap": {"a": "#7952B3", "b": "#FFFFFF"},
+                           "vscode": {"d": "#FFFFFF"}}
+        for ident, color in gradient_colors.get(slug, {}).items():
+            inner = inner.replace(f'fill="url(#{ident})"', f'fill="{color}"')
+        inner = re.sub(r'<(?:linearGradient|radialGradient|filter)\b.*?</(?:linearGradient|radialGradient|filter)>', '', inner, flags=re.S)
+        inner = re.sub(r'\sfilter="[^"]*"', '', inner)
     if slug in BRAND_TINT:
         inner = re.sub(r'fill="[^"]*"', f'fill="{BRAND_TINT[slug]}"', inner)
         inner = f'<g fill="{BRAND_TINT[slug]}">{inner}</g>'
@@ -145,6 +162,49 @@ def labeled_icon(slug, label, social=False):
                  f'<use href="#icon-{slug}" x="9" y="{(height-size)/2}" width="{size}" height="{size}"/>']
     body.append(text(36, height/2+5, label, 14, WHITE))
     return svg(width, height, label, "\n".join(body))
+
+
+def compact_icon(slug, label):
+    """Transparent 28px brand mark; readable names stay in native Markdown."""
+    c = AFTER_HOURS
+    if slug in ("portfolio", "email"):
+        p = Pixels()
+        if slug == "portfolio":
+            p.box(4, 6, 20, 16, c["roof"])
+            p.box(6, 10, 16, 10, c["sky"])
+            p.box(6, 8, 2, 2, c["cyan"])
+            p.box(10, 8, 2, 2, c["warm"])
+            p.box(10, 14, 2, 2, c["cyan"])
+            p.box(12, 16, 2, 2, c["cyan"])
+            p.box(16, 16, 4, 2, c["text"])
+        else:
+            p.box(4, 6, 20, 16, c["cyan"])
+            p.box(6, 8, 16, 12, c["sky"])
+            for x,y in ((6,8),(8,10),(10,12),(12,14),(14,14),(16,12),(18,10),(20,8)):
+                p.box(x,y,2,2,c["cyan"])
+        body = '<g shape-rendering="crispEdges">' + p.draw() + '</g>'
+    else:
+        body = ('<defs>' + icon_symbol(slug, flat=True) + '</defs>'
+                + f'<use href="#icon-{slug}" x="2" y="2" width="24" height="24"/>')
+    return svg(28, 28, label, body)
+
+
+def profile_assets():
+    """Only assets the current README uses; keep legacy regeneration available."""
+    outputs = {}
+    for mobile in (False, True):
+        suffix = "-mobile" if mobile else ""
+        outputs[f"hero{suffix}.svg"] = hero(mobile)
+        outputs[f"hero{suffix}-still.svg"] = hero(mobile, animated=False)
+    for _, icons in GROUPS:
+        for slug, label in icons:
+            outputs[f"marks/{slug}.svg"] = compact_icon(slug, label)
+    for slug, label in SOCIALS:
+        outputs[f"marks/{slug}.svg"] = compact_icon(slug, label)
+    outputs["pixel-divider.svg"] = svg(600,24,"Pixel skyline divider",skyline_accent())
+    outputs["pixel-workstation.svg"] = svg(144,84,"Pixel workstation",'<g shape-rendering="crispEdges">'+workstation()+'</g>')
+    outputs["pixel-cat.svg"] = svg(84,76,"Moonlit rooftop cat",'<g transform="translate(16 4)" shape-rendering="crispEdges">'+rooftop_cat()+'</g>')
+    return outputs
 
 
 def project_card(title, mobile=False):
@@ -177,6 +237,7 @@ def generate_assets(hero_only=False):
         for slug, title, _, _ in PROJECTS:
             outputs[f"project-{slug}{suffix}.svg"] = project_card(title, mobile)
     if not hero_only:
+        outputs.update(profile_assets())
         for _, icons in GROUPS:
             for slug, label in icons:
                 outputs[f"tech/{slug}.svg"] = labeled_icon(slug, label)
@@ -188,8 +249,10 @@ def generate_assets(hero_only=False):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--hero-only", action="store_true", help="Regenerate only the four Tokyo After Hours hero variants")
+    scope = parser.add_mutually_exclusive_group()
+    scope.add_argument("--hero-only", action="store_true", help="Regenerate only the four Tokyo hero variants")
+    scope.add_argument("--profile-only", action="store_true", help="Regenerate only artwork and icons used by README.md")
     args = parser.parse_args()
-    outputs = generate_assets(hero_only=args.hero_only)
+    outputs = profile_assets() if args.profile_only else generate_assets(hero_only=args.hero_only)
     write_assets(outputs)
     print(f"Generated {len(outputs)} profile assets.")

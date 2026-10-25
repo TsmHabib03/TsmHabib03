@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-25T09:50:56.405047+00:00",
+  "generatedAt": "2026-10-25T10:51:26.153859+00:00",
   "title": "Design System: Tokyo After Hours",
   "extensions": {
     "motion": [
@@ -27,7 +27,27 @@
       {
         "name": "reduced-motion",
         "value": "animation:none",
-        "purpose": "The static transform keeps the complete train visible."
+        "purpose": "Disable train and cat-tail animations; static geometry shows the complete train and resting tail."
+      },
+      {
+        "name": "cat-tail-duration",
+        "value": "12s",
+        "purpose": "Occasional movement of the seated cat's separate tail."
+      },
+      {
+        "name": "cat-tail-easing",
+        "value": "steps(1,end)",
+        "purpose": "Discrete pixel movement instead of smooth interpolation."
+      },
+      {
+        "name": "cat-tail-lift",
+        "value": "translateY(-2px)",
+        "purpose": "A two-source-pixel lift at the 80% and 88% keyframes."
+      },
+      {
+        "name": "cat-tail-lift-keyframes",
+        "value": "80%,88%",
+        "purpose": "Resting transform at 0%, 72% and 100%; brief stepped lift late in the cycle."
       }
     ],
     "breakpoints": [
@@ -48,11 +68,12 @@
   ],
   "narrative": {
     "northStar": "Tokyo After Hours",
-    "overview": "The profile's artwork uses a quiet night city and a cyan-striped commuter train to give Habib's developer identity a recognizable setting. Pale pixel lettering and sparse warm lights carry the emphasis. The city stays stationary while the train supplies one clear animated moment.\n\nThis system describes the four profile hero SVGs. GitHub owns the surrounding Markdown typography, spacing, link states, and page colors. Legacy TokyoNight Storm assets and helpers retain their existing tokens; the scoped `AFTER_HOURS` dictionary in `scripts/profile_theme.py` is the hero palette source.",
+    "overview": "The profile's Tokyo at Night artwork extends the Tokyo After Hours identity with a stepped moon and a seated rooftop cat. Pale pixel lettering and sparse warm lights carry the emphasis. The city stays stationary while a cyan-striped commuter train supplies the main animated moment; the cat occasionally lifts its tail.\n\nThis system describes the four profile heroes, small decorative accents, and compact SVG marks. GitHub owns the surrounding Markdown typography, spacing, link states, and page colors. Legacy TokyoNight Storm assets and helpers retain their existing tokens; the scoped `AFTER_HOURS` dictionary in `scripts/profile_theme.py` is the illustrative palette source. Brand marks preserve their recognizable forms and use source colors or the generator's established display tints.",
     "keyCharacteristics": [
       "Crisp bitmap lettering and integer scene geometry.",
       "Tonal building layers with restrained warm lights.",
       "Three connected carriages unified by a cyan stripe.",
+      "A stepped moon and moonlit cat silhouette, repeated as a small static contact accent.",
       "Native profile text and links with useful static artwork alternatives."
     ],
     "rules": [],
@@ -60,7 +81,7 @@
       "Do change hero colors through the scoped `AFTER_HOURS` palette.",
       "Do preserve a complete visible train in static and reduced-motion alternatives.",
       "Do keep informative profile content and destinations in native Markdown.",
-      "Do regenerate the four variants together with `python scripts/generate-profile-assets.py --hero-only`."
+      "Do regenerate current README artwork together with `python scripts/generate-profile-assets.py --profile-only`; `--hero-only` remains available for the four heroes."
     ],
     "donts": [
       "Don't animate the name or scatter motion across the background.",

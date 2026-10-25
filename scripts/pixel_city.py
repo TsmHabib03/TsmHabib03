@@ -288,6 +288,72 @@ def city(w, h, *, seed=27, accent=CYAN, location="tower", quiet_left=0,
 CARRIAGE_WIDTH, CARRIAGE_GAP, CARRIAGE_COUNT = 116, 8, 3
 TRAIN_WIDTH = CARRIAGE_COUNT * CARRIAGE_WIDTH + (CARRIAGE_COUNT - 1) * CARRIAGE_GAP
 TRAIN_HEIGHT, TRAIN_MARGIN, TRAIN_TRAVEL_PERCENT = 48, 12, 88
+CAT_TAIL_DURATION = 12
+
+
+def pixel_moon(x, y, cell=4):
+    """An authored stepped disc with a small cluster of crater pixels."""
+    c, p = AFTER_HOURS, Pixels()
+    spans = [(6, 10), (4, 12), (3, 13), (2, 14), (1, 15), (1, 15),
+             (0, 16), (0, 16), (0, 16), (0, 16), (1, 15), (1, 15),
+             (2, 14), (3, 13), (4, 12), (6, 10)]
+    for row, (left, right) in enumerate(spans):
+        p.box(x + left * cell, y + row * cell, (right-left) * cell, cell, c["moon"])
+    for col, row, width, height in ((3, 8, 2, 3), (5, 11, 3, 2), (9, 12, 2, 1), (11, 4, 2, 2)):
+        p.box(x + col * cell, y + row * cell, width * cell, height * cell, c["moon-shade"])
+    return p.draw()
+
+
+def rooftop_cat():
+    """68px seated cat: pointed ears, haunches, paws and a separate stepped tail."""
+    c, p = AFTER_HOURS, Pixels()
+    # Back view: the cat looks across the city, with a moonlit silhouette.
+    for x, y, width, height in ((20, 0, 6, 14), (42, 0, 6, 14), (24, 8, 20, 4),
+                              (16, 12, 36, 18), (20, 30, 28, 12), (16, 42, 36, 14),
+                              (12, 56, 44, 8), (12, 64, 48, 4)):
+        p.box(x, y, width, height, c["cat"])
+    for x, y, width, height in ((20, 0, 4, 12), (16, 12, 4, 16), (20, 30, 4, 12),
+                              (16, 42, 4, 14), (12, 56, 4, 8), (44, 0, 4, 12),
+                              (48, 12, 4, 16), (44, 30, 4, 12), (48, 42, 4, 14),
+                              (26, 8, 16, 4)):
+        p.box(x, y, width, height, c["moon-shade"])
+    p.box(28, 44, 2, 20, c["glass"])
+    tail = Pixels()
+    for x, y, width, height in ((-10, 54, 6, 4), (-6, 58, 8, 4), (0, 62, 10, 4), (8, 64, 12, 4)):
+        tail.box(x, y, width, height, c["cat"])
+        tail.box(x, y, width, 2, c["roof"])
+    return p.draw() + f'<g class="cat-tail">{tail.draw()}</g>'
+
+
+def workstation():
+    """Small pixel workstation, used once beside the engineering context."""
+    c, p = AFTER_HOURS, Pixels()
+    p.box(24, 4, 88, 52, c["edge"])
+    p.box(28, 8, 80, 44, c["sky"])
+    p.box(34, 16, 4, 4, c["cyan"])
+    p.box(38, 20, 4, 4, c["cyan"])
+    p.box(34, 24, 4, 4, c["cyan"])
+    p.box(48, 26, 18, 2, c["text"])
+    for x, y, width in ((34, 36, 28), (68, 36, 18), (34, 42, 46)):
+        p.box(x, y, width, 2, c["roof"])
+    p.box(62, 56, 12, 8, c["roof"])
+    p.box(48, 64, 40, 4, c["edge"])
+    p.box(12, 72, 120, 4, c["edge"])
+    p.box(28, 68, 28, 4, c["roof"])
+    p.box(116, 52, 12, 16, c["warm"])
+    p.box(128, 56, 4, 8, c["warm"])
+    return p.draw()
+
+
+def skyline_accent(w=600, h=24):
+    """A low, quiet roof rhythm: decorative divider, never a content panel."""
+    c, p = AFTER_HOURS, Pixels()
+    for x, width, height in ((0, 24, 8), (32, 18, 14), (58, 28, 10), (94, 20, 20),
+                             (122, 26, 12), (158, 18, 8), (184, 30, 16)):
+        p.box(x, h-height-2, width, height, c["front"])
+    p.box(0, h-2, w, 2, c["edge"])
+    p.box(98, h-16, 2, 4, c["warm"])
+    return p.draw()
 
 
 def train_positions(width):
@@ -422,7 +488,12 @@ def after_hours_city(w, h, *, mobile=False, animated=True):
   {TRAIN_TRAVEL_PERCENT}%,100% {{ transform:translateX({end}px) }}
 }}
 .tokyo-train {{ animation:tokyo-rail-pass {duration}s linear infinite; animation-delay:{delay:.6f}s }}
-@media (prefers-reduced-motion:reduce) {{ .tokyo-train {{ animation:none }} }}
+@keyframes cat-tail-rest {{
+  0%,72%,100% {{ transform:translateY(0) }}
+  80%,88% {{ transform:translateY(-2px) }}
+}}
+.cat-tail {{ animation:cat-tail-rest {CAT_TAIL_DURATION}s steps(1,end) infinite }}
+@media (prefers-reduced-motion:reduce) {{ .tokyo-train,.cat-tail {{ animation:none }} }}
 </style>''')
     body += [f'<defs><clipPath id="tokyo-scene-clip"><path d="M0 0H{w}V{h}H0Z"/></clipPath></defs>',
              '<g clip-path="url(#tokyo-scene-clip)" shape-rendering="crispEdges" aria-hidden="true">',
@@ -444,4 +515,7 @@ def after_hours_city(w, h, *, mobile=False, animated=True):
         masts.box(x, rail_y - 68, 26, 2, c["edge"])
         masts.box(x + 24, rail_y - 68, 2, 10, c["dim"])
     body += [masts.draw(), '</g>']
+    # Cat sits on a low foreground rooftop, clear of the train and tower.
+    cat_x, cat_ground = (340, ground-42) if mobile else (826, ground-56)
+    body.insert(-1, f'<g class="rooftop-cat" transform="translate({cat_x} {cat_ground-68})">{rooftop_cat()}</g>')
     return "\n".join(body)

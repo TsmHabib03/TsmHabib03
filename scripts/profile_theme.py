@@ -14,6 +14,7 @@ AFTER_HOURS = {
     "front": "#294766", "edge": "#42617F", "dim": "#3B5674",
     "text": "#DCEBFF", "cyan": "#76C8EA", "warm": "#D5AA72",
     "steel": "#A5B8CC", "roof": "#66839F", "glass": "#152B43",
+    "moon": "#BACBEF", "moon-shade": "#849AC8", "cat": "#3B5674",
 }
 SANS = "'Segoe UI', Arial, sans-serif"
 MONO = "Consolas, 'Liberation Mono', monospace"

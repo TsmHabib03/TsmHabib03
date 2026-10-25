@@ -1,6 +1,6 @@
 ---
 name: Tokyo After Hours
-description: Restrained pixel-art identity for Habib's GitHub developer profile.
+description: Moonlit Tokyo pixel-art identity for Habib's GitHub developer profile.
 colors:
   sky: "#081426"
   distant: "#12233D"
@@ -14,6 +14,9 @@ colors:
   steel: "#A5B8CC"
   roof: "#66839F"
   glass: "#152B43"
+  moon: "#BACBEF"
+  moon-shade: "#849AC8"
+  cat: "#3B5674"
 spacing:
   lettering-inset: "32px"
 components:
@@ -35,15 +38,16 @@ components:
 
 **Creative North Star: "Tokyo After Hours"**
 
-The profile's artwork uses a quiet night city and a cyan-striped commuter train to give Habib's developer identity a recognizable setting. Pale pixel lettering and sparse warm lights carry the emphasis. The city stays stationary while the train supplies one clear animated moment.
+The profile's Tokyo at Night artwork extends the Tokyo After Hours identity with a stepped moon and a seated rooftop cat. Pale pixel lettering and sparse warm lights carry the emphasis. The city stays stationary while a cyan-striped commuter train supplies the main animated moment; the cat occasionally lifts its tail.
 
-This system describes the four profile hero SVGs. GitHub owns the surrounding Markdown typography, spacing, link states, and page colors. Legacy TokyoNight Storm assets and helpers retain their existing tokens; the scoped `AFTER_HOURS` dictionary in `scripts/profile_theme.py` is the hero palette source.
+This system describes the four profile heroes, small decorative accents, and compact SVG marks. GitHub owns the surrounding Markdown typography, spacing, link states, and page colors. Legacy TokyoNight Storm assets and helpers retain their existing tokens; the scoped `AFTER_HOURS` dictionary in `scripts/profile_theme.py` is the illustrative palette source. Brand marks preserve their recognizable forms and use source colors or the generator's established display tints.
 
 **Key Characteristics:**
 
 - Crisp bitmap lettering and integer scene geometry.
 - Tonal building layers with restrained warm lights.
 - Three connected carriages unified by a cyan stripe.
+- A stepped moon and moonlit cat silhouette, repeated as a small static contact accent.
 - Native profile text and links with useful static artwork alternatives.
 
 ## Colors
@@ -52,7 +56,7 @@ The palette moves from dark navy to slate blue, with pale text, a single cool ac
 
 ### Primary
 
-**Cyan:** the shared train stripe and scene title. Its repetition connects the identity lettering to the moving train.
+**Cyan:** the shared train stripe and qualification subtitle. Its repetition connects the identity lettering to the moving train.
 
 ### Secondary
 
@@ -62,13 +66,15 @@ The palette moves from dark navy to slate blue, with pale text, a single cool ac
 
 **Sky** supplies the quiet background. **Distant**, **mid**, and **front** distinguish building depth. **Dim** and **edge** define sparse windows and railway details. **Text** carries the name. **Steel**, **roof**, and **glass** separate carriage bodies, equipment, doors, and windows.
 
-The name and cyan scene title have recorded contrast ratios of 15.26:1 and 9.86:1 against the sky. These checks apply to artwork text; GitHub controls native text colors.
+**Moon** and **moon-shade** define the stepped disc and crater pixels. **Cat** gives the seated silhouette enough separation from the dark city; moon-shade highlights its ears and contour. These illustration tokens do not recolor every technology logo.
+
+The name and cyan qualification subtitle have recorded contrast ratios of 15.26:1 and 9.86:1 against the sky. These checks apply to artwork text; GitHub controls native text colors.
 
 ## Typography
 
 Hero lettering is authored geometry from `PIXEL_FONT` in `scripts/generate-profile-assets.py`, rather than a CSS font or external font file. Most uppercase glyphs use five columns and five rows. A one-cell gap separates glyphs; spaces and punctuation have their own widths.
 
-The desktop name uses 10px cells, creating a 50px-high glyph. Mobile uses 9px cells and a two-line name, creating 45px-high glyphs. The scene title uses 3px cells, creating 15px-high glyphs in both variants. All dimensions are source SVG units and scale with the displayed image.
+The desktop name uses 10px cells, creating a 50px-high glyph. Mobile uses 9px cells and a two-line name, creating 45px-high glyphs. The `BSCS · WEB DEVELOPER` subtitle uses 3px cells on desktop and 4px cells on mobile, creating 15px and 20px-high glyphs. All dimensions are source SVG units and scale with the displayed image.
 
 The README keeps personal background, project context, skills, and destinations as native Markdown. Do not substitute bitmap image text for that content.
 
@@ -78,7 +84,9 @@ The desktop source is 1200 × 440; mobile is independently composed at 600 × 46
 
 The name remains in quiet upper sky. The skyline and tower occupy the lower scene, with the elevated railway beneath them. Mobile uses fewer buildings and two name lines to preserve readability rather than cropping the desktop composition.
 
-The current native section order belongs to `.impeccable/surfaces/profile.md`. Source artwork and local padded host previews were inspected at 320px, 375px, and desktop widths; these are not live GitHub captures.
+Source artwork and local padded host previews were inspected at 320px, 375px, and desktop widths; these are not live GitHub captures.
+
+The current surface contract is `.impeccable/surfaces/readme-md.md`: About Me, Current Focus, Tech Stack, Featured Projects, Connect. A thin skyline divider displays at 300px, a workstation at 108px, and a static cat at 42px. Technology names stay beside 24px marks, using short controlled line breaks; project descriptions use 18px marks. Contact destinations form individually focusable native links in a compact list. These are README composition choices rather than typography tokens for other surfaces.
 
 ## Elevation & Depth
 
@@ -100,7 +108,15 @@ The four variants share the palette, train model, bitmap font, and scene helpers
 
 Three 116px carriages separated by two 8px gaps form a 364 × 48 train. The same model supplies windows, paired doors, roof equipment, wheels, outward cabs, and the cyan stripe in every hero. The still transform centers the complete train.
 
-Only the train animates. Linear loops last 28 seconds on desktop and 24 seconds on mobile. Travel starts at `-TRAIN_WIDTH - TRAIN_MARGIN` and ends at `scene_width + TRAIN_MARGIN`, using a 12px margin. The final 12% of each cycle holds beyond the scene edge before resetting; both reset positions hide the entire train. A calculated negative delay begins with the full train visible.
+Linear train loops last 28 seconds on desktop and 24 seconds on mobile. Travel starts at `-TRAIN_WIDTH - TRAIN_MARGIN` and ends at `scene_width + TRAIN_MARGIN`, using a 12px margin. The final 12% of each cycle holds beyond the scene edge before resetting; both reset positions hide the entire train. A calculated negative delay begins with the full train visible.
+
+### Moon and rooftop cat
+
+The moon uses 16 stepped rows, with 4px cells on desktop and 3px cells on mobile. The 68px-high seated cat has pointed ears, haunches, paws, and a separate stepped tail. Its tail uses a 12-second `steps(1,end)` cycle, lifting two source pixels briefly around 80–88% of the cycle. Reduced motion disables both train and tail animations. The name, moon, buildings, and window lights remain stationary.
+
+### Compact marks and accents
+
+The current profile output set contains 27 SVGs: four heroes, 20 transparent 28 × 28 brand/contact marks, a 600 × 24 skyline divider, a 144 × 84 workstation, and an 84 × 76 static cat. Devicon and Simple Icons inputs are attributed in `assets/README.md`. Portfolio and email marks are authored pixel geometry. Compact PHP, Bootstrap, and VS Code marks flatten gradients and remove filters while retaining upstream silhouettes; raw icon inputs and legacy labeled artwork remain intact. Decorative accents use empty image alternatives; meaningful names and links remain native text.
 
 ### Native text and links
 
@@ -113,7 +129,7 @@ Markdown headings, paragraphs, lists, repository links, and social links use Git
 - Do change hero colors through the scoped `AFTER_HOURS` palette.
 - Do preserve a complete visible train in static and reduced-motion alternatives.
 - Do keep informative profile content and destinations in native Markdown.
-- Do regenerate the four variants together with `python scripts/generate-profile-assets.py --hero-only`.
+- Do regenerate current README artwork together with `python scripts/generate-profile-assets.py --profile-only`; `--hero-only` remains available for the four heroes.
 
 ### Don't
 
