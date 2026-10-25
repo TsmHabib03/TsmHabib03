@@ -28,7 +28,7 @@ Marks display at 40px beside technology names, 36px beside contact labels, or 18
 
 The README's `<picture>` selects mobile at viewport widths up to 600px and animation-free variants for reduced-motion preference. Animated SVGs also include an internal reduced-motion query. Explicit visibility attributes show only the resting tail when CSS is unavailable, and windows stay illuminated. Static editions preserve complete scene geometry without an animation stylesheet.
 
-Local Chromium previews were checked at 320px, 375px, and desktop widths, including source selection, image loading, page overflow, tail visibility, window opacity, and static/reduced-motion fallbacks. These results do not establish live GitHub rendering. GitHub sanitization, image proxying, and caching can affect SVG CSS and media selection; profile text and links stay in native Markdown outside the artwork.
+Local Chromium previews were checked at 320px, 375px, and 1280px, including source selection, image loading, page overflow, tail visibility, window opacity, and static/reduced-motion fallbacks. The published GitHub profile was also inspected at those widths: scenes loaded, mobile/static sources selected correctly, larger marks rendered, and no horizontal overflow occurred. Detailed tail timing, window opacity, and CSS-unavailable behavior were verified locally. GitHub owns surrounding typography, icon alignment, page colors, and image caching; profile text and links stay native outside the artwork.
 
 To regenerate only the four hero variants:
 

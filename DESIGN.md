@@ -111,7 +111,7 @@ The quiet upper-left sky carries the identity, with the moon at upper right and 
 
 Only Connect has a second panorama: 1200 × 200 desktop and 600 × 200 mobile. Black, orange, and calico cats share one raised rooftop. About Me, Current Focus, Tech Stack, and Featured Projects use native text without illustrations. Fixed seeds and shared geometry preserve the city identity across the two scenes. The current README composition lives in `.impeccable/surfaces/readme-md.md`.
 
-The README selects mobile sources at viewport widths up to 600px, after reduced-motion sources. Technology marks display at 40px in four compact labeled groups; contact marks display at 36px beside six linked labels, and project marks remain 18px. Short rows wrap naturally at narrow widths; the email address sits below its linked label. Full-width images adapt to the available host column. Local Chromium previews at 320px, 375px, and desktop widths are local evidence; live GitHub rendering has not been verified.
+The README selects mobile sources at viewport widths up to 600px, after reduced-motion sources. Technology marks display at 40px in four compact labeled groups; contact marks display at 36px beside six linked labels, and project marks remain 18px. Short rows wrap naturally at narrow widths; the email address sits below its linked label. Full-width images adapt to the available host column. Local Chromium previews and the published GitHub profile were inspected at 320px, 375px, and 1280px. Live checks confirmed loaded scenes, mobile/static source selection, larger marks, and no horizontal overflow. Detailed animation timing and CSS-unavailable behavior were verified locally.
 
 ## Elevation & Depth
 
