@@ -3,7 +3,7 @@ import argparse
 import random
 import re
 from profile_theme import ASSETS, NAVY, BORDER, WHITE, MUTED, BLUE, CYAN, PURPLE, AFTER_HOURS, ROOFTOP_NIGHT, text, rect, frame, svg, write_assets
-from pixel_city import Pixels, city, step_outline, rooftop_cat, workstation, skyline_accent, rooftop_scene, ROOFTOP_SECTIONS
+from pixel_city import Pixels, city, step_outline, rooftop_cat, workstation, skyline_accent, rooftop_scene, ROOFTOP_SECTIONS, PROFILE_SECTIONS
 
 GROUPS = [
     ("Languages", [("javascript", "JavaScript"), ("php", "PHP"), ("java", "Java")]),
@@ -111,16 +111,17 @@ def hero(mobile=False, animated=True):
     body.append('</g>')
     return svg(w, h, "Habib Jaudian D.", "\n".join(body),
                "BSCS · Web Developer. Stationary pixel lettering above a moonlit indigo city, "
-               "illuminated buildings and a seated rooftop cat. "
+               "illuminated buildings and a seated calico cat on a raised building roof. "
                + ("The cat occasionally curls its tail and a few windows flicker; reduced motion freezes both."
                   if animated else "Static edition with a resting cat and illuminated city."))
 
 
 def section_banner(section, mobile=False, animated=True):
-    w, h = (600 if mobile else 1200), 160
+    w, h = (600 if mobile else 1200), (200 if section == "connect" else 160)
     return svg(w, h, f"Moonlit city — {section}",
                rooftop_scene(w, h, mobile=mobile, animated=animated, section=section),
-               "Decorative rooftop panorama. "
+               ("Black, orange and calico cats sit together on a moonlit building roof. "
+                if section == "connect" else "Decorative rooftop panorama. ")
                + ("Subtle cat-tail and window-light animation." if animated else "Static edition."))
 
 
@@ -205,7 +206,7 @@ def profile_assets():
             outputs[f"marks/{slug}.svg"] = compact_icon(slug, label)
     for slug, label in SOCIALS:
         outputs[f"marks/{slug}.svg"] = compact_icon(slug, label)
-    for section in ROOFTOP_SECTIONS:
+    for section in PROFILE_SECTIONS:
         for mobile in (False, True):
             suffix = "-mobile" if mobile else ""
             outputs[f"section-{section}{suffix}.svg"] = section_banner(section, mobile)
@@ -244,6 +245,14 @@ def generate_assets(hero_only=False):
             outputs[f"project-{slug}{suffix}.svg"] = project_card(title, mobile)
     if not hero_only:
         outputs.update(profile_assets())
+        # Retain unreferenced section outputs for callers of the full command.
+        for section in ROOFTOP_SECTIONS:
+            if section in PROFILE_SECTIONS:
+                continue
+            for mobile in (False, True):
+                suffix = "-mobile" if mobile else ""
+                outputs[f"section-{section}{suffix}.svg"] = section_banner(section,mobile)
+                outputs[f"section-{section}{suffix}-still.svg"] = section_banner(section,mobile,animated=False)
         # Preserve the older accent outputs for callers of the full generator.
         outputs["pixel-divider.svg"] = svg(600,24,"Pixel skyline divider",skyline_accent())
         outputs["pixel-workstation.svg"] = svg(144,84,"Pixel workstation",'<g shape-rendering="crispEdges">'+workstation()+'</g>')

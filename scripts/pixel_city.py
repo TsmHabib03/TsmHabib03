@@ -5,7 +5,7 @@ Geometry is batched by color; motion uses SVG-local CSS, never scripts or filter
 from collections import defaultdict
 import random
 
-from profile_theme import NAVY, BLUE, CYAN, PURPLE, WHITE, AFTER_HOURS, ROOFTOP_NIGHT
+from profile_theme import NAVY, BLUE, CYAN, PURPLE, WHITE, AFTER_HOURS, ROOFTOP_NIGHT, CAT_COATS
 
 SKY = NAVY
 DISTANT, MID, FRONT = "#29314B", "#303B58", "#394563"
@@ -286,6 +286,7 @@ def city(w, h, *, seed=27, accent=CYAN, location="tower", quiet_left=0,
 
 # Rooftop profile scenes: each source cell is an integer rectangle.
 ROOFTOP_SECTIONS = ("about", "focus", "stack", "projects", "connect")
+PROFILE_SECTIONS = ("connect",)
 TAIL_CYCLE = 14
 WINDOW_CYCLES = (11, 17, 23)
 
@@ -340,23 +341,42 @@ def night_moon(x, y, cell):
     return p.draw()
 
 
-def night_cat(x, floor, cell=3):
-    """Back-view cat with asymmetric ears, rim pixels and four curled-tail poses."""
-    c, p = ROOFTOP_NIGHT, Pixels()
+def night_cat(x, floor, cell=3, coat="black"):
+    """Seated back-view cat; shared silhouette and connected tail for each coat."""
+    c, fur, p = ROOFTOP_NIGHT, CAT_COATS[coat], Pixels()
     top = floor-48*cell
     # Bands form the head, narrow neck, shoulders, broad haunches and paws.
     bands = ((0,4,12,14),(2,5,25,27),(4,8,11,28),(8,16,9,30),
              (16,20,11,28),(20,24,13,26),(24,28,11,28),(28,32,9,30),
              (32,36,7,32),(36,40,5,33),(40,43,4,34),(43,46,5,34),(46,48,9,31))
     for y0,y1,left,right in bands:
-        p.box(x+left*cell,top+y0*cell,(right-left)*cell,(y1-y0)*cell,c["cat"])
+        p.box(x+left*cell,top+y0*cell,(right-left)*cell,(y1-y0)*cell,fur["base"])
+    # Hand-placed patches stay inside the stepped body bands, without masks.
+    if coat == "calico":
+        patches = ((12,4,6,4),(10,8,9,7),(12,15,7,4),(14,20,8,4),
+                   (11,25,9,5),(8,30,12,8),(6,38,13,5),(9,43,9,3))
+        darks = ((23,4,4,4),(22,8,7,8),(21,16,6,3),(24,27,4,5),
+                 (23,32,8,8),(25,40,7,5))
+        for color, patches_for_color in ((fur["patch"], patches),(fur["dark"],darks)):
+            for col,row,width,height in patches_for_color:
+                p.box(x+col*cell,top+row*cell,width*cell,height*cell,color)
+    elif coat == "orange":
+        for col,row,width,height in ((14,7,3,7),(22,7,3,7),(12,17,14,2),
+                                      (14,23,11,2),(10,29,8,2),(24,31,5,2),
+                                      (7,36,10,2),(23,38,8,2)):
+            p.box(x+col*cell,top+row*cell,width*cell,height*cell,fur["patch"])
+        p.box(x+12*cell,top+45*cell,17*cell,2*cell,fur["rim"])
     for col,row,width,height in ((12,0,1,4),(11,4,1,4),(9,8,1,8),(10,16,1,3),
                                   (12,20,1,4),(10,24,1,4),(8,28,1,4),(6,32,1,4),
                                   (4,36,1,6),(5,43,2,2),(25,2,1,2),(26,4,1,1)):
-        p.box(x+col*cell,top+row*cell,width*cell,height*cell,c["cat-edge"])
+        p.box(x+col*cell,top+row*cell,width*cell,height*cell,fur["rim"])
     for col,row,width,height in ((13,5,1,9),(11,15,1,3),(13,23,1,7),(9,32,1,9),
                                   (7,42,3,3),(28,37,2,7),(13,46,16,1)):
-        p.box(x+col*cell,top+row*cell,width*cell,height*cell,c["cat-shade"])
+        p.box(x+col*cell,top+row*cell,width*cell,height*cell,fur["shade"])
+    # Ear interiors, shoulder fur and split rear paws read at small display sizes.
+    for col,row,width,height in ((12,4,2,2),(25,5,2,2)):
+        p.box(x+col*cell,top+row*cell,width*cell,height*cell,fur["ear"])
+    p.box(x+19*cell,top+44*cell,cell,3*cell,fur["shade"])
     shadow = Pixels()
     for col,row,width,height in ((8,48,26,2),(13,50,26,2),(20,52,23,2)):
         shadow.box(x+col*cell,top+row*cell,width*cell,height*cell,c["cat-shade"])
@@ -370,13 +390,35 @@ def night_cat(x, floor, cell=3):
         # Join steps before rim pixels so lifted poses stay a continuous tail.
         posed = [(col,row+lift) for (col,row),lift in zip(points,lifts)]
         for (_,y0),(right,y1) in zip(posed,posed[1:]):
-            tail.box(x+right*cell,top+min(y0,y1)*cell,cell,(abs(y1-y0)+2)*cell,c["cat"])
-        for (col,row),lift in zip(points,lifts):
-            tail.box(x+col*cell,top+(row+lift)*cell,5*cell,2*cell,c["cat"])
-            tail.box(x+col*cell,top+(row+lift)*cell,2*cell,cell,c["cat-edge"])
+            tail.box(x+right*cell,top+min(y0,y1)*cell,cell,(abs(y1-y0)+2)*cell,fur["base"])
+        for segment, ((col,row),lift) in enumerate(zip(points,lifts)):
+            tail.box(x+col*cell,top+(row+lift)*cell,5*cell,2*cell,fur["base"])
+            if coat != "black" and segment%3 == 1:
+                tail.box(x+(col+2)*cell,top+(row+lift)*cell,2*cell,2*cell,
+                         fur["dark"] if coat == "calico" and segment == 4 else fur["patch"])
+            tail.box(x+col*cell,top+(row+lift)*cell,2*cell,cell,fur["rim"])
         visibility = "visible" if index == 0 else "hidden"
         body.append(f'<g class="cat-tail-pose tail-{name}" visibility="{visibility}">{tail.draw()}</g>')
-    return '<g class="night-cat">'+"".join(body)+'</g>'
+    return f'<g class="night-cat" data-coat="{coat}">'+"".join(body)+'</g>'
+
+
+def cat_rooftop(x, floor, width, height):
+    """A raised building roof with coping, deck seams and a shallow windowed facade."""
+    c, p = ROOFTOP_NIGHT, Pixels()
+    p.box(x,floor-6,width,height-floor+6,c["ledge"])
+    p.box(x,floor-6,width,4,c["rail"])
+    p.box(x+4,floor-2,width-8,22,c["cat-shade"])
+    p.box(x,floor+20,width,4,c["edge"])
+    p.box(x,floor+24,width,4,c["sky"])
+    for seam in range(x+16,x+width-16,56):
+        p.box(seam,floor+16,24,2,c["mid"])
+        p.box(seam+12,floor+30,2,max(0,height-floor-30),c["mid"])
+    if height-floor >= 40:
+        for wx in range(x+22,x+width-22,48):
+            p.box(wx,floor+32,16,8,c["sky"])
+            p.box(wx+2,floor+34,4,4,c["warm"])
+            p.box(wx+10,floor+34,4,4,c["window-dim"])
+    return '<g class="cat-rooftop">'+p.draw()+'</g>'
 
 
 def night_skyline(w, floor, height, seed):
@@ -473,7 +515,19 @@ def rooftop_scene(w, h, *, mobile=False, animated=True, section=None):
         desk.box(mx+24,my+68,48,4,c["mid"])
         desk.box(mx-24,my+78,156,4,c["edge"])
         body.append(desk.draw())
-    body.append(night_cat(cat_x,floor,cat_cell))
+    if section is None:
+        cat_floor = h-60
+        body.append(cat_rooftop(cat_x-92,cat_floor,284 if mobile else 340,h))
+        body.append(night_cat(cat_x,cat_floor,cat_cell,coat="calico"))
+    elif section == "connect":
+        # Three distinct coats share one roof, with enough space for every tail.
+        cat_floor = h-44
+        trio_x = w//2-154
+        body.append(cat_rooftop(trio_x-48,cat_floor,400,h))
+        for offset, coat in ((0,"black"),(110,"orange"),(220,"calico")):
+            body.append(night_cat(trio_x+offset,cat_floor,2,coat=coat))
+    else:
+        body.append(night_cat(cat_x,floor,cat_cell))
     return f'<g class="rooftop-scene" shape-rendering="crispEdges">'+"".join(body)+'</g>'
 
 

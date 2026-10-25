@@ -25,6 +25,15 @@ ROOFTOP_NIGHT = {
     "cat": "#10152D", "cat-edge": "#A8ACF0", "cat-shade": "#1C2445",
     "ledge": "#202747", "rail": "#8387D4", "text": "#DCEBFF", "cyan": "#76C8EA",
 }
+# Coat colors are shared by the hero and the three-cat contact panorama.
+CAT_COATS = {
+    "black": {"base": ROOFTOP_NIGHT["cat"], "shade": ROOFTOP_NIGHT["cat-shade"],
+              "rim": ROOFTOP_NIGHT["cat-edge"], "patch": "#10152D", "ear": "#71657E"},
+    "orange": {"base": "#CE925C", "shade": "#9D633F", "rim": "#F1CEA0",
+               "patch": "#9D633F", "ear": "#D6A1A0"},
+    "calico": {"base": "#E1DED7", "shade": "#A7A4AE", "rim": "#F5EDDF",
+               "patch": "#C88C57", "dark": "#34364C", "ear": "#D6A1A0"},
+}
 SANS = "'Segoe UI', Arial, sans-serif"
 MONO = "Consolas, 'Liberation Mono', monospace"
 

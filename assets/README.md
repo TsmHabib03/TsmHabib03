@@ -4,27 +4,27 @@ The profile uses a **Tokyo at Night** pixel-art identity: midnight indigo, muted
 
 ## Profile artwork
 
-Regenerate the 44 assets referenced by the current README:
+Regenerate the 28 assets referenced by the current README:
 
 ```sh
 python scripts/generate-profile-assets.py --profile-only
 ```
 
-The generator uses the Python standard library. Current scene colors live in `ROOFTOP_NIGHT` in `scripts/profile_theme.py`; shared rooftop, skyline, moon, cat, tail, window, and terminal geometry live in `scripts/pixel_city.py`. Layout, bitmap lettering, and compact brand marks live in `scripts/generate-profile-assets.py`. The legacy `AFTER_HOURS` palette and city/rail/train helpers remain intact for older artwork and authored compact marks.
+The generator uses the Python standard library. Current scene colors live in `ROOFTOP_NIGHT` and shared fur colors in `CAT_COATS` in `scripts/profile_theme.py`; shared rooftop, skyline, moon, cat, tail, and window geometry live in `scripts/pixel_city.py`. Layout, bitmap lettering, and compact brand marks live in `scripts/generate-profile-assets.py`. The legacy `AFTER_HOURS` palette and city/rail/train helpers remain intact for older artwork and authored compact marks.
 
 | Asset family | Desktop | Mobile | Editions |
 | --- | --- | --- | --- |
-| `hero.svg` / `hero-mobile.svg` | 1200 × 440 | 600 × 464 | Animated and `-still.svg` |
-| `section-{about,focus,stack,projects,connect}.svg` and mobile equivalents | 1200 × 160 | 600 × 160 | Animated and `-still.svg` |
+| `hero.svg` / `hero-mobile.svg` | 1200 × 280 | 600 × 464 | Animated and `-still.svg` |
+| `section-connect.svg` and mobile equivalents | 1200 × 200 | 600 × 200 | Animated and `-still.svg` |
 | `marks/*.svg` | 28 × 28 source canvas | Same source | 20 compact brand/contact marks |
 
-The current hero has no train. Its name and qualification remain stationary above a three-layer indigo city. A lavender stepped crater moon, pixel clouds, dense cool window patterns, and a large seated back-view cat frame the checkered rooftop ledge. Each of the five native README sections has its own shallow panorama; Current Focus includes a small terminal and desk. All scenes share the palette and geometry helpers while using fixed seeds and deliberate section compositions.
+The current hero has no train. Its name and qualification remain stationary above a three-layer indigo city. A lavender stepped crater moon, pixel clouds, dense cool window patterns, and a large seated back-view calico frame a raised building roof with coping, deck seams, and a windowed façade. Only Connect has a second panorama, with black, orange, and calico cats seated together on one roof. About Me, Current Focus, Tech Stack, and Featured Projects contain no pixel-art illustrations. All scenes share the palette and geometry helpers while using fixed seeds and deliberate section compositions.
 
 Only the cat tail and selected window lights animate. Four tail groups switch visibility with `steps(1,end)` during a 14-second cycle, resting for most of the loop. Sparse windows briefly dim from opacity 1 to 0.22 during staggered 11-, 17-, and 23-second cycles. Lamps remain within their building layers so nearer architecture still occludes them. The name, city, moon, and clouds do not move.
 
 All scene geometry uses integer coordinates and crisp edges, with no gradients, filters, external fonts, scripts, or image dependencies. Fixed local random seeds make generation deterministic. Desktop and mobile scenes are separately composed rather than relying on cropping.
 
-Marks display at 24px beside native technology and contact names, or 18px beside project descriptions. Brand marks retain source colors or established display tints; they do not all use the rooftop palette. Names and links remain native text, and decorative panoramas have empty image alternatives. The compact PHP, Bootstrap, and VS Code marks flatten source gradients and remove filters while retaining upstream geometry. Raw inputs, legacy labeled icons, and their attribution are preserved.
+Marks display at 40px beside technology names, 36px beside contact labels, or 18px beside project descriptions. Compact technology rows wrap naturally; six contact rows keep destinations accessible, with the email address below its label. Brand marks retain source colors or established display tints; they do not all use the rooftop palette. Names and links remain native text, and the hero and Connect alternatives describe their city/cat scenes. The compact PHP, Bootstrap, and VS Code marks flatten source gradients and remove filters while retaining upstream geometry. Raw inputs, legacy labeled icons, and their attribution are preserved.
 
 The README's `<picture>` selects mobile at viewport widths up to 600px and animation-free variants for reduced-motion preference. Animated SVGs also include an internal reduced-motion query. Explicit visibility attributes show only the resting tail when CSS is unavailable, and windows stay illuminated. Static editions preserve complete scene geometry without an animation stylesheet.
 
@@ -36,7 +36,7 @@ To regenerate only the four hero variants:
 python scripts/generate-profile-assets.py --hero-only
 ```
 
-Older project strips, footer, labeled tech/social assets, and three small accents remain supported for compatibility but are no longer referenced by the profile. The full command regenerates those assets as well as the current profile; use it only when those legacy outputs need regeneration:
+Unreferenced middle-section panoramas, older project strips, footer, labeled tech/social assets, and three small accents remain supported for compatibility but are no longer referenced by the profile. The full command regenerates those assets as well as the current profile; use it only when those legacy outputs need regeneration:
 
 ```sh
 python scripts/generate-profile-assets.py

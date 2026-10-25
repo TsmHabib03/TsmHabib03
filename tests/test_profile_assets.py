@@ -48,7 +48,7 @@ class HeroContracts(unittest.TestCase):
             still = profile.hero(mobile=mobile, animated=False)
             self.assertNotIn("<style>", still)
             self.assertNotIn("@keyframes", still)
-            self.assertIn('class="night-cat"', still)
+            self.assertIn('class="night-cat" data-coat="calico"', still)
 
     def test_bitmap_name_and_label_fit_each_layout(self):
         for value, cell, width in ((profile.NAME, 10, 1200), ("HABIB", 9, 600), ("JAUDIAN D.", 9, 600), (profile.IDENTITY, 4, 600)):
@@ -62,6 +62,13 @@ class HeroContracts(unittest.TestCase):
             self.assertTrue((ROOT / path).is_file(), path)
         self.assertIn("hero-mobile-still.svg", source)
         self.assertIn("hero-still.svg", source)
+        self.assertEqual(source.count('<picture>'),2)
+        for section in ('about','focus','stack','projects'):
+            self.assertNotIn(f'section-{section}',source)
+        stack = source.split('## Tech Stack')[1].split('## Featured Projects')[0]
+        self.assertEqual(stack.count('width="40" height="40"'),15)
+        connect = source.split('## Connect')[1]
+        self.assertEqual(connect.count('width="36" height="36"'),6)
 
     def test_profile_assets_match_references_and_are_self_contained(self):
         outputs = profile.profile_assets()
@@ -81,7 +88,7 @@ class HeroContracts(unittest.TestCase):
         self.assertNotRegex(readme, r"(?:tel:|\+63\d|\b09\d{9}\b)")
 
     def test_cat_motion_has_a_complete_static_alternative(self):
-        for section in (None, *city.ROOFTOP_SECTIONS):
+        for section in (None, *city.PROFILE_SECTIONS):
             for mobile in (False, True):
                 with self.subTest(section=section, mobile=mobile):
                     render = profile.hero if section is None else lambda **kw: profile.section_banner(section, **kw)
@@ -90,25 +97,44 @@ class HeroContracts(unittest.TestCase):
                     self.assertIn(".cat-tail-pose,.flicker-window { animation:none }", animated)
                     self.assertIn('class="night-cat"', still)
                     self.assertIn('class="cat-tail-pose tail-rest" visibility="visible"', still)
-                    self.assertEqual(still.count('visibility="hidden"'), 3)
+                    cats = 1 if section is None else 3
+                    self.assertEqual(still.count('class="night-cat"'),cats)
+                    self.assertEqual(still.count('visibility="hidden"'), 3*cats)
                     self.assertNotIn("@keyframes", still)
 
     def test_each_section_has_four_variants_and_correct_dimensions(self):
         outputs = profile.profile_assets()
-        self.assertEqual(len(outputs), 44)
-        for section in city.ROOFTOP_SECTIONS:
+        self.assertEqual(len(outputs), 28)
+        for section in city.PROFILE_SECTIONS:
             for mobile in (False, True):
                 for still in (False, True):
                     suffix = ("-mobile" if mobile else "") + ("-still" if still else "")
                     root = ET.fromstring(outputs[f"section-{section}{suffix}.svg"])
-                    self.assertEqual(root.attrib['viewBox'], f"0 0 {600 if mobile else 1200} 160")
+                    self.assertEqual(root.attrib['viewBox'], f"0 0 {600 if mobile else 1200} 200")
+
+    def test_coats_and_rooftops_match_the_two_scene_roles(self):
+        for mobile in (False,True):
+            hero = ET.fromstring(profile.hero(mobile=mobile))
+            connect = ET.fromstring(profile.section_banner('connect',mobile=mobile))
+            ns = {'s':'http://www.w3.org/2000/svg'}
+            self.assertEqual([g.attrib['data-coat'] for g in hero.findall('.//s:g[@class="night-cat"]',ns)],['calico'])
+            self.assertEqual([g.attrib['data-coat'] for g in connect.findall('.//s:g[@class="night-cat"]',ns)],['black','orange','calico'])
+            for scene in (hero,connect):
+                self.assertEqual(len(scene.findall('.//s:g[@class="cat-rooftop"]',ns)),1)
+            for color in (city.CAT_COATS['calico']['base'],city.CAT_COATS['calico']['patch'],city.CAT_COATS['calico']['dark']):
+                self.assertIn(color,profile.hero(mobile=mobile))
 
     def test_every_tail_pose_is_a_connected_pixel_silhouette(self):
-        root = ET.fromstring('<svg>'+city.night_cat(100, 180)+'</svg>')
+        for coat in city.CAT_COATS:
+            with self.subTest(coat=coat):
+                self.assert_connected_tail(coat)
+
+    def assert_connected_tail(self, coat):
+        root = ET.fromstring('<svg>'+city.night_cat(100, 180, coat=coat)+'</svg>')
         for pose in root.iter('g'):
             if 'cat-tail-pose' not in pose.attrib.get('class', ''):
                 continue
-            path = next(p for p in pose if p.attrib.get('fill')==city.ROOFTOP_NIGHT['cat'])
+            path = next(p for p in pose if p.attrib.get('fill')==city.CAT_COATS[coat]['base'])
             boxes = [(int(x),int(y),int(w),int(h)) for x,y,w,h in
                      re.findall(r'M(-?\d+) (-?\d+)h(\d+)v(\d+)h-\d+z', path.attrib['d'])]
             self.assertTrue(boxes)
