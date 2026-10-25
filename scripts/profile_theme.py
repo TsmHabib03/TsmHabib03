@@ -16,6 +16,15 @@ AFTER_HOURS = {
     "steel": "#A5B8CC", "roof": "#66839F", "glass": "#152B43",
     "moon": "#BACBEF", "moon-shade": "#849AC8", "cat": "#3B5674",
 }
+# Reference-led rooftop scenes; older city/rail artwork retains AFTER_HOURS.
+ROOFTOP_NIGHT = {
+    "sky": "#11132C", "sky-low": "#191D3F", "distant": "#232D57",
+    "mid": "#34477C", "front": "#465992", "edge": "#7182BC",
+    "window": "#D5E5FF", "window-dim": "#7388BF", "warm": "#D5BC97",
+    "moon": "#B9B5F4", "moon-light": "#D6D6FF", "moon-shade": "#898BD0",
+    "cat": "#10152D", "cat-edge": "#A8ACF0", "cat-shade": "#1C2445",
+    "ledge": "#202747", "rail": "#8387D4", "text": "#DCEBFF", "cyan": "#76C8EA",
+}
 SANS = "'Segoe UI', Arial, sans-serif"
 MONO = "Consolas, 'Liberation Mono', monospace"
 

@@ -1,39 +1,42 @@
 # Profile assets
 
-The profile uses a **Tokyo at Night** pixel-art identity: midnight navy, slate-blue buildings, off-white lettering, cyan accents, and sparse warm windows. All displayed artwork is stored in this repository and uses self-contained SVG geometry.
+The profile uses a **Tokyo at Night** pixel-art identity: midnight indigo, muted blue buildings, pale lettering and windows, a lavender moon and cat rim light, cyan qualification text, and sparse warm lights. Displayed artwork is stored in this repository as self-contained SVG geometry.
 
 ## Profile artwork
 
-Regenerate the 27 assets referenced by the current README:
+Regenerate the 44 assets referenced by the current README:
 
 ```sh
 python scripts/generate-profile-assets.py --profile-only
 ```
 
-The generator uses the Python standard library. Shared colors live in `AFTER_HOURS` in `scripts/profile_theme.py`; authored skyline, Tokyo Tower, moon, cat, railway, train, and workstation geometry live in `scripts/pixel_city.py`. Layout, bitmap lettering, and compact brand marks live in `scripts/generate-profile-assets.py`. Legacy palette tokens and the original city helper are preserved for other artwork.
+The generator uses the Python standard library. Current scene colors live in `ROOFTOP_NIGHT` in `scripts/profile_theme.py`; shared rooftop, skyline, moon, cat, tail, window, and terminal geometry live in `scripts/pixel_city.py`. Layout, bitmap lettering, and compact brand marks live in `scripts/generate-profile-assets.py`. The legacy `AFTER_HOURS` palette and city/rail/train helpers remain intact for older artwork and authored compact marks.
 
-| Variant | Dimensions | Purpose |
-| --- | --- | --- |
-| `hero.svg` | 1200 × 440 | Desktop, animated train and occasional cat-tail movement |
-| `hero-still.svg` | 1200 × 440 | Desktop, stationary train |
-| `hero-mobile.svg` | 600 × 464 | Mobile, two-line name and restrained motion |
-| `hero-mobile-still.svg` | 600 × 464 | Mobile, stationary train |
+| Asset family | Desktop | Mobile | Editions |
+| --- | --- | --- | --- |
+| `hero.svg` / `hero-mobile.svg` | 1200 × 440 | 600 × 464 | Animated and `-still.svg` |
+| `section-{about,focus,stack,projects,connect}.svg` and mobile equivalents | 1200 × 160 | 600 × 160 | Animated and `-still.svg` |
+| `marks/*.svg` | 28 × 28 source canvas | Same source | 20 compact brand/contact marks |
 
-The name, moon, city, and windows stay stationary. Three linked train carriages share doors, windows, wheels, roof equipment, and a continuous cyan stripe. The cat's stepped tail lifts two source pixels briefly during a 12-second cycle. All scene geometry uses integer coordinates and crisp edges, without gradients, filters, external fonts, scripts, or image dependencies. Building positions are authored; window placement uses a fixed random seed.
+The current hero has no train. Its name and qualification remain stationary above a three-layer indigo city. A lavender stepped crater moon, pixel clouds, dense cool window patterns, and a large seated back-view cat frame the checkered rooftop ledge. Each of the five native README sections has its own shallow panorama; Current Focus includes a small terminal and desk. All scenes share the palette and geometry helpers while using fixed seeds and deliberate section compositions.
 
-The remaining assets are 20 transparent brand/contact marks in `marks/`, a thin skyline divider, a small workstation, and a static cat accent. Marks use a 28 × 28 source canvas and display at 24px in the stack and contact sections or 18px beside project descriptions. Names and links remain native text; decorative accents have empty image alternatives. The compact PHP, Bootstrap, and VS Code marks flatten source gradients and remove filters while retaining the upstream geometry. Raw icon inputs and legacy labeled icons are preserved.
+Only the cat tail and selected window lights animate. Four tail groups switch visibility with `steps(1,end)` during a 14-second cycle, resting for most of the loop. Sparse windows briefly dim from opacity 1 to 0.22 during staggered 11-, 17-, and 23-second cycles. Lamps remain within their building layers so nearer architecture still occludes them. The name, city, moon, and clouds do not move.
 
-The train travels from `-TRAIN_WIDTH - TRAIN_MARGIN` to `scene_width + TRAIN_MARGIN`, then waits outside the clip for the final 12% of each loop before resetting. Desktop loops take 28 seconds; mobile loops take 24 seconds. The negative delay starts with the whole train visible. The static transform also shows all three carriages when SVG CSS animation is unavailable.
+All scene geometry uses integer coordinates and crisp edges, with no gradients, filters, external fonts, scripts, or image dependencies. Fixed local random seeds make generation deterministic. Desktop and mobile scenes are separately composed rather than relying on cropping.
 
-The README's `<picture>` selects mobile at viewport widths up to 600px and animation-free variants for reduced-motion preference. Animated SVGs also contain an internal reduced-motion media query. Browser and GitHub sanitization/caching can affect media selection; local preview validation does not establish live GitHub compatibility. GitHub embeds SVGs as images, so links and profile text remain native Markdown outside the artwork.
+Marks display at 24px beside native technology and contact names, or 18px beside project descriptions. Brand marks retain source colors or established display tints; they do not all use the rooftop palette. Names and links remain native text, and decorative panoramas have empty image alternatives. The compact PHP, Bootstrap, and VS Code marks flatten source gradients and remove filters while retaining upstream geometry. Raw inputs, legacy labeled icons, and their attribution are preserved.
 
-To regenerate only the four hero variants, the existing command remains available:
+The README's `<picture>` selects mobile at viewport widths up to 600px and animation-free variants for reduced-motion preference. Animated SVGs also include an internal reduced-motion query. Explicit visibility attributes show only the resting tail when CSS is unavailable, and windows stay illuminated. Static editions preserve complete scene geometry without an animation stylesheet.
+
+Local Chromium previews were checked at 320px, 375px, and desktop widths, including source selection, image loading, page overflow, tail visibility, window opacity, and static/reduced-motion fallbacks. These results do not establish live GitHub rendering. GitHub sanitization, image proxying, and caching can affect SVG CSS and media selection; profile text and links stay in native Markdown outside the artwork.
+
+To regenerate only the four hero variants:
 
 ```sh
 python scripts/generate-profile-assets.py --hero-only
 ```
 
-The older project strips, footer, tech, and social assets are retained for compatibility but no longer referenced by the profile. To regenerate every asset supported by the existing profile generator:
+Older project strips, footer, labeled tech/social assets, and three small accents remain supported for compatibility but are no longer referenced by the profile. The full command regenerates those assets as well as the current profile; use it only when those legacy outputs need regeneration:
 
 ```sh
 python scripts/generate-profile-assets.py

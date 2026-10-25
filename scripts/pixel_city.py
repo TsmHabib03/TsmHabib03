@@ -5,7 +5,7 @@ Geometry is batched by color; motion uses SVG-local CSS, never scripts or filter
 from collections import defaultdict
 import random
 
-from profile_theme import NAVY, BLUE, CYAN, PURPLE, WHITE, AFTER_HOURS
+from profile_theme import NAVY, BLUE, CYAN, PURPLE, WHITE, AFTER_HOURS, ROOFTOP_NIGHT
 
 SKY = NAVY
 DISTANT, MID, FRONT = "#29314B", "#303B58", "#394563"
@@ -282,6 +282,199 @@ def city(w, h, *, seed=27, accent=CYAN, location="tower", quiet_left=0,
         reflections.box(x+4, h-2, rng.randrange(4, 12, 2), 1, BLUE)
     body.append(f'<g class="reflection" opacity=".2">{reflections.draw()}</g></g>')
     return "\n".join(body)
+
+
+# Rooftop profile scenes: each source cell is an integer rectangle.
+ROOFTOP_SECTIONS = ("about", "focus", "stack", "projects", "connect")
+TAIL_CYCLE = 14
+WINDOW_CYCLES = (11, 17, 23)
+
+
+def rooftop_motion(animated):
+    if not animated:
+        return ""
+    return f'''<style>
+@keyframes rooftop-tail {{
+  0%,64%,100% {{ visibility:visible }}
+  65%,99% {{ visibility:hidden }}
+}}
+@keyframes rooftop-tail-rise {{
+  0%,64%,73%,90%,100% {{ visibility:hidden }}
+  65%,72%,91%,99% {{ visibility:visible }}
+}}
+@keyframes rooftop-tail-curl {{
+  0%,72%,81%,100% {{ visibility:hidden }}
+  73%,80% {{ visibility:visible }}
+}}
+@keyframes rooftop-tail-return {{
+  0%,80%,91%,100% {{ visibility:hidden }}
+  81%,90% {{ visibility:visible }}
+}}
+.tail-rest {{ animation:rooftop-tail {TAIL_CYCLE}s steps(1,end) infinite }}
+.tail-rise {{ animation:rooftop-tail-rise {TAIL_CYCLE}s steps(1,end) infinite }}
+.tail-curl {{ animation:rooftop-tail-curl {TAIL_CYCLE}s steps(1,end) infinite }}
+.tail-return {{ animation:rooftop-tail-return {TAIL_CYCLE}s steps(1,end) infinite }}
+@keyframes rooftop-window {{ 0%,38%,44%,100% {{ opacity:1 }} 39%,43% {{ opacity:.22 }} }}
+.lights-0 {{ animation:rooftop-window {WINDOW_CYCLES[0]}s steps(1,end) infinite; animation-delay:-3s }}
+.lights-1 {{ animation:rooftop-window {WINDOW_CYCLES[1]}s steps(1,end) infinite; animation-delay:-9s }}
+.lights-2 {{ animation:rooftop-window {WINDOW_CYCLES[2]}s steps(1,end) infinite; animation-delay:-15s }}
+@media (prefers-reduced-motion:reduce) {{
+ .cat-tail-pose,.flicker-window {{ animation:none }}
+}}
+</style>'''
+
+
+def night_moon(x, y, cell):
+    c, p = ROOFTOP_NIGHT, Pixels()
+    spans = ((6,18),(4,20),(3,21),(2,22),(1,23),(1,23),
+             (0,24),(0,24),(0,24),(0,24),(0,24),(0,24),
+             (0,24),(0,24),(0,24),(0,24),(1,23),(1,23),
+             (2,22),(3,21),(4,20),(6,18),(8,16),(10,14))
+    for row,(left,right) in enumerate(spans):
+        p.box(x+left*cell,y+row*cell,(right-left)*cell,cell,c["moon"])
+    for col,row,width,height in ((3,5,2,11),(5,17,3,3),(8,20,8,2),(17,6,3,2),
+                                  (16,9,3,3),(13,12,4,3),(9,15,4,3),(6,14,2,2)):
+        p.box(x+col*cell,y+row*cell,width*cell,height*cell,c["moon-light"])
+    for col,row,width,height in ((5,4,3,2),(8,6,2,2),(12,17,3,2),(18,14,2,3),(16,19,2,2)):
+        p.box(x+col*cell,y+row*cell,width*cell,height*cell,c["moon-shade"])
+    return p.draw()
+
+
+def night_cat(x, floor, cell=3):
+    """Back-view cat with asymmetric ears, rim pixels and four curled-tail poses."""
+    c, p = ROOFTOP_NIGHT, Pixels()
+    top = floor-48*cell
+    # Bands form the head, narrow neck, shoulders, broad haunches and paws.
+    bands = ((0,4,12,14),(2,5,25,27),(4,8,11,28),(8,16,9,30),
+             (16,20,11,28),(20,24,13,26),(24,28,11,28),(28,32,9,30),
+             (32,36,7,32),(36,40,5,33),(40,43,4,34),(43,46,5,34),(46,48,9,31))
+    for y0,y1,left,right in bands:
+        p.box(x+left*cell,top+y0*cell,(right-left)*cell,(y1-y0)*cell,c["cat"])
+    for col,row,width,height in ((12,0,1,4),(11,4,1,4),(9,8,1,8),(10,16,1,3),
+                                  (12,20,1,4),(10,24,1,4),(8,28,1,4),(6,32,1,4),
+                                  (4,36,1,6),(5,43,2,2),(25,2,1,2),(26,4,1,1)):
+        p.box(x+col*cell,top+row*cell,width*cell,height*cell,c["cat-edge"])
+    for col,row,width,height in ((13,5,1,9),(11,15,1,3),(13,23,1,7),(9,32,1,9),
+                                  (7,42,3,3),(28,37,2,7),(13,46,16,1)):
+        p.box(x+col*cell,top+row*cell,width*cell,height*cell,c["cat-shade"])
+    shadow = Pixels()
+    for col,row,width,height in ((8,48,26,2),(13,50,26,2),(20,52,23,2)):
+        shadow.box(x+col*cell,top+row*cell,width*cell,height*cell,c["cat-shade"])
+    body = [shadow.draw(), p.draw()]
+    # The tail curls left along the ledge. Every pose connects to the same haunch.
+    for index, name in enumerate(("rest", "rise", "curl", "return")):
+        tail = Pixels()
+        points = [(-18,44),(-14,46),(-10,48),(-6,50),(-2,51),(2,51),(6,50),(10,48),(14,46)]
+        lifts = ((0,0,0,0,0,0,0,0,0),(-4,-3,-2,-1,0,0,0,0,0),
+                 (-8,-7,-5,-3,-1,0,0,0,0),(-3,-4,-4,-3,-2,-1,0,0,0))[index]
+        # Join steps before rim pixels so lifted poses stay a continuous tail.
+        posed = [(col,row+lift) for (col,row),lift in zip(points,lifts)]
+        for (_,y0),(right,y1) in zip(posed,posed[1:]):
+            tail.box(x+right*cell,top+min(y0,y1)*cell,cell,(abs(y1-y0)+2)*cell,c["cat"])
+        for (col,row),lift in zip(points,lifts):
+            tail.box(x+col*cell,top+(row+lift)*cell,5*cell,2*cell,c["cat"])
+            tail.box(x+col*cell,top+(row+lift)*cell,2*cell,cell,c["cat-edge"])
+        visibility = "visible" if index == 0 else "hidden"
+        body.append(f'<g class="cat-tail-pose tail-{name}" visibility="{visibility}">{tail.draw()}</g>')
+    return '<g class="night-cat">'+"".join(body)+'</g>'
+
+
+def night_skyline(w, floor, height, seed):
+    c = ROOFTOP_NIGHT
+    rng = random.Random(seed)
+    body = []
+    for layer, color in enumerate((c["distant"],c["mid"],c["front"])):
+        lamps = [Pixels() for _ in WINDOW_CYCLES]
+        p, x = Pixels(), -20
+        while x < w:
+            width = rng.randrange(32,73,4)
+            building_h = rng.randrange(max(20,height//3),max(24,height),4)
+            top = floor-building_h + layer*8
+            p.box(x,top,width,building_h,color)
+            p.box(x+4,top-4,width-12,4,color)
+            if rng.random()<.25:
+                p.box(x+width-12,top-12,4,8,color)
+            if layer:
+                pattern = rng.randrange(4)
+                for row,y in enumerate(range(top+8,floor-5,12)):
+                    for col,wx in enumerate(range(max(2,x+8),min(w-4,x+width-4),10)):
+                        if rng.random()>.55:
+                            continue
+                        bright = rng.random()<.7
+                        shade = (c["warm"] if rng.random()<.035 else c["window"]) if bright else c["window-dim"]
+                        ww,hh = (6,3) if pattern==0 else (3,6) if pattern==1 else (4,4)
+                        if bright and rng.random()<.085:
+                            lamps[(row+col+layer)%3].box(wx,y,ww,hh,shade)
+                        else:
+                            p.box(wx,y,ww,hh,shade)
+                if pattern==3:
+                    for y in range(top+9,min(top+38,floor-4),8):
+                        p.box(x+width//3,y,width//2,2,c["window"])
+            x += width+rng.randrange(0,9,4)
+        body.append(p.draw())
+        # Animate within the layer so nearer buildings still occlude its lamps.
+        body.extend(f'<g class="flicker-window lights-{i}">{lamp.draw()}</g>' for i,lamp in enumerate(lamps))
+    return "".join(body)
+
+
+def rooftop_scene(w, h, *, mobile=False, animated=True, section=None):
+    """Shared reference-led geometry, with deliberate compositions per section."""
+    c, p = ROOFTOP_NIGHT, Pixels()
+    index = ROOFTOP_SECTIONS.index(section)+1 if section else 0
+    floor = h-(24 if section else 40)
+    city_floor = floor-(10 if section else 26)
+    city_height = (78 if mobile else 100) if section else (110 if mobile else 150)
+    p.box(0,0,w,h,c["sky"])
+    # Flat lower-sky band comes from the reference's tonal depth, not a gradient.
+    band_y = 38 if section else (208 if mobile else 142)
+    p.box(0,band_y,w,h-band_y,c["sky-low"])
+    if section:
+        moon_x = (w-94 if index%2 else 68)
+        moon_y, moon_cell = 8,2
+        cat_x = {"about":int(w*.57),"focus":int(w*.78),"stack":int(w*.24),
+                 "projects":int(w*.70),"connect":int(w*.47)}[section]
+        cat_cell = 2
+    else:
+        moon_x,moon_y,moon_cell = (w-96,24,3) if mobile else (w-160,24,4)
+        cat_x,cat_cell = (int(w*.53),3) if mobile else (int(w*.52),3)
+    # Pixel clouds stay clear of identity lettering; they do not drift.
+    cloud_positions = ((w//3,16),(w*3//4,34)) if section else ((w//4,204 if mobile else 154),(w*3//4,190 if mobile else 138))
+    for x,y in cloud_positions:
+        p.box(x,y,38,4,c["distant"])
+        p.box(x-12,y+4,72,4,c["mid"])
+        p.box(x+16,y+8,76,4,c["distant"])
+    rng = random.Random(300+index)
+    star_min = 8 if section else (196 if mobile else 138)
+    for _ in range(10 if section else 18):
+        x,y = rng.randrange(12,w-12,4),rng.randrange(star_min,max(star_min+4,city_floor-city_height),4)
+        p.box(x,y,2,2,c["window-dim"])
+    body = [rooftop_motion(animated),p.draw(),night_moon(moon_x,moon_y,moon_cell),
+            night_skyline(w,city_floor,city_height,seed=620+index)]
+    ledge = Pixels()
+    ledge.box(0,city_floor,w,4,c["rail"])
+    ledge.box(0,city_floor+4,w,4,c["cat-shade"])
+    ledge.box(0,city_floor+8,w,h-city_floor-8,c["ledge"])
+    ledge.box(0,h-4,w,4,c["sky"])
+    # Checker-like parapet edge and perspective seams, all actual pixels.
+    for x in range(0,w,8):
+        ledge.box(x,city_floor+4,4,2,c["sky"])
+    for x in range(32,w,180):
+        ledge.box(x,floor+12,104,2,c["cat-shade"])
+    body.append(ledge.draw())
+    if section == "focus":
+        desk = Pixels()
+        mx,my = (72 if mobile else 260),floor-82
+        desk.box(mx,my,92,56,c["edge"])
+        desk.box(mx+4,my+4,84,46,c["cat"])
+        for dx,dy in ((14,16),(18,20),(14,24)):
+            desk.box(mx+dx,my+dy,4,4,c["cyan"])
+        desk.box(mx+32,my+28,24,2,c["window"])
+        desk.box(mx+42,my+56,12,12,c["edge"])
+        desk.box(mx+24,my+68,48,4,c["mid"])
+        desk.box(mx-24,my+78,156,4,c["edge"])
+        body.append(desk.draw())
+    body.append(night_cat(cat_x,floor,cat_cell))
+    return f'<g class="rooftop-scene" shape-rendering="crispEdges">'+"".join(body)+'</g>'
 
 
 # One train model drives all hero variants and the motion endpoints.

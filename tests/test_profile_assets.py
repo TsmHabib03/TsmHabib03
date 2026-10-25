@@ -1,4 +1,4 @@
-"""Hero contracts: deterministic assets, fallbacks and complete train exit."""
+"""Profile contracts: deterministic rooftop assets and complete motion fallbacks."""
 import importlib.util
 from pathlib import Path
 import re
@@ -38,17 +38,17 @@ class HeroContracts(unittest.TestCase):
             self.assertLessEqual(still + city.TRAIN_WIDTH, width - city.TRAIN_MARGIN)
         self.assertEqual(city.commuter_train().count('class="carriage"'), 3)
 
-    def test_motion_uses_train_geometry_and_holds_after_exit(self):
-        for mobile, width in ((False, 1200), (True, 600)):
+    def test_current_scenes_only_animate_tail_and_sparse_windows(self):
+        for mobile in (False, True):
             source = profile.hero(mobile=mobile)
-            start, end, _ = city.train_positions(width)
-            self.assertIn(f"translateX({start}px)", source)
-            self.assertIn(f"{city.TRAIN_TRAVEL_PERCENT}%,100% {{ transform:translateX({end}px)", source)
+            self.assertNotIn("train", source)
+            self.assertNotIn("translateX", source)
+            self.assertEqual(len(re.findall(r"@keyframes", source)), 5)
             self.assertIn("prefers-reduced-motion:reduce", source)
             still = profile.hero(mobile=mobile, animated=False)
             self.assertNotIn("<style>", still)
             self.assertNotIn("@keyframes", still)
-            self.assertEqual(still.count('class="carriage"'), 3)
+            self.assertIn('class="night-cat"', still)
 
     def test_bitmap_name_and_label_fit_each_layout(self):
         for value, cell, width in ((profile.NAME, 10, 1200), ("HABIB", 9, 600), ("JAUDIAN D.", 9, 600), (profile.IDENTITY, 4, 600)):
@@ -81,13 +81,52 @@ class HeroContracts(unittest.TestCase):
         self.assertNotRegex(readme, r"(?:tel:|\+63\d|\b09\d{9}\b)")
 
     def test_cat_motion_has_a_complete_static_alternative(self):
-        for mobile in (False, True):
-            animated = profile.hero(mobile=mobile)
-            still = profile.hero(mobile=mobile, animated=False)
-            self.assertIn(".tokyo-train,.cat-tail { animation:none }", animated)
-            self.assertIn('class="rooftop-cat"', still)
-            self.assertIn('class="cat-tail"', still)
-            self.assertNotIn("@keyframes", still)
+        for section in (None, *city.ROOFTOP_SECTIONS):
+            for mobile in (False, True):
+                with self.subTest(section=section, mobile=mobile):
+                    render = profile.hero if section is None else lambda **kw: profile.section_banner(section, **kw)
+                    animated = render(mobile=mobile)
+                    still = render(mobile=mobile, animated=False)
+                    self.assertIn(".cat-tail-pose,.flicker-window { animation:none }", animated)
+                    self.assertIn('class="night-cat"', still)
+                    self.assertIn('class="cat-tail-pose tail-rest" visibility="visible"', still)
+                    self.assertEqual(still.count('visibility="hidden"'), 3)
+                    self.assertNotIn("@keyframes", still)
+
+    def test_each_section_has_four_variants_and_correct_dimensions(self):
+        outputs = profile.profile_assets()
+        self.assertEqual(len(outputs), 44)
+        for section in city.ROOFTOP_SECTIONS:
+            for mobile in (False, True):
+                for still in (False, True):
+                    suffix = ("-mobile" if mobile else "") + ("-still" if still else "")
+                    root = ET.fromstring(outputs[f"section-{section}{suffix}.svg"])
+                    self.assertEqual(root.attrib['viewBox'], f"0 0 {600 if mobile else 1200} 160")
+
+    def test_every_tail_pose_is_a_connected_pixel_silhouette(self):
+        root = ET.fromstring('<svg>'+city.night_cat(100, 180)+'</svg>')
+        for pose in root.iter('g'):
+            if 'cat-tail-pose' not in pose.attrib.get('class', ''):
+                continue
+            path = next(p for p in pose if p.attrib.get('fill')==city.ROOFTOP_NIGHT['cat'])
+            boxes = [(int(x),int(y),int(w),int(h)) for x,y,w,h in
+                     re.findall(r'M(-?\d+) (-?\d+)h(\d+)v(\d+)h-\d+z', path.attrib['d'])]
+            self.assertTrue(boxes)
+            # Edge contact is connected; diagonal point contact is insufficient.
+            def touching(a, b):
+                x,y,w,h = a
+                bx,by,bw,bh = b
+                dx = min(x+w,bx+bw)-max(x,bx)
+                dy = min(y+h,by+bh)-max(y,by)
+                return dx>=0 and dy>=0 and (dx>0 or dy>0)
+            reached, pending = {0}, [0]
+            while pending:
+                current = pending.pop()
+                for i, box in enumerate(boxes):
+                    if i not in reached and touching(boxes[current],box):
+                        reached.add(i)
+                        pending.append(i)
+            self.assertEqual(len(reached),len(boxes),pose.attrib['class'])
 
 
 if __name__ == "__main__":

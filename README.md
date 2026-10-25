@@ -3,23 +3,40 @@
     <source media="(prefers-reduced-motion: reduce) and (max-width: 600px)" srcset="assets/hero-mobile-still.svg">
     <source media="(prefers-reduced-motion: reduce)" srcset="assets/hero-still.svg">
     <source media="(max-width: 600px)" srcset="assets/hero-mobile.svg">
-    <img src="assets/hero.svg" width="100%" alt="Habib Jaudian D. — BSCS · Web Developer. A moonlit Tokyo pixel skyline with Tokyo Tower, a rooftop cat and an elevated three-car train.">
+    <img src="assets/hero.svg" width="100%" alt="Habib Jaudian D. — BSCS · Web Developer. A cat watches a moonlit Tokyo-inspired pixel city from a rooftop.">
   </picture>
 </h1>
 
 ## About Me
 
-I'm **Habib**, a **BS Computer Science student** and web developer, working toward a career in software engineering. I build practical web applications for student tools, school attendance, membership management, and employee records.
+<picture>
+  <source media="(prefers-reduced-motion: reduce) and (max-width: 600px)" srcset="assets/section-about-mobile-still.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="assets/section-about-still.svg">
+  <source media="(max-width: 600px)" srcset="assets/section-about-mobile.svg">
+  <img src="assets/section-about.svg" width="100%" alt="">
+</picture>
 
-<img src="assets/pixel-divider.svg" width="300" alt="">
+I'm **Habib**, a **BS Computer Science student** and web developer, working toward a career in software engineering. I build practical web applications for student tools, school attendance, membership management, and employee records.
 
 ## Current Focus
 
-<img src="assets/pixel-workstation.svg" width="108" alt="">
+<picture>
+  <source media="(prefers-reduced-motion: reduce) and (max-width: 600px)" srcset="assets/section-focus-mobile-still.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="assets/section-focus-still.svg">
+  <source media="(max-width: 600px)" srcset="assets/section-focus-mobile.svg">
+  <img src="assets/section-focus.svg" width="100%" alt="">
+</picture>
 
 My project work centers on making everyday workflows easier to follow: organizing student information, connecting QR check-ins to attendance reports, and bringing membership and HR records into role-based dashboards.
 
 ## Tech Stack
+
+<picture>
+  <source media="(prefers-reduced-motion: reduce) and (max-width: 600px)" srcset="assets/section-stack-mobile-still.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="assets/section-stack-still.svg">
+  <source media="(max-width: 600px)" srcset="assets/section-stack-mobile.svg">
+  <img src="assets/section-stack.svg" width="100%" alt="">
+</picture>
 
 ### Languages
 
@@ -42,7 +59,12 @@ My project work centers on making everyday workflows easier to follow: organizin
 
 ## Featured Projects
 
-<img src="assets/pixel-divider.svg" width="300" alt="">
+<picture>
+  <source media="(prefers-reduced-motion: reduce) and (max-width: 600px)" srcset="assets/section-projects-mobile-still.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="assets/section-projects-still.svg">
+  <source media="(max-width: 600px)" srcset="assets/section-projects-mobile.svg">
+  <img src="assets/section-projects.svg" width="100%" alt="">
+</picture>
 
 - **[QCU Schedule](https://github.com/TsmHabib03/QCU-Schedule-Web-App)** — Schedules, notes, tasks, and campus tools in one student workspace. <img src="assets/marks/javascript.svg" width="18" height="18" alt="JavaScript">
 - **[ASJ Attendance Checker](https://github.com/TsmHabib03/ASJ-Attendance-Checker)** — A school research project for Academy of St. Joseph in Claveria, Cagayan: QR check-ins, role-based dashboards, and attendance reports. <img src="assets/marks/php.svg" width="18" height="18" alt="PHP"> <img src="assets/marks/mysql.svg" width="18" height="18" alt="MySQL">
@@ -51,7 +73,12 @@ My project work centers on making everyday workflows easier to follow: organizin
 
 ## Connect
 
-<img src="assets/pixel-cat.svg" width="42" alt="">
+<picture>
+  <source media="(prefers-reduced-motion: reduce) and (max-width: 600px)" srcset="assets/section-connect-mobile-still.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="assets/section-connect-still.svg">
+  <source media="(max-width: 600px)" srcset="assets/section-connect-mobile.svg">
+  <img src="assets/section-connect.svg" width="100%" alt="">
+</picture>
 
 - <img src="assets/marks/portfolio.svg" width="24" height="24" alt="">&nbsp;[Portfolio](https://my-portfolio.jaudianhabib879.workers.dev/)
 - <img src="assets/marks/github.svg" width="24" height="24" alt="">&nbsp;[GitHub](https://github.com/TsmHabib03)

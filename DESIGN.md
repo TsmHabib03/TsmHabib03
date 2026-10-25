@@ -1,22 +1,26 @@
 ---
-name: Tokyo After Hours
-description: Moonlit Tokyo pixel-art identity for Habib's GitHub developer profile.
+name: Tokyo at Night
+description: Moonlit rooftop pixel-art identity for Habib's GitHub developer profile.
 colors:
-  sky: "#081426"
-  distant: "#12233D"
-  mid: "#1D3554"
-  front: "#294766"
-  edge: "#42617F"
-  dim: "#3B5674"
+  sky: "#11132C"
+  sky-low: "#191D3F"
+  distant: "#232D57"
+  mid: "#34477C"
+  front: "#465992"
+  edge: "#7182BC"
+  window: "#D5E5FF"
+  window-dim: "#7388BF"
+  warm: "#D5BC97"
+  moon: "#B9B5F4"
+  moon-light: "#D6D6FF"
+  moon-shade: "#898BD0"
+  cat: "#10152D"
+  cat-edge: "#A8ACF0"
+  cat-shade: "#1C2445"
+  ledge: "#202747"
+  rail: "#8387D4"
   text: "#DCEBFF"
   cyan: "#76C8EA"
-  warm: "#D5AA72"
-  steel: "#A5B8CC"
-  roof: "#66839F"
-  glass: "#152B43"
-  moon: "#BACBEF"
-  moon-shade: "#849AC8"
-  cat: "#3B5674"
 spacing:
   lettering-inset: "32px"
 components:
@@ -30,110 +34,127 @@ components:
     textColor: "{colors.text}"
     width: "600px"
     height: "464px"
+  panorama-desktop:
+    backgroundColor: "{colors.sky}"
+    width: "1200px"
+    height: "160px"
+  panorama-mobile:
+    backgroundColor: "{colors.sky}"
+    width: "600px"
+    height: "160px"
 ---
 
-# Design System: Tokyo After Hours
+# Design System: Tokyo at Night
 
 ## Overview
 
-**Creative North Star: "Tokyo After Hours"**
+**Creative North Star: "Tokyo at Night"**
 
-The profile's Tokyo at Night artwork extends the Tokyo After Hours identity with a stepped moon and a seated rooftop cat. Pale pixel lettering and sparse warm lights carry the emphasis. The city stays stationary while a cyan-striped commuter train supplies the main animated moment; the cat occasionally lifts its tail.
+A large back-view cat watches a moonlit indigo city from a pixel rooftop. Layered blue buildings, dense cool windows, a lavender stepped moon, and quiet pale lettering establish the identity. A curled tail occasionally changes pose, and a sparse subset of windows briefly dims; the architecture, moon, clouds, and name remain stationary.
 
-This system describes the four profile heroes, small decorative accents, and compact SVG marks. GitHub owns the surrounding Markdown typography, spacing, link states, and page colors. Legacy TokyoNight Storm assets and helpers retain their existing tokens; the scoped `AFTER_HOURS` dictionary in `scripts/profile_theme.py` is the illustrative palette source. Brand marks preserve their recognizable forms and use source colors or the generator's established display tints.
+The system describes the current profile hero, five shallow section panoramas, and compact brand/contact marks. The reference image guides the composition and atmosphere; the artwork is original self-contained SVG geometry. GitHub owns surrounding Markdown typography, spacing, link states, and page colors. The scoped `ROOFTOP_NIGHT` dictionary in `scripts/profile_theme.py` owns current scene colors. Legacy `AFTER_HOURS` tokens, city/rail helpers, and older artwork remain available with their existing behavior; compact marks retain source colors or established display tints.
 
 **Key Characteristics:**
 
 - Crisp bitmap lettering and integer scene geometry.
-- Tonal building layers with restrained warm lights.
-- Three connected carriages unified by a cyan stripe.
-- A stepped moon and moonlit cat silhouette, repeated as a small static contact accent.
-- Native profile text and links with useful static artwork alternatives.
+- Three tonal city layers with cool window patterns and sparse warm lights.
+- A large seated cat, asymmetric ears, lavender rim pixels, and four discrete tail poses.
+- A stepped crater moon and checkered rooftop/parapet edge.
+- Complete static artwork beside native profile content and functional links.
 
 ## Colors
 
-The palette moves from dark navy to slate blue, with pale text, a single cool accent, and limited warm highlights. The frontmatter records the exact values from `AFTER_HOURS`.
+The palette runs from midnight indigo through muted blue façades to pale windows and lavender moonlight. The frontmatter records the exact values from `ROOFTOP_NIGHT`.
 
 ### Primary
 
-**Cyan:** the shared train stripe and qualification subtitle. Its repetition connects the identity lettering to the moving train.
+**Cyan** carries the qualification subtitle. **Text** carries the prominent name, keeping the identity distinct from the detailed lower city.
 
 ### Secondary
 
-**Warm:** the Tokyo Tower lattice, a small share of building windows, and train window highlights.
+**Moon**, **moon-light**, and **moon-shade** form the stepped lunar disc and crater pixels. **Cat-edge** gives the dark seated silhouette a narrow lavender rim rather than a glow.
+
+### Tertiary
+
+**Warm** appears in a small share of illuminated windows. The dominant window character remains cool.
 
 ### Neutral
 
-**Sky** supplies the quiet background. **Distant**, **mid**, and **front** distinguish building depth. **Dim** and **edge** define sparse windows and railway details. **Text** carries the name. **Steel**, **roof**, and **glass** separate carriage bodies, equipment, doors, and windows.
+**Sky** and **sky-low** define two flat sky tones. **Distant**, **mid**, and **front** separate building depth; **edge** is the shared scene-detail token. **Window** and **window-dim** provide readable architectural patterns. **Cat** and **cat-shade** define the silhouette, body details, and cast pixel shadow. **Ledge** and **rail** separate the foreground rooftop from the city.
 
-**Moon** and **moon-shade** define the stepped disc and crater pixels. **Cat** gives the seated silhouette enough separation from the dark city; moon-shade highlights its ears and contour. These illustration tokens do not recolor every technology logo.
-
-The name and cyan qualification subtitle have recorded contrast ratios of 15.26:1 and 9.86:1 against the sky. These checks apply to artwork text; GitHub controls native text colors.
+These illustration colors do not recolor every technology logo. The portfolio/email marks use the established authored pixel geometry and legacy palette; other compact marks preserve trustworthy upstream silhouettes and display tints.
 
 ## Typography
 
-Hero lettering is authored geometry from `PIXEL_FONT` in `scripts/generate-profile-assets.py`, rather than a CSS font or external font file. Most uppercase glyphs use five columns and five rows. A one-cell gap separates glyphs; spaces and punctuation have their own widths.
+Hero lettering is authored geometry from `PIXEL_FONT` in `scripts/generate-profile-assets.py`, with no CSS font or external font file. Most uppercase glyphs use five columns and five rows; punctuation and spaces have their own widths.
 
-The desktop name uses 10px cells, creating a 50px-high glyph. Mobile uses 9px cells and a two-line name, creating 45px-high glyphs. The `BSCS · WEB DEVELOPER` subtitle uses 3px cells on desktop and 4px cells on mobile, creating 15px and 20px-high glyphs. All dimensions are source SVG units and scale with the displayed image.
+The desktop name uses 10px cells, producing 50px-high glyphs at source scale. Mobile uses 9px cells and two name lines, producing 45px-high glyphs. The `BSCS · WEB DEVELOPER` subtitle uses 3px cells on desktop and 4px cells on mobile, producing 15px and 20px-high glyphs. These dimensions are SVG source units and scale with the displayed image.
 
-The README keeps personal background, project context, skills, and destinations as native Markdown. Do not substitute bitmap image text for that content.
+GitHub provides native heading, paragraph, list, and link typography. Background, project context, skill names, and destinations stay in Markdown; decorative scene banners contain no factual section text.
 
 ## Layout
 
-The desktop source is 1200 × 440; mobile is independently composed at 600 × 464. The README displays the selected image at full available width and switches to mobile sources at viewport widths up to 600px. Lettering starts 32 source units from the left. City stages begin at y=140 on desktop and y=188 on mobile.
+Desktop hero artwork is 1200 × 440; mobile is independently composed at 600 × 464. Both start lettering 32 source units from the left. Desktop places the name at y=36 and subtitle at y=104. Mobile places `HABIB` at y=32, `JAUDIAN D.` at y=98, and the subtitle at y=160.
 
-The name remains in quiet upper sky. The skyline and tower occupy the lower scene, with the elevated railway beneath them. Mobile uses fewer buildings and two name lines to preserve readability rather than cropping the desktop composition.
+The quiet upper-left sky carries the identity, with the moon at upper right and a large cat on the foreground ledge. The flat lower-sky band begins at y=142 on desktop and y=208 on mobile. Mobile recomposes the scene and type rather than cropping the desktop source.
 
-Source artwork and local padded host previews were inspected at 320px, 375px, and desktop widths; these are not live GitHub captures.
+Each native section has a distinct shallow panorama: 1200 × 160 desktop and 600 × 160 mobile. Shared helpers and fixed section seeds preserve the visual identity while alternating moon placement and cat position. Current Focus adds a small pixel terminal and desk. The current README composition lives in `.impeccable/surfaces/readme-md.md`.
 
-The current surface contract is `.impeccable/surfaces/readme-md.md`: About Me, Current Focus, Tech Stack, Featured Projects, Connect. A thin skyline divider displays at 300px, a workstation at 108px, and a static cat at 42px. Technology names stay beside 24px marks, using short controlled line breaks; project descriptions use 18px marks. Contact destinations form individually focusable native links in a compact list. These are README composition choices rather than typography tokens for other surfaces.
+The README selects mobile sources at viewport widths up to 600px, after reduced-motion sources. Marks display at 24px beside native technology/contact names and at 18px beside project descriptions. Full-width images adapt to the available host column. Local Chromium previews at 320px, 375px, and desktop widths are local evidence; live GitHub rendering has not been verified.
 
 ## Elevation & Depth
 
-Depth comes from tonal building layers and ordered overlaps: the tower sits between middle buildings and the low foreground; railway masts cross the train. There are no shadows, gradients, filters, glow, or blurred atmospheric effects in the hero.
+Depth comes from flat tonal layering, architecture occluding distant windows, and the foreground cat and rooftop ledge. Animated lamps remain inside their city layers so nearer buildings still cover them. The cat uses a stepped solid-color shadow, rather than a blurred effect. Current scenes contain no gradients, filters, glow, or atmospheric blur.
 
 ## Shapes
 
-The scene uses integer rectangles batched into same-color paths, with `shape-rendering="crispEdges"`. Most architectural details follow a two-pixel source grid. The outer sky panel has an 8px stepped corner cut; the scene uses a rectangular clip. Tower taper, cross-braces, and decks use stepped pixel geometry.
+Scene geometry uses integer rectangles batched into same-color paths with `shape-rendering="crispEdges"`. The current outer artwork is rectangular. Buildings, cloud steps, moon craters, asymmetric cat ears, tail segments, and checkered parapet edges share hard pixel geometry.
 
-The geometry contract applies to source coordinates. At arbitrary browser display widths, scaling maps source pixels onto device pixels; crisp-edge rendering preserves the intended hard-edged character.
+The moon spans 24 stepped rows: 4px cells on desktop, 3px on mobile, and 2px in section panoramas. The cat silhouette is 48 cells high: 3px cells in heroes and 2px in sections. Tail and shadow geometry extend below the paws within the foreground ledge.
+
+At arbitrary browser widths, source coordinates may map to fractional device pixels. Crisp-edge rendering preserves the intended hard-edged character; it does not guarantee a one-to-one source/device pixel grid.
 
 ## Components
 
-### Tokyo hero
+### Rooftop hero
 
-The four variants share the palette, train model, bitmap font, and scene helpers. Desktop and mobile each have animated and animation-free `-still.svg` assets. The README's `<picture>` selects reduced-motion still variants before the standard mobile source, and animated SVGs also contain an internal reduced-motion query. A meaningful image alternative identifies Habib and the scene.
+Four variants share the scene helper, palette, bitmap font, and tail/light model. Desktop and mobile each have animated and animation-free `-still.svg` editions. The name remains `HABIB JAUDIAN D.` and the subtitle remains `BSCS · WEB DEVELOPER`. The current hero contains no train.
 
-### Three-car commuter train
+The README's `<picture>` selects reduced-motion still sources before standard mobile selection. Animated SVGs also contain an internal reduced-motion query. The hero image alternative identifies Habib, the qualification, and the moonlit city/cat scene.
 
-Three 116px carriages separated by two 8px gaps form a 364 × 48 train. The same model supplies windows, paired doors, roof equipment, wheels, outward cabs, and the cyan stripe in every hero. The still transform centers the complete train.
+### Cat tail and window lights
 
-Linear train loops last 28 seconds on desktop and 24 seconds on mobile. Travel starts at `-TRAIN_WIDTH - TRAIN_MARGIN` and ends at `scene_width + TRAIN_MARGIN`, using a 12px margin. The final 12% of each cycle holds beyond the scene edge before resetting; both reset positions hide the entire train. A calculated negative delay begins with the full train visible.
+Four tail groups switch visibility using `steps(1,end)` in a 14-second cycle. The tail rests for most of the cycle, then briefly switches among rise, curl, and return poses before returning to rest. Exactly one pose is intended to be visible at a time; there is no smooth rotation of pixel geometry.
 
-### Moon and rooftop cat
+A few windows use staggered 11-, 17-, and 23-second cycles with delays of −3, −9, and −15 seconds. Their opacity briefly drops from 1 to 0.22, then returns. Most windows remain stationary, avoiding synchronized whole-scene flashing.
 
-The moon uses 16 stepped rows, with 4px cells on desktop and 3px cells on mobile. The 68px-high seated cat has pointed ears, haunches, paws, and a separate stepped tail. Its tail uses a 12-second `steps(1,end)` cycle, lifting two source pixels briefly around 80–88% of the cycle. Reduced motion disables both train and tail animations. The name, moon, buildings, and window lights remain stationary.
+Reduced motion disables tail and window animations. With CSS unavailable, visibility attributes show only the resting tail and all windows remain illuminated. Static editions contain no animation stylesheet and preserve the same complete scene.
 
-### Compact marks and accents
+### Section panoramas
 
-The current profile output set contains 27 SVGs: four heroes, 20 transparent 28 × 28 brand/contact marks, a 600 × 24 skyline divider, a 144 × 84 workstation, and an 84 × 76 static cat. Devicon and Simple Icons inputs are attributed in `assets/README.md`. Portfolio and email marks are authored pixel geometry. Compact PHP, Bootstrap, and VS Code marks flatten gradients and remove filters while retaining upstream silhouettes; raw icon inputs and legacy labeled artwork remain intact. Decorative accents use empty image alternatives; meaningful names and links remain native text.
+About Me, Current Focus, Tech Stack, Featured Projects, and Connect each use four panorama variants: animated/static × desktop/mobile. Their artwork is decorative, with an empty image alternative; native headings, factual text, names, and links communicate the content.
+
+### Compact marks
+
+The current output set contains 44 SVGs: four heroes, 20 section variants, and 20 transparent 28 × 28 brand/contact marks. Inputs from Devicon and Simple Icons are attributed in `assets/README.md`; portfolio and email marks are authored geometry. Compact PHP, Bootstrap, and VS Code marks flatten source gradients and remove filters while retaining upstream silhouettes. Raw inputs and legacy labeled assets remain intact.
 
 ### Native text and links
 
-Markdown headings, paragraphs, lists, repository links, and social links use GitHub's rendering and interaction states. SVG contents do not provide custom link or hover controls in the embedded profile. Contribution assets and other legacy artwork remain available but are omitted from the current README.
+Markdown headings, paragraphs, lists, project links, and the six supplied contact links use GitHub's native rendering and interaction states. Embedded SVGs supply no custom interactive controls. Contribution graphics are omitted because GitHub already displays contribution activity; their generation and data remain available.
 
 ## Do's and Don'ts
 
 ### Do
 
-- Do change hero colors through the scoped `AFTER_HOURS` palette.
-- Do preserve a complete visible train in static and reduced-motion alternatives.
-- Do keep informative profile content and destinations in native Markdown.
-- Do regenerate current README artwork together with `python scripts/generate-profile-assets.py --profile-only`; `--hero-only` remains available for the four heroes.
+- Do change current scene colors through the scoped `ROOFTOP_NIGHT` palette.
+- Do preserve the resting cat and illuminated city in static and reduced-motion alternatives.
+- Do keep profile facts, technology names, and destinations in native Markdown.
+- Do regenerate current README artwork with `python scripts/generate-profile-assets.py --profile-only`; `--hero-only` remains available for the four heroes.
 
 ### Don't
 
-- Don't animate the name or scatter motion across the background.
-- Don't add glow, gradients, excessive neon, or external image/font dependencies to the hero.
-- Don't change legacy artwork tokens as a side effect of editing the hero.
+- Don't animate the name, buildings, moon, or clouds.
+- Don't add a train to the current rooftop scene.
+- Don't add gradients, glow, excessive neon, or external image/font dependencies to current scenes.
+- Don't change legacy tokens or artwork as a side effect of current profile edits.
 - Don't claim live GitHub compatibility from local browser screenshots.

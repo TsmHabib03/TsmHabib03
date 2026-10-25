@@ -1,92 +1,78 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-25T10:51:26.153859+00:00",
-  "title": "Design System: Tokyo After Hours",
+  "generatedAt": "2026-10-25T11:29:23.735022+00:00",
+  "title": "Design System: Tokyo at Night",
   "extensions": {
     "motion": [
       {
-        "name": "train-desktop-duration",
-        "value": "28s",
-        "purpose": "Linear travel, followed by an offscreen hold."
-      },
-      {
-        "name": "train-mobile-duration",
-        "value": "24s",
-        "purpose": "Same train and exit contract in the mobile scene."
-      },
-      {
-        "name": "train-easing",
-        "value": "linear",
-        "purpose": "Constant rail speed during the first 88% of the cycle."
-      },
-      {
-        "name": "train-travel-end",
-        "value": "88%",
-        "purpose": "Entire train is beyond the clip; hold through 100% before reset."
-      },
-      {
-        "name": "reduced-motion",
-        "value": "animation:none",
-        "purpose": "Disable train and cat-tail animations; static geometry shows the complete train and resting tail."
-      },
-      {
         "name": "cat-tail-duration",
-        "value": "12s",
-        "purpose": "Occasional movement of the seated cat's separate tail."
+        "value": "14s",
+        "purpose": "Resting-dominant cycle among four discrete visibility poses."
       },
       {
         "name": "cat-tail-easing",
         "value": "steps(1,end)",
-        "purpose": "Discrete pixel movement instead of smooth interpolation."
+        "purpose": "Switch authored pixel poses without smooth interpolation."
       },
       {
-        "name": "cat-tail-lift",
-        "value": "translateY(-2px)",
-        "purpose": "A two-source-pixel lift at the 80% and 88% keyframes."
+        "name": "window-durations",
+        "value": "11s,17s,23s",
+        "purpose": "Staggered cycles for a sparse subset of building lamps."
       },
       {
-        "name": "cat-tail-lift-keyframes",
-        "value": "80%,88%",
-        "purpose": "Resting transform at 0%, 72% and 100%; brief stepped lift late in the cycle."
+        "name": "window-delays",
+        "value": "-3s,-9s,-15s",
+        "purpose": "Avoid a synchronized starting phase across lamp groups."
+      },
+      {
+        "name": "window-dim-opacity",
+        "value": "0.22",
+        "purpose": "Brief dimming at 39-43% of each window cycle; ordinary opacity is 1."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "animation:none",
+        "purpose": "Resting tail and illuminated windows; scene, moon, clouds and identity are stationary."
       }
     ],
     "breakpoints": [
       {
-        "name": "hero-mobile",
+        "name": "scene-mobile",
         "value": "600px"
       }
     ]
   },
   "components": [
     {
-      "name": "Three-car commuter train",
+      "name": "Moonlit rooftop cat",
       "kind": "custom",
-      "description": "Actual shared 364 by 48 train geometry from commuter_train(), displayed on the hero sky with 12px preview padding.",
-      "html": "<svg class=\"ds-commuter-train\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 388 72\" role=\"img\" aria-labelledby=\"ds-train-title\"><title id=\"ds-train-title\">Three-car Tokyo commuter train</title><path fill=\"#081426\" d=\"M0 0H388V72H0Z\"/><g transform=\"translate(12 12)\" shape-rendering=\"crispEdges\"><g class=\"ds-carriage\" transform=\"translate(0 0)\"><path fill=\"#A5B8CC\" d=\"M4 6h108v32h-108zM0 10h116v24h-116zM30 12h10v22h-10zM78 12h10v22h-10z\"/><path fill=\"#66839F\" d=\"M4 4h108v4h-108zM24 0h14v4h-14zM78 0h14v4h-14zM28 10h14v26h-14zM34 12h2v22h-2zM76 10h14v26h-14zM82 12h2v22h-2zM4 36h108v4h-108z\"/><path fill=\"#42617F\" d=\"M26 0h10v2h-10zM80 0h10v2h-10zM18 44h4v2h-4zM26 44h4v2h-4zM88 44h4v2h-4zM96 44h4v2h-4zM0 24h4v2h-4z\"/><path fill=\"#152B43\" d=\"M30 12h4v8h-4zM36 12h4v8h-4zM78 12h4v8h-4zM84 12h4v8h-4zM8 12h12v12h-12zM46 12h12v12h-12zM60 12h12v12h-12zM96 12h12v12h-12zM14 40h88v4h-88zM0 12h6v12h-6z\"/><path fill=\"#D5AA72\" d=\"M10 12h8v2h-8zM48 12h8v2h-8zM62 12h8v2h-8zM98 12h8v2h-8z\"/><path fill=\"#76C8EA\" d=\"M0 28h116v4h-116z\"/><path fill=\"#081426\" d=\"M16 42h8v6h-8zM24 42h8v6h-8zM86 42h8v6h-8zM94 42h8v6h-8z\"/></g><path fill=\"#152B43\" d=\"M116 32h8v4h-8z\"/><g class=\"ds-carriage\" transform=\"translate(124 0)\"><path fill=\"#A5B8CC\" d=\"M4 6h108v32h-108zM0 10h116v24h-116zM30 12h10v22h-10zM78 12h10v22h-10z\"/><path fill=\"#66839F\" d=\"M4 4h108v4h-108zM24 0h14v4h-14zM78 0h14v4h-14zM28 10h14v26h-14zM34 12h2v22h-2zM76 10h14v26h-14zM82 12h2v22h-2zM4 36h108v4h-108z\"/><path fill=\"#42617F\" d=\"M26 0h10v2h-10zM80 0h10v2h-10zM18 44h4v2h-4zM26 44h4v2h-4zM88 44h4v2h-4zM96 44h4v2h-4z\"/><path fill=\"#152B43\" d=\"M30 12h4v8h-4zM36 12h4v8h-4zM78 12h4v8h-4zM84 12h4v8h-4zM8 12h12v12h-12zM46 12h12v12h-12zM60 12h12v12h-12zM96 12h12v12h-12zM14 40h88v4h-88z\"/><path fill=\"#D5AA72\" d=\"M10 12h8v2h-8zM48 12h8v2h-8zM62 12h8v2h-8zM98 12h8v2h-8z\"/><path fill=\"#76C8EA\" d=\"M0 28h116v4h-116z\"/><path fill=\"#081426\" d=\"M16 42h8v6h-8zM24 42h8v6h-8zM86 42h8v6h-8zM94 42h8v6h-8z\"/></g><path fill=\"#152B43\" d=\"M240 32h8v4h-8z\"/><g class=\"ds-carriage\" transform=\"translate(248 0)\"><path fill=\"#A5B8CC\" d=\"M4 6h108v32h-108zM0 10h116v24h-116zM30 12h10v22h-10zM78 12h10v22h-10z\"/><path fill=\"#66839F\" d=\"M4 4h108v4h-108zM24 0h14v4h-14zM78 0h14v4h-14zM28 10h14v26h-14zM34 12h2v22h-2zM76 10h14v26h-14zM82 12h2v22h-2zM4 36h108v4h-108z\"/><path fill=\"#42617F\" d=\"M26 0h10v2h-10zM80 0h10v2h-10zM18 44h4v2h-4zM26 44h4v2h-4zM88 44h4v2h-4zM96 44h4v2h-4z\"/><path fill=\"#152B43\" d=\"M30 12h4v8h-4zM36 12h4v8h-4zM78 12h4v8h-4zM84 12h4v8h-4zM8 12h12v12h-12zM46 12h12v12h-12zM60 12h12v12h-12zM96 12h12v12h-12zM14 40h88v4h-88zM110 12h6v12h-6z\"/><path fill=\"#D5AA72\" d=\"M10 12h8v2h-8zM48 12h8v2h-8zM62 12h8v2h-8zM98 12h8v2h-8zM110 24h4v2h-4z\"/><path fill=\"#76C8EA\" d=\"M0 28h116v4h-116z\"/><path fill=\"#081426\" d=\"M16 42h8v6h-8zM24 42h8v6h-8zM86 42h8v6h-8zM94 42h8v6h-8z\"/></g></g></svg>",
-      "css": ".ds-commuter-train { display:block; width:100%; max-width:388px; height:auto; }"
+      "description": "Actual night_cat() body, rim, shadow and resting-tail geometry at two-source-unit cell scale. Hidden animation poses omitted for this static decorative preview.",
+      "html": "<svg class=\"ds-rooftop-cat\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 168 140\" role=\"img\" aria-labelledby=\"ds-cat-title\" shape-rendering=\"crispEdges\"><title id=\"ds-cat-title\">Moonlit rooftop cat, resting tail</title><path fill=\"#11132C\" d=\"M0 0H168V140H0Z\"/><path fill=\"#202747\" d=\"M0 106H168V140H0Z\"/><g class=\"ds-night-cat\"><path fill=\"#1C2445\" d=\"M80 110h52v4h-52zM90 114h52v4h-52zM104 118h46v4h-46z\" /><path fill=\"#10152D\" d=\"M88 14h4v8h-4zM114 18h4v6h-4zM86 22h34v8h-34zM82 30h42v16h-42zM86 46h34v8h-34zM90 54h26v8h-26zM86 62h34v8h-34zM82 70h42v8h-42zM78 78h50v8h-50zM74 86h56v8h-56zM72 94h60v6h-60zM74 100h58v6h-58zM82 106h44v4h-44z\" /><path fill=\"#A8ACF0\" d=\"M88 14h2v8h-2zM86 22h2v8h-2zM82 30h2v16h-2zM84 46h2v6h-2zM88 54h2v8h-2zM84 62h2v8h-2zM80 70h2v8h-2zM76 78h2v8h-2zM72 86h2v12h-2zM74 100h4v4h-4zM114 18h2v4h-2zM116 22h2v2h-2z\" /><path fill=\"#1C2445\" d=\"M90 24h2v18h-2zM86 44h2v6h-2zM90 60h2v14h-2zM82 78h2v18h-2zM78 98h6v6h-6zM120 88h4v14h-4zM90 106h32v2h-32z\" /><g class=\"ds-cat-tail-pose ds-tail-rest\" visibility=\"visible\"><path fill=\"#10152D\" d=\"M36 102h2v8h-2zM44 106h2v8h-2zM52 110h2v8h-2zM60 114h2v6h-2zM68 116h2v4h-2zM76 114h2v6h-2zM84 110h2v8h-2zM92 106h2v8h-2zM28 102h10v4h-10zM36 106h10v4h-10zM44 110h10v4h-10zM52 114h10v4h-10zM60 116h10v4h-10zM68 116h10v4h-10zM76 114h10v4h-10zM84 110h10v4h-10zM92 106h10v4h-10z\" /><path fill=\"#A8ACF0\" d=\"M28 102h4v2h-4zM36 106h4v2h-4zM44 110h4v2h-4zM52 114h4v2h-4zM60 116h4v2h-4zM68 116h4v2h-4zM76 114h4v2h-4zM84 110h4v2h-4zM92 106h4v2h-4z\" /></g></g></svg>",
+      "css": ".ds-rooftop-cat { display:block; width:100%; max-width:168px; height:auto; }"
     }
   ],
   "narrative": {
-    "northStar": "Tokyo After Hours",
-    "overview": "The profile's Tokyo at Night artwork extends the Tokyo After Hours identity with a stepped moon and a seated rooftop cat. Pale pixel lettering and sparse warm lights carry the emphasis. The city stays stationary while a cyan-striped commuter train supplies the main animated moment; the cat occasionally lifts its tail.\n\nThis system describes the four profile heroes, small decorative accents, and compact SVG marks. GitHub owns the surrounding Markdown typography, spacing, link states, and page colors. Legacy TokyoNight Storm assets and helpers retain their existing tokens; the scoped `AFTER_HOURS` dictionary in `scripts/profile_theme.py` is the illustrative palette source. Brand marks preserve their recognizable forms and use source colors or the generator's established display tints.",
+    "northStar": "Tokyo at Night",
+    "overview": "A large back-view cat watches a moonlit indigo city from a pixel rooftop. Layered blue buildings, dense cool windows, a lavender stepped moon, and quiet pale lettering establish the identity. A curled tail occasionally changes pose, and a sparse subset of windows briefly dims; the architecture, moon, clouds, and name remain stationary.\n\nThe system describes the current profile hero, five shallow section panoramas, and compact brand/contact marks. The reference image guides the composition and atmosphere; the artwork is original self-contained SVG geometry. GitHub owns surrounding Markdown typography, spacing, link states, and page colors. The scoped `ROOFTOP_NIGHT` dictionary in `scripts/profile_theme.py` owns current scene colors. Legacy `AFTER_HOURS` tokens, city/rail helpers, and older artwork remain available with their existing behavior; compact marks retain source colors or established display tints.\n",
     "keyCharacteristics": [
       "Crisp bitmap lettering and integer scene geometry.",
-      "Tonal building layers with restrained warm lights.",
-      "Three connected carriages unified by a cyan stripe.",
-      "A stepped moon and moonlit cat silhouette, repeated as a small static contact accent.",
-      "Native profile text and links with useful static artwork alternatives."
+      "Three tonal city layers with cool window patterns and sparse warm lights.",
+      "A large seated cat, asymmetric ears, lavender rim pixels, and four discrete tail poses.",
+      "A stepped crater moon and checkered rooftop/parapet edge.",
+      "Complete static artwork beside native profile content and functional links."
     ],
     "rules": [],
     "dos": [
-      "Do change hero colors through the scoped `AFTER_HOURS` palette.",
-      "Do preserve a complete visible train in static and reduced-motion alternatives.",
-      "Do keep informative profile content and destinations in native Markdown.",
-      "Do regenerate current README artwork together with `python scripts/generate-profile-assets.py --profile-only`; `--hero-only` remains available for the four heroes."
+      "Do change current scene colors through the scoped `ROOFTOP_NIGHT` palette.",
+      "Do preserve the resting cat and illuminated city in static and reduced-motion alternatives.",
+      "Do keep profile facts, technology names, and destinations in native Markdown.",
+      "Do regenerate current README artwork with `python scripts/generate-profile-assets.py --profile-only`; `--hero-only` remains available for the four heroes."
     ],
     "donts": [
-      "Don't animate the name or scatter motion across the background.",
-      "Don't add glow, gradients, excessive neon, or external image/font dependencies to the hero.",
-      "Don't change legacy artwork tokens as a side effect of editing the hero.",
+      "Don't animate the name, buildings, moon, or clouds.",
+      "Don't add a train to the current rooftop scene.",
+      "Don't add gradients, glow, excessive neon, or external image/font dependencies to current scenes.",
+      "Don't change legacy tokens or artwork as a side effect of current profile edits.",
       "Don't claim live GitHub compatibility from local browser screenshots."
     ]
   }

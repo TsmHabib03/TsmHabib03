@@ -2,8 +2,8 @@
 import argparse
 import random
 import re
-from profile_theme import ASSETS, NAVY, BORDER, WHITE, MUTED, BLUE, CYAN, PURPLE, AFTER_HOURS, text, rect, frame, svg, write_assets
-from pixel_city import Pixels, city, step_outline, after_hours_city, pixel_moon, rooftop_cat, workstation, skyline_accent
+from profile_theme import ASSETS, NAVY, BORDER, WHITE, MUTED, BLUE, CYAN, PURPLE, AFTER_HOURS, ROOFTOP_NIGHT, text, rect, frame, svg, write_assets
+from pixel_city import Pixels, city, step_outline, rooftop_cat, workstation, skyline_accent, rooftop_scene, ROOFTOP_SECTIONS
 
 GROUPS = [
     ("Languages", [("javascript", "JavaScript"), ("php", "PHP"), ("java", "Java")]),
@@ -95,29 +95,33 @@ def stars(w, y_min, y_max, avoid, seed=11):
 
 
 def hero(mobile=False, animated=True):
-    c = AFTER_HOURS
-    w, h, sky_y = HERO_LAYOUTS[mobile]
+    c = ROOFTOP_NIGHT
+    w, h, _ = HERO_LAYOUTS[mobile]
     if mobile:
         names = [("HABIB", 32, 32, 9), ("JAUDIAN D.", 32, 98, 9)]
         label_y, label_cell = 160, 4
     else:
         names = [(NAME, 32, 36, 10)]
         label_y, label_cell = 104, 3
-    body = [f'<path d="{step_outline(0, 0, w, h)}" fill="{c["sky"]}"/>',
-            '<g shape-rendering="crispEdges">']
+    body = [rooftop_scene(w, h, mobile=mobile, animated=animated),
+            '<g class="identity" shape-rendering="crispEdges">']
     for value, x, y, cell in names:
         body.append(pixel_text(value, x, y, cell, c["text"]))
     body.append(pixel_text(IDENTITY, 32, label_y, label_cell, c["cyan"]))
-    body.append(pixel_moon(516 if mobile else 1080, 30, cell=3 if mobile else 4))
-    body.append(f'<g transform="translate(0 {sky_y})">'
-                + after_hours_city(w, h-sky_y, mobile=mobile, animated=animated)
-                + '</g>')
     body.append('</g>')
     return svg(w, h, "Habib Jaudian D.", "\n".join(body),
-               "BSCS · Web Developer. Stationary pixel lettering above a midnight-blue Tokyo skyline, "
-               "a pixel moon, Tokyo Tower, illuminated buildings, a rooftop cat and an elevated three-car train. "
-               + ("The train passes and the cat occasionally moves its tail; reduced motion freezes both."
-                  if animated else "Static edition with the complete train and seated cat visible."))
+               "BSCS · Web Developer. Stationary pixel lettering above a moonlit indigo city, "
+               "illuminated buildings and a seated rooftop cat. "
+               + ("The cat occasionally curls its tail and a few windows flicker; reduced motion freezes both."
+                  if animated else "Static edition with a resting cat and illuminated city."))
+
+
+def section_banner(section, mobile=False, animated=True):
+    w, h = (600 if mobile else 1200), 160
+    return svg(w, h, f"Moonlit city — {section}",
+               rooftop_scene(w, h, mobile=mobile, animated=animated, section=section),
+               "Decorative rooftop panorama. "
+               + ("Subtle cat-tail and window-light animation." if animated else "Static edition."))
 
 
 # Local source icons retain their provenance. Display tints improve dark contrast.
@@ -201,9 +205,11 @@ def profile_assets():
             outputs[f"marks/{slug}.svg"] = compact_icon(slug, label)
     for slug, label in SOCIALS:
         outputs[f"marks/{slug}.svg"] = compact_icon(slug, label)
-    outputs["pixel-divider.svg"] = svg(600,24,"Pixel skyline divider",skyline_accent())
-    outputs["pixel-workstation.svg"] = svg(144,84,"Pixel workstation",'<g shape-rendering="crispEdges">'+workstation()+'</g>')
-    outputs["pixel-cat.svg"] = svg(84,76,"Moonlit rooftop cat",'<g transform="translate(16 4)" shape-rendering="crispEdges">'+rooftop_cat()+'</g>')
+    for section in ROOFTOP_SECTIONS:
+        for mobile in (False, True):
+            suffix = "-mobile" if mobile else ""
+            outputs[f"section-{section}{suffix}.svg"] = section_banner(section, mobile)
+            outputs[f"section-{section}{suffix}-still.svg"] = section_banner(section, mobile, animated=False)
     return outputs
 
 
@@ -238,6 +244,10 @@ def generate_assets(hero_only=False):
             outputs[f"project-{slug}{suffix}.svg"] = project_card(title, mobile)
     if not hero_only:
         outputs.update(profile_assets())
+        # Preserve the older accent outputs for callers of the full generator.
+        outputs["pixel-divider.svg"] = svg(600,24,"Pixel skyline divider",skyline_accent())
+        outputs["pixel-workstation.svg"] = svg(144,84,"Pixel workstation",'<g shape-rendering="crispEdges">'+workstation()+'</g>')
+        outputs["pixel-cat.svg"] = svg(84,76,"Moonlit rooftop cat",'<g transform="translate(16 4)" shape-rendering="crispEdges">'+rooftop_cat()+'</g>')
         for _, icons in GROUPS:
             for slug, label in icons:
                 outputs[f"tech/{slug}.svg"] = labeled_icon(slug, label)
