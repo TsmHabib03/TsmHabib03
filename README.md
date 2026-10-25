@@ -3,77 +3,27 @@
     <source media="(prefers-reduced-motion: reduce) and (max-width: 600px)" srcset="assets/hero-mobile-still.svg">
     <source media="(prefers-reduced-motion: reduce)" srcset="assets/hero-still.svg">
     <source media="(max-width: 600px)" srcset="assets/hero-mobile.svg">
-    <img src="assets/hero.svg" width="100%" alt="Habib Jaudian D. — pixel-art night skyline banner">
+    <img src="assets/hero.svg" width="100%" alt="Habib Jaudian D. — Tokyo After Hours, a pixel-art skyline with Tokyo Tower and an elevated three-car train">
   </picture>
 </h1>
 
-<p align="center">
-  <strong>BSCS Student · Web Developer · Aspiring Software Engineer</strong><br>
-  Building practical web applications and software systems while studying Computer Science.
-</p>
+## About Me
 
-### Tech Stack
+I'm **Habib**, a **BS Computer Science student** and web developer, working toward a career in software engineering. I build practical applications around the everyday work of students, school staff, membership teams, and HR departments.
 
-<p align="center">
-  <picture>
-    <source media="(max-width: 660px)" srcset="assets/tech-stack-mobile.svg">
-    <img src="assets/tech-stack.svg" width="480" alt="Languages: HTML5, CSS3, JavaScript, PHP, Java. UI and data: Tailwind CSS, Bootstrap, MySQL. Tools: Git, GitHub, VS Code, Docker, Laragon, Google Apps Script.">
-  </picture>
-</p>
+## Current Focus
 
-### GitHub Activity
+My project work explores how people organize information and move through everyday workflows:
 
-<a href="https://github.com/TsmHabib03?tab=overview">
-  <picture>
-    <source media="(max-width: 600px)" srcset="assets/github-activity-mobile.svg">
-    <img src="assets/github-activity.svg" width="100%" alt="GitHub contribution calendar and statistics, with the reporting period and update date. Open native contribution activity.">
-  </picture>
-</a>
+- **Student tools and attendance:** [QCU Schedule](https://github.com/TsmHabib03/QCU-Schedule-Web-App) brings schedules, notes, tasks, and campus tools together. [ASJ Attendance Checker](https://github.com/TsmHabib03/ASJ-Attendance-Checker), a school research project for Academy of St. Joseph in Claveria, Cagayan, connects QR check-ins with role-based dashboards and attendance reports.
+- **Membership and employee records:** [RepCore Fitness](https://github.com/TsmHabib03/Repcorefitness) covers gym membership, QR check-ins, expiry tracking, and email notifications. [Manila City Council HRIS](https://github.com/TsmHabib03/Manila-City-Council-HRIS) brings employee records, leave approvals, and JasperReports PDF output into HR workflows.
 
-<sub>Dated snapshot from GitHub data · <a href="https://github.com/TsmHabib03?tab=overview">Contribution activity</a></sub>
+## Tech Stack
 
-### Featured Projects
+- **Languages & web foundations:** HTML, CSS, JavaScript, PHP, Java
+- **Frameworks & data:** Spring Boot, Tailwind CSS, Bootstrap, MySQL
+- **Tools & automation:** Git, GitHub, VS Code, Docker, Laragon, Google Apps Script
 
-<p align="center">
-  <a href="https://github.com/TsmHabib03/QCU-Schedule-Web-App">
-    <picture>
-      <source media="(prefers-reduced-motion: reduce) and (max-width: 660px)" srcset="assets/project-qcu-schedule-mobile-still.svg">
-      <source media="(prefers-reduced-motion: reduce)" srcset="assets/project-qcu-schedule-still.svg">
-      <source media="(max-width: 660px)" srcset="assets/project-qcu-schedule-mobile.svg">
-      <img src="assets/project-qcu-schedule.svg" width="100%" alt="QCU Schedule — class schedules and student tools for QCU. HTML, CSS, JavaScript. View repository.">
-    </picture>
-  </a>
-  <a href="https://github.com/TsmHabib03/ASJ-Attendance-Checker">
-    <picture>
-      <source media="(prefers-reduced-motion: reduce) and (max-width: 660px)" srcset="assets/project-asj-attendance-mobile-still.svg">
-      <source media="(prefers-reduced-motion: reduce)" srcset="assets/project-asj-attendance-still.svg">
-      <source media="(max-width: 660px)" srcset="assets/project-asj-attendance-mobile.svg">
-      <img src="assets/project-asj-attendance.svg" width="100%" alt="ASJ Attendance Checker — QR attendance with role-based dashboards. PHP, MySQL, JavaScript. View repository.">
-    </picture>
-  </a>
-  <a href="https://github.com/TsmHabib03/Repcorefitness">
-    <picture>
-      <source media="(prefers-reduced-motion: reduce) and (max-width: 660px)" srcset="assets/project-repcore-fitness-mobile-still.svg">
-      <source media="(prefers-reduced-motion: reduce)" srcset="assets/project-repcore-fitness-still.svg">
-      <source media="(max-width: 660px)" srcset="assets/project-repcore-fitness-mobile.svg">
-      <img src="assets/project-repcore-fitness.svg" width="100%" alt="RepCore Fitness — fitness membership and QR attendance. PHP, MySQL, JavaScript. View repository.">
-    </picture>
-  </a>
-  <a href="https://github.com/TsmHabib03/Manila-City-Council-HRIS">
-    <picture>
-      <source media="(prefers-reduced-motion: reduce) and (max-width: 660px)" srcset="assets/project-manila-hris-mobile-still.svg">
-      <source media="(prefers-reduced-motion: reduce)" srcset="assets/project-manila-hris-still.svg">
-      <source media="(max-width: 660px)" srcset="assets/project-manila-hris-mobile.svg">
-      <img src="assets/project-manila-hris.svg" width="100%" alt="Manila City Council HRIS — employee records and leave management. Java, Spring Boot, MySQL. View repository.">
-    </picture>
-  </a>
-</p>
+## Connect
 
-<a href="https://my-portfolio.jaudianhabib879.workers.dev/">
-  <picture>
-    <source media="(prefers-reduced-motion: reduce) and (max-width: 600px)" srcset="assets/portfolio-mobile-still.svg">
-    <source media="(prefers-reduced-motion: reduce)" srcset="assets/portfolio-still.svg">
-    <source media="(max-width: 600px)" srcset="assets/portfolio-mobile.svg">
-    <img src="assets/portfolio.svg" width="100%" alt="View my portfolio — explore my work.">
-  </picture>
-</a>
+[GitHub](https://github.com/TsmHabib03) · [LinkedIn](https://www.linkedin.com/in/habib-jaudian-661a9a424)

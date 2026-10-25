@@ -6,8 +6,15 @@ import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
 ASSETS = ROOT / "assets"
-NAVY, PANEL, BORDER = "#24283B", "#292E42", "#414868"
-WHITE, MUTED, BLUE, CYAN, PURPLE = "#D5DEFB", "#A9B1D6", "#7AA2F7", "#7DCFFF", "#BB9AF7"
+NAVY, PANEL, BORDER = "#1A1B26", "#24283B", "#414868"
+WHITE, MUTED, BLUE, CYAN, PURPLE = "#C0CAF5", "#A9B1D6", "#7AA2F7", "#7DCFFF", "#BB9AF7"
+# Scoped to the Tokyo After Hours hero; legacy artwork keeps its existing palette.
+AFTER_HOURS = {
+    "sky": "#081426", "distant": "#12233D", "mid": "#1D3554",
+    "front": "#294766", "edge": "#42617F", "dim": "#3B5674",
+    "text": "#DCEBFF", "cyan": "#76C8EA", "warm": "#D5AA72",
+    "steel": "#A5B8CC", "roof": "#66839F", "glass": "#152B43",
+}
 SANS = "'Segoe UI', Arial, sans-serif"
 MONO = "Consolas, 'Liberation Mono', monospace"
 
@@ -71,6 +78,7 @@ def write_assets(files):
         ET.fromstring(source)
     for name, source in files.items():
         destination = ASSETS / name
+        destination.parent.mkdir(parents=True, exist_ok=True)
         temporary = destination.with_suffix(".svg.tmp")
         temporary.write_text(source, encoding="utf-8")
         temporary.replace(destination)

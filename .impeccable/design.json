@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-25T09:50:56.405047+00:00",
+  "title": "Design System: Tokyo After Hours",
+  "extensions": {
+    "motion": [
+      {
+        "name": "train-desktop-duration",
+        "value": "28s",
+        "purpose": "Linear travel, followed by an offscreen hold."
+      },
+      {
+        "name": "train-mobile-duration",
+        "value": "24s",
+        "purpose": "Same train and exit contract in the mobile scene."
+      },
+      {
+        "name": "train-easing",
+        "value": "linear",
+        "purpose": "Constant rail speed during the first 88% of the cycle."
+      },
+      {
+        "name": "train-travel-end",
+        "value": "88%",
+        "purpose": "Entire train is beyond the clip; hold through 100% before reset."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "animation:none",
+        "purpose": "The static transform keeps the complete train visible."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "hero-mobile",
+        "value": "600px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Three-car commuter train",
+      "kind": "custom",
+      "description": "Actual shared 364 by 48 train geometry from commuter_train(), displayed on the hero sky with 12px preview padding.",
+      "html": "<svg class=\"ds-commuter-train\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 388 72\" role=\"img\" aria-labelledby=\"ds-train-title\"><title id=\"ds-train-title\">Three-car Tokyo commuter train</title><path fill=\"#081426\" d=\"M0 0H388V72H0Z\"/><g transform=\"translate(12 12)\" shape-rendering=\"crispEdges\"><g class=\"ds-carriage\" transform=\"translate(0 0)\"><path fill=\"#A5B8CC\" d=\"M4 6h108v32h-108zM0 10h116v24h-116zM30 12h10v22h-10zM78 12h10v22h-10z\"/><path fill=\"#66839F\" d=\"M4 4h108v4h-108zM24 0h14v4h-14zM78 0h14v4h-14zM28 10h14v26h-14zM34 12h2v22h-2zM76 10h14v26h-14zM82 12h2v22h-2zM4 36h108v4h-108z\"/><path fill=\"#42617F\" d=\"M26 0h10v2h-10zM80 0h10v2h-10zM18 44h4v2h-4zM26 44h4v2h-4zM88 44h4v2h-4zM96 44h4v2h-4zM0 24h4v2h-4z\"/><path fill=\"#152B43\" d=\"M30 12h4v8h-4zM36 12h4v8h-4zM78 12h4v8h-4zM84 12h4v8h-4zM8 12h12v12h-12zM46 12h12v12h-12zM60 12h12v12h-12zM96 12h12v12h-12zM14 40h88v4h-88zM0 12h6v12h-6z\"/><path fill=\"#D5AA72\" d=\"M10 12h8v2h-8zM48 12h8v2h-8zM62 12h8v2h-8zM98 12h8v2h-8z\"/><path fill=\"#76C8EA\" d=\"M0 28h116v4h-116z\"/><path fill=\"#081426\" d=\"M16 42h8v6h-8zM24 42h8v6h-8zM86 42h8v6h-8zM94 42h8v6h-8z\"/></g><path fill=\"#152B43\" d=\"M116 32h8v4h-8z\"/><g class=\"ds-carriage\" transform=\"translate(124 0)\"><path fill=\"#A5B8CC\" d=\"M4 6h108v32h-108zM0 10h116v24h-116zM30 12h10v22h-10zM78 12h10v22h-10z\"/><path fill=\"#66839F\" d=\"M4 4h108v4h-108zM24 0h14v4h-14zM78 0h14v4h-14zM28 10h14v26h-14zM34 12h2v22h-2zM76 10h14v26h-14zM82 12h2v22h-2zM4 36h108v4h-108z\"/><path fill=\"#42617F\" d=\"M26 0h10v2h-10zM80 0h10v2h-10zM18 44h4v2h-4zM26 44h4v2h-4zM88 44h4v2h-4zM96 44h4v2h-4z\"/><path fill=\"#152B43\" d=\"M30 12h4v8h-4zM36 12h4v8h-4zM78 12h4v8h-4zM84 12h4v8h-4zM8 12h12v12h-12zM46 12h12v12h-12zM60 12h12v12h-12zM96 12h12v12h-12zM14 40h88v4h-88z\"/><path fill=\"#D5AA72\" d=\"M10 12h8v2h-8zM48 12h8v2h-8zM62 12h8v2h-8zM98 12h8v2h-8z\"/><path fill=\"#76C8EA\" d=\"M0 28h116v4h-116z\"/><path fill=\"#081426\" d=\"M16 42h8v6h-8zM24 42h8v6h-8zM86 42h8v6h-8zM94 42h8v6h-8z\"/></g><path fill=\"#152B43\" d=\"M240 32h8v4h-8z\"/><g class=\"ds-carriage\" transform=\"translate(248 0)\"><path fill=\"#A5B8CC\" d=\"M4 6h108v32h-108zM0 10h116v24h-116zM30 12h10v22h-10zM78 12h10v22h-10z\"/><path fill=\"#66839F\" d=\"M4 4h108v4h-108zM24 0h14v4h-14zM78 0h14v4h-14zM28 10h14v26h-14zM34 12h2v22h-2zM76 10h14v26h-14zM82 12h2v22h-2zM4 36h108v4h-108z\"/><path fill=\"#42617F\" d=\"M26 0h10v2h-10zM80 0h10v2h-10zM18 44h4v2h-4zM26 44h4v2h-4zM88 44h4v2h-4zM96 44h4v2h-4z\"/><path fill=\"#152B43\" d=\"M30 12h4v8h-4zM36 12h4v8h-4zM78 12h4v8h-4zM84 12h4v8h-4zM8 12h12v12h-12zM46 12h12v12h-12zM60 12h12v12h-12zM96 12h12v12h-12zM14 40h88v4h-88zM110 12h6v12h-6z\"/><path fill=\"#D5AA72\" d=\"M10 12h8v2h-8zM48 12h8v2h-8zM62 12h8v2h-8zM98 12h8v2h-8zM110 24h4v2h-4z\"/><path fill=\"#76C8EA\" d=\"M0 28h116v4h-116z\"/><path fill=\"#081426\" d=\"M16 42h8v6h-8zM24 42h8v6h-8zM86 42h8v6h-8zM94 42h8v6h-8z\"/></g></g></svg>",
+      "css": ".ds-commuter-train { display:block; width:100%; max-width:388px; height:auto; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Tokyo After Hours",
+    "overview": "The profile's artwork uses a quiet night city and a cyan-striped commuter train to give Habib's developer identity a recognizable setting. Pale pixel lettering and sparse warm lights carry the emphasis. The city stays stationary while the train supplies one clear animated moment.\n\nThis system describes the four profile hero SVGs. GitHub owns the surrounding Markdown typography, spacing, link states, and page colors. Legacy TokyoNight Storm assets and helpers retain their existing tokens; the scoped `AFTER_HOURS` dictionary in `scripts/profile_theme.py` is the hero palette source.",
+    "keyCharacteristics": [
+      "Crisp bitmap lettering and integer scene geometry.",
+      "Tonal building layers with restrained warm lights.",
+      "Three connected carriages unified by a cyan stripe.",
+      "Native profile text and links with useful static artwork alternatives."
+    ],
+    "rules": [],
+    "dos": [
+      "Do change hero colors through the scoped `AFTER_HOURS` palette.",
+      "Do preserve a complete visible train in static and reduced-motion alternatives.",
+      "Do keep informative profile content and destinations in native Markdown.",
+      "Do regenerate the four variants together with `python scripts/generate-profile-assets.py --hero-only`."
+    ],
+    "donts": [
+      "Don't animate the name or scatter motion across the background.",
+      "Don't add glow, gradients, excessive neon, or external image/font dependencies to the hero.",
+      "Don't change legacy artwork tokens as a side effect of editing the hero.",
+      "Don't claim live GitHub compatibility from local browser screenshots."
+    ]
+  }
+}

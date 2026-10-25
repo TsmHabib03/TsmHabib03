@@ -5,7 +5,7 @@ Geometry is batched by color; motion uses SVG-local CSS, never scripts or filter
 from collections import defaultdict
 import random
 
-from profile_theme import NAVY, BLUE, CYAN, PURPLE, WHITE
+from profile_theme import NAVY, BLUE, CYAN, PURPLE, WHITE, AFTER_HOURS
 
 SKY = NAVY
 DISTANT, MID, FRONT = "#29314B", "#303B58", "#394563"
@@ -281,4 +281,167 @@ def city(w, h, *, seed=27, accent=CYAN, location="tower", quiet_left=0,
         reflections.box(x, h-4, rng.randrange(6, 22, 2), 1, accent)
         reflections.box(x+4, h-2, rng.randrange(4, 12, 2), 1, BLUE)
     body.append(f'<g class="reflection" opacity=".2">{reflections.draw()}</g></g>')
+    return "\n".join(body)
+
+
+# One train model drives all hero variants and the motion endpoints.
+CARRIAGE_WIDTH, CARRIAGE_GAP, CARRIAGE_COUNT = 116, 8, 3
+TRAIN_WIDTH = CARRIAGE_COUNT * CARRIAGE_WIDTH + (CARRIAGE_COUNT - 1) * CARRIAGE_GAP
+TRAIN_HEIGHT, TRAIN_MARGIN, TRAIN_TRAVEL_PERCENT = 48, 12, 88
+
+
+def train_positions(width):
+    """Start and end are fully outside the clip; still position shows all cars."""
+    if width < TRAIN_WIDTH + 2 * TRAIN_MARGIN:
+        raise ValueError("Scene must fit the complete static train")
+    return -TRAIN_WIDTH - TRAIN_MARGIN, width + TRAIN_MARGIN, (width - TRAIN_WIDTH) // 2
+
+
+def commuter_train():
+    """Three linked carriages, integer geometry, both cabs facing outward."""
+    c = AFTER_HOURS
+    cars = []
+    for index in range(CARRIAGE_COUNT):
+        p = Pixels()
+        p.box(4, 6, 108, 32, c["steel"])
+        p.box(0, 10, 116, 24, c["steel"])
+        p.box(4, 4, 108, 4, c["roof"])
+        for x in (24, 78):
+            p.box(x, 0, 14, 4, c["roof"])
+            p.box(x + 2, 0, 10, 2, c["edge"])
+        # Door outlines and paired leaves are readable at mobile image scale.
+        for x in (28, 76):
+            p.box(x, 10, 14, 26, c["roof"])
+            p.box(x + 2, 12, 10, 22, c["steel"])
+            p.box(x + 6, 12, 2, 22, c["roof"])
+            p.box(x + 2, 12, 4, 8, c["glass"])
+            p.box(x + 8, 12, 4, 8, c["glass"])
+        for x in (8, 46, 60, 96):
+            p.box(x, 12, 12, 12, c["glass"])
+            p.box(x + 2, 12, 8, 2, c["warm"])
+        p.box(0, 28, 116, 4, c["cyan"])
+        p.box(4, 36, 108, 4, c["roof"])
+        p.box(14, 40, 88, 4, c["glass"])
+        for x in (16, 24, 86, 94):
+            p.box(x, 42, 8, 6, c["sky"])
+            p.box(x + 2, 44, 4, 2, c["edge"])
+        if index in (0, 2):
+            cab_x = 0 if index == 0 else 110
+            p.box(cab_x, 12, 6, 12, c["glass"])
+            p.box(cab_x, 24, 4, 2, c["warm"] if index == 2 else c["edge"])
+        cars.append(f'<g class="carriage" transform="translate({index * (CARRIAGE_WIDTH + CARRIAGE_GAP)} 0)">{p.draw()}</g>')
+        if index < CARRIAGE_COUNT - 1:
+            cars.append(f'<path fill="{c["glass"]}" d="M{(index+1)*CARRIAGE_WIDTH+index*CARRIAGE_GAP} 32h{CARRIAGE_GAP}v4h{-CARRIAGE_GAP}z"/>')
+    return "".join(cars)
+
+
+def tokyo_tower(center, ground):
+    """Stepped Tokyo Tower: antenna, two decks, tapered lattice and splayed feet."""
+    c, p = AFTER_HOURS, Pixels()
+    top = ground - 192
+    p.box(center - 2, top, 4, 32, c["warm"])
+    p.box(center - 4, top + 30, 8, 12, c["text"])
+    # Pixel lattice follows the taper, opening out below the main deck.
+    for row in range(15):
+        y = top + 42 + row * 10
+        spread = 4 + row * 2 if row < 8 else 20 + (row - 8) * 4
+        p.box(center - spread - 2, y, 4, 10, c["warm"])
+        p.box(center + spread - 2, y, 4, 10, c["warm"])
+        p.box(center - spread, y + 8, spread * 2, 2, c["roof"])
+        # Cross-braces made from square pixels, avoiding smoothed diagonals.
+        for step in range(0, spread * 2, 4):
+            brace_y = y + round(step / (spread * 2) * 4) * 2
+            p.box(center - spread + step, brace_y, 2, 2, c["warm"])
+            p.box(center - spread + step, y + 8 - (brace_y - y), 2, 2, c["warm"])
+    for y, width in ((top + 62, 28), (top + 116, 64)):
+        p.box(center - width // 2, y, width, 8, c["warm"])
+        p.box(center - width // 2 + 4, y + 2, width - 8, 2, c["text"])
+        p.box(center - width // 2 + 4, y + 6, width - 8, 2, c["glass"])
+    p.box(center - 52, ground - 4, 20, 4, c["warm"])
+    p.box(center + 32, ground - 4, 20, 4, c["warm"])
+    return p.draw()
+
+
+def after_hours_skyline(w, ground, mobile):
+    """Authored roof rhythm; seeded windows only, never random composition."""
+    c, rng = AFTER_HOURS, random.Random(20261025)
+    # x, width, height, rooftop kind. Values are on the same two-pixel grid.
+    distant = [(0, 56, 100, 0), (68, 76, 140, 1), (156, 54, 108, 2),
+               (222, 88, 168, 0), (324, 60, 116, 1), (402, 68, 148, 2),
+               (488, 88, 100, 0)] if mobile else [
+               (0, 70, 116, 0), (86, 90, 144, 1), (192, 64, 110, 2),
+               (272, 82, 174, 0), (374, 72, 132, 1), (466, 94, 156, 2),
+               (580, 60, 120, 0), (660, 100, 164, 1), (784, 66, 138, 2),
+               (872, 58, 92, 0), (1060, 82, 148, 1), (1158, 60, 118, 0)]
+    mid = [(0, 84, 80, 2), (110, 94, 106, 0), (232, 78, 88, 1),
+           (342, 82, 74, 2), (494, 106, 78, 0)] if mobile else [
+           (0, 112, 92, 2), (136, 90, 106, 0), (252, 112, 84, 1),
+           (390, 80, 110, 2), (496, 120, 82, 0), (642, 100, 106, 1),
+           (766, 110, 86, 2), (902, 70, 68, 0), (1080, 120, 98, 1)]
+    front = [(0, 122, 48, 0), (154, 110, 58, 2), (302, 98, 42, 0),
+             (498, 102, 50, 2)] if mobile else [
+             (0, 132, 54, 0), (162, 114, 64, 2), (308, 144, 48, 0),
+             (486, 124, 60, 2), (642, 132, 50, 0), (810, 104, 56, 2),
+             (1080, 120, 52, 0)]
+    layers = []
+    for layer, (buildings, fill) in enumerate(zip((distant, mid, front), (c["distant"], c["mid"], c["front"]))):
+        p = Pixels()
+        for x, width, height, roof in buildings:
+            top = ground - height
+            p.box(x, top, width, height, fill)
+            p.box(x + width - 8, top + 4, 8, height - 4, c["distant"])
+            p.box(x + 4, top - 2, width - 8, 2, c["dim"] if layer == 2 else fill)
+            if roof == 1:
+                p.box(x + 14, top - 14, 2, 14, c["dim"])
+                p.box(x + 10, top - 10, 10, 2, c["dim"])
+            elif roof == 2:
+                p.box(x + 12, top - 10, 22, 10, fill)
+                p.box(x + 10, top - 12, 26, 2, c["dim"])
+            for wy in range(top + 12, ground - 8, 14):
+                for wx in range(x + 10, min(x + width - 10, w - 4), 14):
+                    chance = rng.random()
+                    if chance < .5:
+                        p.box(wx, wy, 4, 6, c["warm"] if layer > 0 and chance < .12 else c["dim"])
+        layers.append(p.draw())
+    # Tower is behind the low foreground but in front of middle silhouettes.
+    return layers[0] + layers[1] + tokyo_tower(456 if mobile else 996, ground) + layers[2]
+
+
+def after_hours_city(w, h, *, mobile=False, animated=True):
+    c = AFTER_HOURS
+    start, end, still = train_positions(w)
+    duration = 24 if mobile else 28
+    # Start with the whole train visible; move linearly, then wait outside the clip.
+    delay = -duration * (TRAIN_TRAVEL_PERCENT / 100) * (still - start) / (end - start)
+    rail_y, ground = h - 44, h - 62
+    body = []
+    if animated:
+        body.append(f'''<style>
+@keyframes tokyo-rail-pass {{
+  0% {{ transform:translateX({start}px) }}
+  {TRAIN_TRAVEL_PERCENT}%,100% {{ transform:translateX({end}px) }}
+}}
+.tokyo-train {{ animation:tokyo-rail-pass {duration}s linear infinite; animation-delay:{delay:.6f}s }}
+@media (prefers-reduced-motion:reduce) {{ .tokyo-train {{ animation:none }} }}
+</style>''')
+    body += [f'<defs><clipPath id="tokyo-scene-clip"><path d="M0 0H{w}V{h}H0Z"/></clipPath></defs>',
+             '<g clip-path="url(#tokyo-scene-clip)" shape-rendering="crispEdges" aria-hidden="true">',
+             after_hours_skyline(w, ground, mobile)]
+    rail = Pixels()
+    rail.box(0, rail_y, w, 4, c["roof"])
+    rail.box(0, rail_y + 4, w, 10, c["mid"])
+    rail.box(0, rail_y + 14, w, 2, c["edge"])
+    rail.box(0, h - 8, w, 8, c["distant"])
+    for x in range(28, w, 148):
+        rail.box(x, rail_y + 16, 10, h - rail_y - 24, c["front"])
+        rail.box(x - 8, rail_y + 16, 26, 4, c["front"])
+    body += [rail.draw(), f'<g transform="translate(0 {rail_y - TRAIN_HEIGHT})"><g class="tokyo-train" transform="translate({still} 0)">{commuter_train()}</g></g>']
+    # Static overhead line and sparse masts frame, rather than obscure, the train.
+    masts = Pixels()
+    masts.box(0, rail_y - 60, w, 2, c["dim"])
+    for x in range(12, w, 296):
+        masts.box(x, rail_y - 68, 4, 68, c["edge"])
+        masts.box(x, rail_y - 68, 26, 2, c["edge"])
+        masts.box(x + 24, rail_y - 68, 2, 10, c["dim"])
+    body += [masts.draw(), '</g>']
     return "\n".join(body)

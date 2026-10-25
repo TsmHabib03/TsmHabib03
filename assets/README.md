@@ -1,24 +1,41 @@
 # Profile assets
 
-All artwork uses a TokyoNight Storm palette: navy panels, blue/cyan accents, muted purple, and pale text. Images are stored in this repository; visitors do not depend on a third-party statistics or icon service.
+The profile hero uses a **Tokyo After Hours** palette: dark navy sky, slate-blue buildings, pale lettering, a cyan train stripe, and sparse warm windows. All displayed artwork is stored in this repository and uses self-contained SVG geometry.
 
 ## Profile artwork
 
-Edit `scripts/generate-profile-assets.py` and regenerate:
+Regenerate just the four hero assets after changing the scene:
+
+```sh
+python scripts/generate-profile-assets.py --hero-only
+```
+
+The generator uses the Python standard library. Shared hero colors live in `AFTER_HOURS` in `scripts/profile_theme.py`; authored skyline, Tokyo Tower, railway, and train geometry live in `scripts/pixel_city.py`. Layout and bitmap lettering live in `scripts/generate-profile-assets.py`. Legacy palette tokens and the original city helper are preserved for other artwork.
+
+| Variant | Dimensions | Purpose |
+| --- | --- | --- |
+| `hero.svg` | 1200 × 440 | Desktop, animated train |
+| `hero-still.svg` | 1200 × 440 | Desktop, stationary train |
+| `hero-mobile.svg` | 600 × 464 | Mobile, two-line name and animated train |
+| `hero-mobile-still.svg` | 600 × 464 | Mobile, stationary train |
+
+The name and city stay stationary. Three linked train carriages share doors, windows, wheels, roof equipment, and a continuous cyan stripe. Only the train animates. All scene geometry uses integer coordinates and crisp edges, without gradients, filters, external fonts, scripts, or image dependencies. Building positions are authored; window placement uses a fixed random seed.
+
+The train travels from `-TRAIN_WIDTH - TRAIN_MARGIN` to `scene_width + TRAIN_MARGIN`, then waits outside the clip for the final 12% of each loop before resetting. Desktop loops take 28 seconds; mobile loops take 24 seconds. The negative delay starts with the whole train visible. The static transform also shows all three carriages when SVG CSS animation is unavailable.
+
+The README's `<picture>` selects mobile at viewport widths up to 600px and animation-free variants for reduced-motion preference. Animated SVGs also contain an internal reduced-motion media query. Browser and GitHub sanitization/caching can affect media selection; local preview validation does not establish live GitHub compatibility. GitHub embeds SVGs as images, so links and profile text remain native Markdown outside the artwork.
+
+The older project strips, footer, tech, and social assets are retained for compatibility but no longer referenced by the profile. To regenerate every asset supported by the existing profile generator:
 
 ```sh
 python scripts/generate-profile-assets.py
 ```
 
-Shared SVG helpers and colors live in `scripts/profile_theme.py`; detailed city geometry and motion live in `scripts/pixel_city.py`. The hero keeps the original name, pixel lettering, cursor, identity text, and navy palette. Its expanded skyline adds three depth layers, rooftop equipment, an observation tower, windows, a crescent moon, clouds, an elevated train, road traffic, and restrained wet-street reflections. Backgrounds use flat colors, with sharp pixel edges and no gradients or glow filters. Geometry is grouped into paths by color to keep the SVGs small.
+Run generator and contribution-integrity tests:
 
-The four project cards show distinct illustrative locations in the same city: a campus, an entrance building, a gym storefront, and a civic arcade. These are artwork, not depictions of real project premises. Each card retains the verified project name, description, stack, and repository link. Desktop layouts place the landmark beside the information; mobile layouts move the city below the copy. The technology wall and contribution graphics are unchanged.
-
-The portfolio CTA is a raised arcade button with pixel lettering, stepped borders, a solid depth edge, and a moving train and car behind it. The label stays stationary. Animation is internal SVG CSS: no JavaScript, external fonts, external assets, or animated raster files. Trains and cars loop beyond the clipped scene edges; cloud, window and reflection motion is slow and subtle.
-
-Every animated hero, project, and portfolio asset has a matching `-still.svg` version. The README's picture sources select the mobile or desktop still image for `prefers-reduced-motion: reduce`; these contain no animation rules. Internal media queries also support standalone SVG viewing. Renderers without SVG CSS animation show a complete static scene.
-
-GitHub embeds SVGs as images and does not forward hover, focus, or click events into their contents. README links use outer HTML anchors, preserving native keyboard and pointer behavior. The portfolio button's short hover/press effect and inner link work only when its animated SVG is opened directly; the README does not claim a custom hover effect. The pixel-game appearance and ambient motion remain visible when embedded.
+```sh
+python -m unittest discover -s tests -v
+```
 
 ## Contribution data
 
@@ -36,7 +53,7 @@ A muted pixel skyline sits behind the activity scene; opaque navy beneath the ca
 python scripts/update_activity.py --render-snapshot
 ```
 
-The graphic complements the native GitHub profile contribution UI. It is a dated, generated image, not a live embed. No count is hardcoded into the README or generator. Counts reflect data visible to the API; GitHub determines which contributions qualify. Statistics are computed only from those returned counts.
+The snapshot assets and refresh workflow are retained for optional use. The profile README omits the graphic because GitHub already displays contribution activity. The generated images show the saved snapshot's reporting and update dates. It is a dated, generated image, not a live embed. No count is hardcoded into the README or generator. Counts reflect data visible to the API; GitHub determines which contributions qualify. Statistics are computed only from those returned counts.
 
 Refresh locally using existing GitHub CLI authentication:
 
@@ -48,12 +65,12 @@ Or run the script with `GITHUB_TOKEN` already set in the environment. Do not pla
 
 ## Icon attribution
 
-The 14 local icon inputs are in `assets/icons/`, stored as raw brand SVGs. Brand marks belong to their respective owners.
+Local icon inputs are in `assets/icons/`, stored as raw brand SVGs. Brand marks belong to their respective owners.
 
-- **Devicon:** HTML5, CSS3, JavaScript, PHP, Java, Tailwind CSS, Bootstrap, MySQL, Git, GitHub, VS Code, Docker. [Pinned source](https://github.com/devicons/devicon/tree/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons) · [MIT license](icons/LICENSE-devicon.txt).
-- **Simple Icons:** Laragon, Google Apps Script. [Pinned source](https://github.com/simple-icons/simple-icons/tree/d4e6ba93e48f178898707f0145ec285f28b64b38/icons) · [CC0 license](icons/LICENSE-simple-icons.txt).
+- **Devicon:** HTML5, CSS3, JavaScript, PHP, Java, Tailwind CSS, Bootstrap, MySQL, Git, GitHub, VS Code, Docker, LinkedIn. [Pinned source](https://github.com/devicons/devicon/tree/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons) · [MIT license](icons/LICENSE-devicon.txt).
+- **Simple Icons:** Laragon, Google Apps Script, Spring Boot, Instagram, TikTok. [Pinned source](https://github.com/simple-icons/simple-icons/tree/d4e6ba93e48f178898707f0145ec285f28b64b38/icons) · [CC0 license](icons/LICENSE-simple-icons.txt).
 
-Definition IDs are namespaced when combining them into the technology wall. Laragon and Google Apps Script icons are tinted to `#0E83CD` and `#4285F4` (Simple Icons brand colors) inside the generator, because Simple Icons ships single-path glyphs without colors.
+Definition IDs are namespaced when combining icons into labeled assets. Display tints are defined by `BRAND_TINT` in the profile generator. These legacy icon assets are retained; the concise README lists skills and social links as native text.
 
 ## Project sources
 
