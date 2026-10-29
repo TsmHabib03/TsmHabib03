@@ -12,6 +12,9 @@ spec = importlib.util.spec_from_file_location("profile_assets", ROOT / "scripts/
 profile = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(profile)
 import pixel_city as city
+stack_spec = importlib.util.spec_from_file_location("readme_stack", ROOT / "scripts/build-readme-stack.py")
+stack_assets = importlib.util.module_from_spec(stack_spec)
+stack_spec.loader.exec_module(stack_assets)
 
 
 class HeroContracts(unittest.TestCase):
@@ -65,13 +68,19 @@ class HeroContracts(unittest.TestCase):
             else:
                 self.assertTrue((ROOT / path).is_file(), path)
         self.assertNotRegex(source, r'Featured Work|FEATURED WORK|night-city-cat|github\.io|placeholder|profile\.html')
-        self.assertEqual(source.count('<table>'), 1)
+        self.assertNotIn('<table>', source)
+        self.assertIn("I'm a BSCS student at Quezon City University who enjoys building web applications and exploring software engineering.", source)
         stack = source.split('<samp>Tech Stack</samp>')[1].split('<samp>Education</samp>')[0]
-        self.assertEqual(re.findall(r"<h3>(.+?)</h3>", stack), ["Frontend", "Backend", "Database", "Tools"])
-        self.assertEqual(re.findall(r'alt="([^"]+)"', stack), [
+        self.assertEqual(re.findall(r'<h3><img[^>]+alt="([^"]+)"', stack), ["Frontend", "Backend", "Database", "Tools"])
+        self.assertEqual(re.findall(r'<img src="assets/readme/tech-[^>]+alt="([^"]+)"', stack), [
             "HTML", "CSS", "JavaScript", "Tailwind CSS", "Bootstrap", "PHP", "Java",
             "MySQL", "Git", "GitHub", "Docker", "VS Code",
         ])
+        education = source.split('<samp>Education</samp>')[1].split('<samp>Connection</samp>')[0]
+        self.assertEqual(re.findall(r'<h3><img[^>]+alt="([^"]+)"', education),
+                         ["BS Computer Science", "NC III — Web Development"])
+        self.assertIn('<p>Quezon City University</p>', education)
+        self.assertIn('<p>TESDA</p>', education)
         contact = source.split('<samp>Connection</samp>')[1]
         self.assertEqual(contact.count('width="32" height="32"'), 4)
         self.assertIn('https://www.facebook.com/habib.jaudian.1', contact)
@@ -85,7 +94,19 @@ class HeroContracts(unittest.TestCase):
         references = set(re.findall(r'(?:src|srcset)="assets/([^"]+)"', readme))
         self.assertEqual(references, {"readme/profile-banner.svg", "readme/profile-banner-mobile.svg",
                                       "readme/connect-banner.svg", "readme/connect-banner-mobile.svg",
-                                      "marks/facebook.svg", "marks/instagram.svg", "marks/github.svg", "marks/email.svg"})
+                                      "marks/facebook.svg", "marks/instagram.svg", "marks/github.svg", "marks/email.svg"}
+                         | {f"readme/{name}" for name in stack_assets.assets()})
+        for name, source in stack_assets.assets().items():
+            with self.subTest(readme_asset=name):
+                root = ET.fromstring(source)
+                self.assertEqual(source, (ROOT / "assets/readme" / name).read_text(encoding="utf-8"))
+                self.assertNotRegex(source, r'<(?:script|filter|image|text|style)\b|https?://(?!www.w3.org)')
+                ids = {element.attrib['id'] for element in root.iter() if 'id' in element.attrib}
+                for url_id, href_id in re.findall(r'url\(#([^\)]+)\)|href="#([^"]+)"', source):
+                    self.assertIn(url_id or href_id, ids)
+                if name.startswith('tech-'):
+                    logo = root.find('{http://www.w3.org/2000/svg}use')
+                    self.assertEqual((logo.attrib['width'], logo.attrib['height']), ('48', '48'))
         for name, source in outputs.items():
             with self.subTest(asset=name):
                 root = ET.fromstring(source)

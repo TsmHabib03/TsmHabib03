@@ -10,44 +10,45 @@
 
 <p><strong>Building useful software, one project at a time.</strong></p>
 
-<p>I'm a BSCS student at Quezon City University interested in full-stack web development and software engineering.</p>
+<p>I'm a BSCS student at Quezon City University who enjoys building web applications and exploring software engineering.</p>
 
 <h2><samp>Tech Stack</samp></h2>
 
-<h3>Frontend</h3>
+<h3><img src="assets/readme/heading-frontend.svg" height="24" alt="Frontend"></h3>
 <p>
-  <img src="https://img.shields.io/badge/HTML-171C25?style=for-the-badge&amp;logo=html5&amp;logoColor=FF9D38" alt="HTML">
-  <img src="https://img.shields.io/badge/CSS-171C25?style=for-the-badge&amp;logo=css&amp;logoColor=76D8F0" alt="CSS">
-  <img src="https://img.shields.io/badge/JavaScript-171C25?style=for-the-badge&amp;logo=javascript&amp;logoColor=F4CD70" alt="JavaScript">
-  <img src="https://img.shields.io/badge/Tailwind_CSS-171C25?style=for-the-badge&amp;logo=tailwindcss&amp;logoColor=76D8F0" alt="Tailwind CSS">
-  <img src="https://img.shields.io/badge/Bootstrap-171C25?style=for-the-badge&amp;logo=bootstrap&amp;logoColor=C5A0EF" alt="Bootstrap">
+  <img src="assets/readme/tech-html5.svg" width="128" height="94" alt="HTML">
+  <img src="assets/readme/tech-css3.svg" width="128" height="94" alt="CSS">
+  <img src="assets/readme/tech-javascript.svg" width="128" height="94" alt="JavaScript">
+  <img src="assets/readme/tech-tailwindcss.svg" width="128" height="94" alt="Tailwind CSS">
+  <img src="assets/readme/tech-bootstrap.svg" width="128" height="94" alt="Bootstrap">
 </p>
 
-<h3>Backend</h3>
+<h3><img src="assets/readme/heading-backend.svg" height="24" alt="Backend"></h3>
 <p>
-  <img src="https://img.shields.io/badge/PHP-171C25?style=for-the-badge&amp;logo=php&amp;logoColor=C5A0EF" alt="PHP">
-  <img src="https://img.shields.io/badge/Java-171C25?style=for-the-badge" alt="Java">
+  <img src="assets/readme/tech-php.svg" width="128" height="94" alt="PHP">
+  <img src="assets/readme/tech-java.svg" width="128" height="94" alt="Java">
 </p>
 
-<h3>Database</h3>
+<h3><img src="assets/readme/heading-database.svg" height="24" alt="Database"></h3>
 <p>
-  <img src="https://img.shields.io/badge/MySQL-171C25?style=for-the-badge&amp;logo=mysql&amp;logoColor=F4CD70" alt="MySQL">
+  <img src="assets/readme/tech-mysql.svg" width="128" height="94" alt="MySQL">
 </p>
 
-<h3>Tools</h3>
+<h3><img src="assets/readme/heading-tools.svg" height="24" alt="Tools"></h3>
 <p>
-  <img src="https://img.shields.io/badge/Git-171C25?style=for-the-badge&amp;logo=git&amp;logoColor=FF9D38" alt="Git">
-  <img src="https://img.shields.io/badge/GitHub-171C25?style=for-the-badge&amp;logo=github&amp;logoColor=E9EEF5" alt="GitHub">
-  <img src="https://img.shields.io/badge/Docker-171C25?style=for-the-badge&amp;logo=docker&amp;logoColor=76D8F0" alt="Docker">
-  <img src="https://img.shields.io/badge/VS_Code-171C25?style=for-the-badge" alt="VS Code">
+  <img src="assets/readme/tech-git.svg" width="128" height="94" alt="Git">
+  <img src="assets/readme/tech-github.svg" width="128" height="94" alt="GitHub">
+  <img src="assets/readme/tech-docker.svg" width="128" height="94" alt="Docker">
+  <img src="assets/readme/tech-vscode.svg" width="128" height="94" alt="VS Code">
 </p>
 
 <h2><samp>Education</samp></h2>
 
-<table>
-  <tr><td><strong>BS Computer Science</strong></td><td>Quezon City University</td></tr>
-  <tr><td><strong>NC III — Web Development</strong></td><td>TESDA</td></tr>
-</table>
+<h3><img src="assets/readme/education-bscs.svg" width="264" height="48" alt="BS Computer Science"></h3>
+<p>Quezon City University</p>
+
+<h3><img src="assets/readme/education-tesda.svg" width="264" height="48" alt="NC III — Web Development"></h3>
+<p>TESDA</p>
 
 <h2><samp>Connection</samp></h2>
 

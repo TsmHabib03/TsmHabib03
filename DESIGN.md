@@ -15,10 +15,8 @@ colors:
   blue: "#3f83bf"
   blue-light: "#67c7ef"
   blue-deep: "#29437c"
-  badge-ground: "#171c25"
-  badge-orange: "#ff9d38"
-  badge-purple: "#c5a0ef"
-  badge-amber: "#f4cd70"
+  lavender: "#c5a0ef"
+  stack-amber: "#f4cd70"
 typography:
   display:
     fontFamily: "Silkscreen"
@@ -37,6 +35,22 @@ typography:
     fontSize: "36px"
     fontWeight: 400
   caption:
+    fontFamily: "Silkscreen"
+    fontSize: "18px"
+    fontWeight: 400
+  technology-label:
+    fontFamily: "Silkscreen"
+    fontSize: "14px"
+    fontWeight: 400
+  group-heading:
+    fontFamily: "Silkscreen"
+    fontSize: "20px"
+    fontWeight: 400
+  qualification-first-line:
+    fontFamily: "Silkscreen"
+    fontSize: "20px"
+    fontWeight: 400
+  qualification-second-line:
     fontFamily: "Silkscreen"
     fontSize: "18px"
     fontWeight: 400
@@ -64,9 +78,44 @@ components:
   connection-mobile:
     width: "600px"
     height: "240px"
-  technology-badge:
-    backgroundColor: "{colors.badge-ground}"
-    height: "28px"
+  technology-module:
+    textColor: "{colors.ink}"
+    typography: "{typography.technology-label}"
+    width: "128px"
+    height: "94px"
+  technology-logo:
+    width: "48px"
+    height: "48px"
+  group-frontend:
+    textColor: "{colors.cyan}"
+    typography: "{typography.group-heading}"
+    width: "124px"
+    height: "24px"
+  group-backend:
+    textColor: "{colors.orange}"
+    typography: "{typography.group-heading}"
+    width: "110px"
+    height: "24px"
+  group-database:
+    textColor: "{colors.stack-amber}"
+    typography: "{typography.group-heading}"
+    width: "120px"
+    height: "24px"
+  group-tools:
+    textColor: "{colors.lavender}"
+    typography: "{typography.group-heading}"
+    width: "75px"
+    height: "24px"
+  qualification-bscs:
+    textColor: "{colors.orange}"
+    typography: "{typography.qualification-first-line}"
+    width: "264px"
+    height: "48px"
+  qualification-tesda:
+    textColor: "{colors.cyan}"
+    typography: "{typography.qualification-first-line}"
+    width: "264px"
+    height: "48px"
   contact-mark:
     width: "32px"
     height: "32px"
@@ -87,24 +136,27 @@ The full experience renders in README.md. The supplied references determine the 
 - Orange square scatter beside the name.
 - Blue modular square edge beside the connection invitation.
 - Outlined pixel lettering with no remote font dependency.
-- One native GitHub column and naturally wrapping badges.
+- One native GitHub column and independently wrapping logo groups.
+- Transparent logo modules and stacked pixel qualification titles.
 - Separate mobile banner compositions.
 
 ## Colors
 
 Warm orange shades form the hero's dense right field and separated square transition. Ink carries the name; cyan carries its subtitle. The connection banner combines a blue ground patch with blue, deep blue and cyan squares. Both SVGs use the ground token to blend into GitHub dark mode.
 
-Technology badges retain their charcoal backgrounds and established orange, cyan, purple and amber logo colors. Contact marks retain their existing brand tints. GitHub supplies the surrounding page theme and native text colors.
+Transparent technology modules expose the surrounding GitHub canvas. Cyan identifies Frontend, orange Backend, stack amber Database, and lavender Tools. Orange identifies the BS Computer Science title and cyan the NC III Web Development title. Logo geometry and available brand colors come from the attributed local Devicon sources, with the retained generator's flat rendering and display tints. Contact marks retain their existing brand tints. GitHub supplies the surrounding page theme and native text colors.
 
 ## Typography
 
-Silkscreen is the build-time source for banner lettering, licensed under SIL OFL. The generator converts bitmap glyph runs into SVG paths. No browser font download is required. Token sizes are generator input sizes in each SVG's coordinate system; displayed letters scale with the image width.
+Silkscreen is the build-time source for pixel lettering, licensed under SIL OFL. The generators use Pillow and the local font to convert bitmap glyph runs into SVG paths. Shipped SVG outputs embed no fonts, images or filters and make no network requests. Token sizes are generator input sizes in each SVG's coordinate system; banner lettering scales with the image width, while technology modules retain their declared dimensions.
 
 The desktop name uses 48px input type. Mobile splits HABIB and JAUDIAN D. into two lines at 48px and 40px. The cyan identity subtitle uses 22px. CONNECT uses 36px; the two-line invitation uses 18px. Native GitHub headings, samp labels and prose retain the platform's actual typography.
 
+Technology labels use the technology-label role, centered beneath each logo. Group headings use the group-heading role in transparent canvases with four group accents. Qualification titles use the first-line and second-line roles in two-line compositions. School and provider names remain native selectable prose.
+
 ## Layout
 
-README.md uses a single column. Its sequence is the hero, About, Tech Stack, Education, Connection and centered contacts. Twelve badges wrap within four technology groups. The education table contains two rows and two columns.
+README.md uses a single column. Its sequence is the hero, About, Tech Stack, Education, Connection and centered contacts. Twelve fixed-size technology modules wrap independently within Frontend, Backend, Database and Tools paragraphs. Five Frontend modules and four Tools modules fit their desktop rows. Verified 320px and 375px captures show two columns without shrinking the logos or labels. Education uses two stacked qualification blocks, each followed by its native school or provider paragraph.
 
 Picture sources select the mobile SVGs at a viewport width of 640px or below. Desktop hero and connection viewBoxes are 1200 x 340 and 1200 x 220. Mobile variants are 600 x 360 and 600 x 240. The images fill the available README width. GitHub determines outer spacing and native section margins.
 
@@ -126,13 +178,13 @@ The name and subtitle sit in the dark left field. Orange occupies the right fiel
 
 Supported HTML headings and prose carry the profile facts. GitHub owns their appearance and link states. No custom README stylesheet or standalone browser page is needed.
 
-### Technology badges
+### Technology groups and modules
 
-Twelve Shields.io images use the service's for-the-badge format in Frontend, Backend, Database and Tools groups. Java and VS Code are text-only badges. Images carry meaningful alternatives.
+Local transparent SVG modules pair a centered logo viewport with an outlined pixel label. All twelve technologies have logos, including Java and VS Code. Logo viewports start at x=40, y=10 within each module; labels begin at y=72. Supported h3 elements contain local group-title SVGs; paragraph elements contain the fixed-size modules with meaningful alternatives. The open groups wrap through GitHub's native inline image layout, with no enclosing panel or custom README stylesheet.
 
-### Education table
+### Qualification blocks
 
-Two rows pair BS Computer Science with Quezon City University, and NC III Web Development with TESDA. Content wraps naturally on narrow screens.
+Two transparent title SVGs precede selectable school and provider prose. The orange title reads BS COMPUTER / SCIENCE; the cyan title reads NC III / WEB DEVELOPMENT. Their two outlined lines start at y=4 and y=30. The following paragraphs read Quezon City University and TESDA. Meaningful image alternatives carry the complete qualification names; no dates, proficiency or graduation claims are added.
 
 ### Connection banner and contacts
 
@@ -143,6 +195,8 @@ An asymmetric blue modular square edge occupies the left; cyan CONNECT and ink i
 - Do keep each banner self-contained with outlined lettering and meaningful alternatives.
 - Do preserve the supplied abstract square compositions and separate mobile layouts.
 - Do keep profile facts as native selectable prose.
+- Do keep technology modules at their declared dimensions and let each group wrap independently.
+- Do retain attributed brand geometry and outlined pixel labels in transparent self-contained SVGs.
 - Do keep decorative motion independent from content visibility and respect reduced motion.
 - Don't introduce emojis or generated scene artwork.
 - Don't restore the cat, Featured Work, missing placeholders or Pages links to this profile.
