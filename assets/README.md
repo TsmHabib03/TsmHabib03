@@ -1,54 +1,46 @@
 # Profile assets
 
-The profile uses a **Tokyo at Night** pixel-art identity: midnight indigo, muted blue buildings, pale lettering and windows, a lavender moon and cat rim light, cyan qualification text, and sparse warm lights. Displayed artwork is stored in this repository as self-contained SVG geometry.
+## Current README
 
-## Profile artwork
+The profile uses one user-supplied static black-cat city banner, twelve Shields.io technology badges, and four local contact marks. GitHub provides the surrounding page styles and native text. The approved composition and verification limits are recorded in [DESIGN.md](../DESIGN.md).
 
-Regenerate the 28 assets referenced by the current README:
+| Asset | Source and display | Provenance |
+| --- | --- | --- |
+| `readme/night-city-cat.jpg` | 736 ? 414 JPEG; full available column width | User-supplied `0ae95a03469fe58971c9c2577579e7d9.jpg`; decoded pixels unchanged; JPEG origin comment added |
+| Shields.io badges | Twelve external SVG badges; service-standard 28px height | HTML, CSS, JavaScript, Tailwind CSS, Bootstrap, PHP, Java, MySQL, Git, GitHub, Docker, VS Code |
+| `marks/portfolio.svg`, `marks/email.svg` | Local 28 ? 28 source canvas; displayed at 32px | Authored pixel geometry |
+| `marks/github.svg` | Local 28 ? 28 source canvas; displayed at 32px | Devicon source, established display tint |
+| `icons/linkedin.svg` | Local source icon; displayed at 32px | Devicon source |
+
+The banner is an existing image, not generated artwork. Its creator was not identified by the supplied source. Shipping SHA-256: `2652e77fadd3a4644d84628418c970e15a59bddd3b86a56c5b15614fb8a8ff5b`. Its provenance is recorded in the JPEG comment and in [readme/provenance.json](readme/provenance.json).
+
+Badge backgrounds use `#1A1B26`; frontend logos use `#7AA2F7`, backend `#BB9AF7`, database `#7DCFFF`, and tools `#C0CAF5`. Java and VS Code have text-only badges. Local contact icons are decorative beside native linked labels. Two short centered contact rows fit narrow screens, with nonbreaking spaces joining icons and labels.
+
+GitHub Markdown API-sanitized HTML was rendered locally at 320px, 375px, and 1280px. The checks cover image loading, wrapping, keyboard focus, and no page/table overflow. Twelve badge responses were retrieved successfully. These are local preview checks, not evidence that this README version has been published. Ignored review evidence lives in `.impeccable/review/simple-black-cat/`.
+
+## Retained SVG artwork
+
+Earlier calico heroes, three-cat Connect panoramas, section banners, project strips, footers, accents, and labeled technology/social assets remain available. They are unreferenced by the current README. The Python standard-library generator preserves their deterministic geometry and motion fallbacks.
 
 ```sh
 python scripts/generate-profile-assets.py --profile-only
 ```
 
-The generator uses the Python standard library. Current scene colors live in `ROOFTOP_NIGHT` and shared fur colors in `CAT_COATS` in `scripts/profile_theme.py`; shared rooftop, skyline, moon, cat, tail, and window geometry live in `scripts/pixel_city.py`. Layout, bitmap lettering, and compact brand marks live in `scripts/generate-profile-assets.py`. The legacy `AFTER_HOURS` palette and city/rail/train helpers remain intact for older artwork and authored compact marks.
-
-| Asset family | Desktop | Mobile | Editions |
-| --- | --- | --- | --- |
-| `hero.svg` / `hero-mobile.svg` | 1200 × 280 | 600 × 464 | Animated and `-still.svg` |
-| `section-connect.svg` and mobile equivalents | 1200 × 200 | 600 × 200 | Animated and `-still.svg` |
-| `marks/*.svg` | 28 × 28 source canvas | Same source | 20 compact brand/contact marks |
-
-The current hero has no train. Its name and qualification remain stationary above a three-layer indigo city. A lavender stepped crater moon, pixel clouds, dense cool window patterns, and a large seated back-view calico frame a raised building roof with coping, deck seams, and a windowed façade. Only Connect has a second panorama, with black, orange, and calico cats seated together on one roof. About Me, Current Focus, Tech Stack, and Featured Projects contain no pixel-art illustrations. All scenes share the palette and geometry helpers while using fixed seeds and deliberate section compositions.
-
-Only the cat tail and selected window lights animate. Four tail groups switch visibility with `steps(1,end)` during a 14-second cycle, resting for most of the loop. Sparse windows briefly dim from opacity 1 to 0.22 during staggered 11-, 17-, and 23-second cycles. Lamps remain within their building layers so nearer architecture still occludes them. The name, city, moon, and clouds do not move.
-
-All scene geometry uses integer coordinates and crisp edges, with no gradients, filters, external fonts, scripts, or image dependencies. Fixed local random seeds make generation deterministic. Desktop and mobile scenes are separately composed rather than relying on cropping.
-
-Marks display at 40px beside technology names, 36px beside contact labels, or 18px beside project descriptions. Compact technology rows wrap naturally; six contact rows keep destinations accessible, with the email address below its label. Brand marks retain source colors or established display tints; they do not all use the rooftop palette. Names and links remain native text, and the hero and Connect alternatives describe their city/cat scenes. The compact PHP, Bootstrap, and VS Code marks flatten source gradients and remove filters while retaining upstream geometry. Raw inputs, legacy labeled icons, and their attribution are preserved.
-
-The README's `<picture>` selects mobile at viewport widths up to 600px and animation-free variants for reduced-motion preference. Animated SVGs also include an internal reduced-motion query. Explicit visibility attributes show only the resting tail when CSS is unavailable, and windows stay illuminated. Static editions preserve complete scene geometry without an animation stylesheet.
-
-Local Chromium previews were checked at 320px, 375px, and 1280px, including source selection, image loading, page overflow, tail visibility, window opacity, and static/reduced-motion fallbacks. The published GitHub profile was also inspected at those widths: scenes loaded, mobile/static sources selected correctly, larger marks rendered, and no horizontal overflow occurred. Detailed tail timing, window opacity, and CSS-unavailable behavior were verified locally. GitHub owns surrounding typography, icon alignment, page colors, and image caching; profile text and links stay native outside the artwork.
-
-To regenerate only the four hero variants:
+This regenerates the retained 28-asset set: four heroes, four Connect variants, and twenty compact marks. It does not generate the current JPEG or external badges. Current README contact marks are included in that retained set. The `ROOFTOP_NIGHT` and `CAT_COATS` palettes live in `scripts/profile_theme.py`; rooftop and motion geometry live in `scripts/pixel_city.py`. Legacy `AFTER_HOURS` and train helpers remain available.
 
 ```sh
 python scripts/generate-profile-assets.py --hero-only
 ```
 
-Unreferenced middle-section panoramas, older project strips, footer, labeled tech/social assets, and three small accents remain supported for compatibility but are no longer referenced by the profile. The full command regenerates those assets as well as the current profile; use it only when those legacy outputs need regeneration:
+This regenerates only the four legacy hero variants. The full command also regenerates older section, project, footer, accent, and labeled assets:
 
 ```sh
 python scripts/generate-profile-assets.py
 ```
 
-Run profile generation, reference, and animation contract tests:
+Animated rooftop editions retain a 14-second discrete tail cycle and sparse 11-, 17-, and 23-second window cycles. Reduced-motion styles freeze them. Explicit visibility attributes provide resting tails when CSS is unavailable, and static editions contain no animation stylesheet. None of these animated scenes is referenced by the current README.
 
-```sh
-python -m unittest discover -s tests -p test_profile_assets.py -v
-```
-
-Run all available tests, including contribution integrity:
+Run current README reference checks, retained generation/motion checks, and contribution integrity tests:
 
 ```sh
 python -m unittest discover -s tests -v
@@ -64,7 +56,7 @@ The official GitHub GraphQL `contributionCalendar` supplies actual daily counts,
 - `assets/github-activity-mobile.svg`: the same full year split into two chronological calendar blocks.
 - `assets/activity-data.json`: the verified source snapshot used for both images.
 
-A muted pixel skyline sits behind the activity scene; opaque navy beneath the calendar keeps decorative windows separate from actual contribution cells. To redraw the saved snapshot after an artwork change without calling GitHub or changing its dates:
+The calendar uses the established navy frame and five discrete contribution levels. To redraw the saved snapshot after an artwork change without calling GitHub or changing its dates:
 
 ```sh
 python scripts/update_activity.py --render-snapshot

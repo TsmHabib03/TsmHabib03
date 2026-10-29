@@ -1,4 +1,4 @@
-"""Profile contracts: deterministic rooftop assets and complete motion fallbacks."""
+"""Current README references and retained deterministic artwork contracts."""
 import importlib.util
 from pathlib import Path
 import re
@@ -56,26 +56,33 @@ class HeroContracts(unittest.TestCase):
 
     def test_readme_structure_and_asset_references(self):
         source = (ROOT / "README.md").read_text(encoding="utf-8")
-        self.assertEqual(re.findall(r"^## (.+)$", source, re.M), ["About Me", "Current Focus", "Tech Stack", "Featured Projects", "Connect"])
-        self.assertNotIn("project-", source)
+        self.assertEqual(re.findall(r"^## (.+)$", source, re.M), ["About", "Tech Stack", "Education", "Contact"])
+        self.assertNotRegex(source, r"Featured|assets/(?:hero|section-|project-|pixel-cat)|<style|\sstyle=|<script")
         for path in re.findall(r'(?:src|srcset)="([^"]+)"', source):
-            self.assertTrue((ROOT / path).is_file(), path)
-        self.assertIn("hero-mobile-still.svg", source)
-        self.assertIn("hero-still.svg", source)
-        self.assertEqual(source.count('<picture>'),2)
-        for section in ('about','focus','stack','projects'):
-            self.assertNotIn(f'section-{section}',source)
-        stack = source.split('## Tech Stack')[1].split('## Featured Projects')[0]
-        self.assertEqual(stack.count('width="40" height="40"'),15)
-        connect = source.split('## Connect')[1]
-        self.assertEqual(connect.count('width="36" height="36"'),6)
+            if path.startswith("https://"):
+                self.assertTrue(path.startswith("https://img.shields.io/badge/"), path)
+            else:
+                self.assertTrue((ROOT / path).is_file(), path)
+        self.assertEqual(source.count('src="assets/readme/night-city-cat.jpg"'), 1)
+        self.assertEqual(source.count('<table align="center">'), 1)
+        stack = source.split('## Tech Stack')[1].split('## Education')[0]
+        self.assertEqual(re.findall(r"^### (.+)$", stack, re.M), ["Frontend", "Backend", "Database", "Tools"])
+        self.assertEqual(re.findall(r'alt="([^"]+)"', stack), [
+            "HTML", "CSS", "JavaScript", "Tailwind CSS", "Bootstrap", "PHP", "Java",
+            "MySQL", "Git", "GitHub", "Docker", "VS Code",
+        ])
+        contact = source.split('## Contact')[1]
+        self.assertEqual(contact.count('width="32" height="32"'), 4)
+        self.assertEqual(contact.count('alt="">&nbsp;'), 4)
+        self.assertIn('https://www.linkedin.com/in/habib-jaudian-661a9a424/', contact)
 
-    def test_profile_assets_match_references_and_are_self_contained(self):
+    def test_retained_profile_assets_are_self_contained(self):
         outputs = profile.profile_assets()
         self.assertEqual(outputs, profile.profile_assets())
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         references = set(re.findall(r'(?:src|srcset)="assets/([^"]+)"', readme))
-        self.assertEqual(references, set(outputs))
+        self.assertEqual(references, {"readme/night-city-cat.jpg", "marks/portfolio.svg",
+                                      "marks/github.svg", "icons/linkedin.svg", "marks/email.svg"})
         for name, source in outputs.items():
             with self.subTest(asset=name):
                 root = ET.fromstring(source)

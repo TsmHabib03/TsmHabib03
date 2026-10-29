@@ -1,0 +1,14 @@
+{
+  "asset": "night-city-cat.jpg",
+  "origin": "user-supplied image",
+  "source_filename": "0ae95a03469fe58971c9c2577579e7d9.jpg",
+  "source_sha256": "14513d1b7db936bb0c65b7f30170df2ebcf1df79edf49cef8d38ddc129894acc",
+  "shipping_sha256": "2652e77fadd3a4644d84628418c970e15a59bddd3b86a56c5b15614fb8a8ff5b",
+  "dimensions": [
+    736,
+    414
+  ],
+  "processing": "Added a JPEG provenance comment; decoded pixels unchanged; no recompression or generated artwork.",
+  "creator": null,
+  "creator_note": "No creator attribution was supplied."
+}

@@ -1,3 +1,5 @@
+> Archived direction. The current profile contract is [readme-md.md](readme-md.md); its black-cat correction supersedes this earlier train composition.
+
 # README surface brief
 
 Target: README.md. Mode: Read with an Experience-led pixel-art hero.

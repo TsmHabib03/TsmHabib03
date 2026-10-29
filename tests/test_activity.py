@@ -40,6 +40,33 @@ class CalendarIntegrity(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "total"):
             activity.normalize_calendar(self.calendar, self.today)
 
+    def test_accepts_github_calendar_with_complete_week_padding(self):
+        # Reproduces the 371-date response that broke the daily workflow.
+        start, end = date(2025, 9, 28), date(2026, 10, 3)
+        days = [{"date": (start + timedelta(days=i)).isoformat(),
+                 "contributionCount": 1, "contributionLevel": "FIRST_QUARTILE"}
+                for i in range((end - start).days + 1)]
+        calendar = {"totalContributions": len(days),
+                    "weeks": [{"contributionDays": days[i:i+7]} for i in range(0, len(days), 7)]}
+        data = activity.normalize_calendar(calendar, end)
+        data.update(username="fixture", updated=end.isoformat())
+        self.assertEqual(data["total"], 371)
+        for mobile in (False, True):
+            root = ET.fromstring(activity.render_activity(data, mobile))
+            cells = root.findall(".//{http://www.w3.org/2000/svg}g/{http://www.w3.org/2000/svg}title")
+            self.assertEqual(len(cells), 371)
+        calendar["totalContributions"] += 1
+        with self.assertRaisesRegex(ValueError, "total"):
+            activity.normalize_calendar(calendar, end)
+
+    def test_rejects_dates_before_the_allowed_week_padding(self):
+        extra = {"date": "2024-12-25", "contributionCount": 0, "contributionLevel": "NONE"}
+        days = [dict(extra, date=(date(2024, 12, 25) + timedelta(days=i)).isoformat())
+                for i in range(7)]
+        self.calendar["weeks"].insert(0, {"contributionDays": days})
+        with self.assertRaisesRegex(ValueError, "week padding"):
+            activity.normalize_calendar(self.calendar, self.today)
+
     def test_rejects_missing_or_duplicate_day(self):
         self.calendar["weeks"][0]["contributionDays"][1] = deepcopy(self.calendar["weeks"][0]["contributionDays"][0])
         with self.assertRaisesRegex(ValueError, "duplicate or missing"):

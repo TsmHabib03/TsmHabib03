@@ -2,33 +2,36 @@
 version: 1
 slug: "readme-md"
 primary_target: "README.md"
-related_targets: ["scripts/generate-profile-assets.py","scripts/pixel_city.py","scripts/profile_theme.py","assets/hero.svg","assets/hero-mobile.svg","assets/section-connect.svg"]
+related_targets: ["assets/readme/night-city-cat.jpg"]
 ---
 
 # README surface brief
 
-Target: README.md. Mode: Read with an Experience-led pixel-art hero.
+Target: README.md. Mode: Read. The approved plan is executed with the user's correction: remove Featured Work because GitHub pins already provide project discovery, retain only the black cat, and simplify the page. This supersedes earlier calico and multi-cat artwork directions.
 
-Approved surface: Tokyo hero, About Me, Current Focus, Tech Stack, Featured Projects, Connect. Preserve confirmed BSCS student background and verified skills/project workflows. No age, phone number, invented learning priorities, project status, or achievements. Four concise project descriptions add context beyond pins; no repeated project banners or redundant activity graph.
+Content: HABIB JAUDIAN D.; BSCS · WEB DEVELOPER; a short intro and existing quick links; About with the supplied sentence and Quezon City University background; four Shields.io groups; BS Computer Science at QCU and NC III Web Development at TESDA; centered Portfolio, GitHub, LinkedIn, and Email contacts. LinkedIn was verified via the public GitHub social_accounts API: https://www.linkedin.com/in/habib-jaudian-661a9a424/.
 
-Hero: stationary HABIB JAUDIAN D. and BSCS · WEB DEVELOPER in quiet upper-left sky. Reference-inspired indigo city with three building layers, dense cool windows, a lavender stepped crater moon, large back-view calico with asymmetric ears, warm/dark patches and pale rim pixels, seated on a raised building roof with coping and a windowed façade. No train. Original SVG pixels interpret the reference composition without embedding or copying its raster image. No gradients, glow, or excessive neon.
+Assets: use the supplied 0ae95a03469fe58971c9c2577579e7d9.jpg as assets/readme/night-city-cat.jpg with its decoded pixels unchanged. The JPEG carries an added provenance comment. It contains the single dark black cat and indigo skyline. No image generation. The pale typing-cat reference is omitted to honor the latest black-cat-only correction. Remove all legacy cat illustration references from README.md; retain unreferenced files with existing in-progress changes.
 
-Native content: one column with illustrations only in the hero and Connect. About Me, Current Focus, Tech Stack, and Featured Projects have no pixel-art illustrations. Connect places black, orange, and calico cats together on one building roof. Four compact technology groups use 40px trustworthy SVG marks beside native names. Six aligned contact rows use 36px linked marks/labels; the email address sits below its label to fit narrow viewports. Contact links include the supplied Portfolio, GitHub, Facebook, Instagram, TikTok, and email destinations. GitHub owns host typography and link behavior.
+GitHub constraints: supported HTML and Markdown only; no custom CSS, scripts, generated SVGs, font overrides, fake terminal controls, or fabricated background-color attributes. Host typography, panel borders, and native inline-code styling form the identity panel. Shields use Tokyo Night colors. Native text and labeled links remain readable without image delivery.
 
-Variants: hero 1200 × 440 desktop and 600 × 464 mobile with two name lines. Connect is 1200 × 200 desktop and 600 × 200 mobile. Each scene has animated/static variants with shared geometry. Mobile selection applies at viewport widths up to 600px; reduced-motion sources precede animated selection.
-
-Motion: four tail visibility poses use a 14-second stepped cycle with a long resting period. Sparse windows briefly dim using staggered 11-, 17-, and 23-second cycles. Name, buildings, moon, and clouds stay stationary. Internal reduced-motion CSS disables both animated details; explicit visibility attributes and ordinary opacity provide a resting tail and lit windows when CSS is unavailable. Static sources have no animation stylesheet.
-
-Build path: reference-led replacement of the current scene through existing Python/SVG generators. ROOFTOP_NIGHT owns current scene colors and CAT_COATS owns shared fur colors; legacy AFTER_HOURS tokens and city/rail helpers remain intact. Current scope: 28 profile assets = 4 heroes + 4 Connect variants + 20 compact marks. Preserve existing full generation commands, legacy artwork, contribution data, and unrelated in-progress work. Regenerate with python scripts/generate-profile-assets.py --profile-only.
-
-Acceptance: inspect at 320px, 375px, and desktop; legible name/subtitle/native text, no page overflow or accidental cat clipping; correct source selection, one visible connected tail pose per cat, window dimming, useful CSS-unavailable/static/reduced-motion fallbacks; valid deterministic SVGs and exact local README asset coverage. Local Chromium evidence does not establish actual GitHub rendering.
+Acceptance: one black-cat banner; no project section or old cat assets referenced; one identity panel and four unnumbered content sections; all twelve requested technologies; supplied education and About facts; centered labeled contact links; no emoji; inspect 320px, 375px, and desktop for overflow, image loading, and text readability. Distinguish local preview from live GitHub evidence.
 
 ## Direction contract
 
-THESIS: A calico watches the moonlit city while native text introduces Habib and his real applications.
-OWN-WORLD: Midnight indigo, cool blue façades, pale windows, lavender moon/rim light, crisp stepped cat and rooftop geometry.
-STORY: Main scene -> personal context -> practical focus -> skills -> project evidence -> contacts.
-FIRST VIEWPORT: Fixed pale pixel name and cyan qualification in quiet upper-left sky; moon upper right; dense lower skyline; large seated calico on raised building roof.
-FORM: One column, main calico hero plus one three-cat Connect panorama; no middle-section illustrations; native headings/names/links and compact brand marks.
-MOTION: Four discrete tail poses, staggered sparse window dimming, no moving city/moon/clouds/type or synchronized flashes.
-FINISH: Scoped design documentation and local render review; live GitHub verification remains separate.
+THESIS: A single black cat overlooking a midnight city introduces a concise developer profile; pinned repositories supply the project evidence.
+
+OWN-WORLD: Indigo pixel skyline, lavender moon and window light, one unchanged black silhouette. Native GitHub borders and a centered identity panel frame readable text. Badge plates use #1A1B26 with #7AA2F7, #BB9AF7, #7DCFFF, and #C0CAF5 accents.
+
+STORY: City and name -> personal background -> practical tools -> education -> contact.
+
+FIRST VIEWPORT: Full-width 736 × 414 supplied city image at the top, followed by centered HABIB JAUDIAN D., a shaded native-code subtitle, one short intro, and three quick links. No added illustration or decorative cat.
+
+FORM: One column, a single HTML identity panel, native unnumbered section headings, wrapping badge rows, and centered labeled contact links. Two centered contact rows fit narrow screens; nonbreaking spaces join icons to labels. Code-led user-pinned execution of the confirmed plan; no concept tournament or generated comp. seed: none (user-pinned).
+
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+
+
+## Finish result
+
+PASS for local implementation: all 22 tests pass; GitHub-sanitized local previews at 320px, 375px, and 1280px load all 17 images with no page/table overflow. Two centered contact rows keep all icon-label pairs together. Image provenance and current design/product docs are complete. Evidence: .impeccable/review/simple-black-cat/finish-review.md and checks.json. Publication was not performed in this continuation.

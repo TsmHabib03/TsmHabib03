@@ -1,171 +1,67 @@
 ---
-name: Tokyo at Night
-description: Moonlit rooftop pixel-art identity for Habib's GitHub developer profile.
+name: Tokyo Night Profile
+description: A single black-cat city banner with a concise native GitHub profile.
 colors:
-  sky: "#11132C"
-  sky-low: "#191D3F"
-  distant: "#232D57"
-  mid: "#34477C"
-  front: "#465992"
-  edge: "#7182BC"
-  window: "#D5E5FF"
-  window-dim: "#7388BF"
-  warm: "#D5BC97"
-  moon: "#B9B5F4"
-  moon-light: "#D6D6FF"
-  moon-shade: "#898BD0"
-  cat: "#10152D"
-  cat-edge: "#A8ACF0"
-  cat-shade: "#1C2445"
-  ledge: "#202747"
-  rail: "#8387D4"
-  text: "#DCEBFF"
-  cyan: "#76C8EA"
-  orange-base: "#CE925C"
-  orange-shade: "#9D633F"
-  orange-rim: "#F1CEA0"
-  orange-patch: "#9D633F"
-  orange-ear: "#D6A1A0"
-  calico-base: "#E1DED7"
-  calico-shade: "#A7A4AE"
-  calico-rim: "#F5EDDF"
-  calico-patch: "#C88C57"
-  calico-dark: "#34364C"
-  calico-ear: "#D6A1A0"
-spacing:
-  lettering-inset: "32px"
+  badge-background: "#1A1B26"
+  frontend: "#7AA2F7"
+  backend: "#BB9AF7"
+  database: "#7DCFFF"
+  tools: "#C0CAF5"
 components:
-  hero-desktop:
-    backgroundColor: "{colors.sky}"
-    textColor: "{colors.text}"
-    width: "1200px"
-    height: "440px"
-  hero-mobile:
-    backgroundColor: "{colors.sky}"
-    textColor: "{colors.text}"
-    width: "600px"
-    height: "464px"
-  connect-desktop:
-    backgroundColor: "{colors.sky}"
-    width: "1200px"
-    height: "200px"
-  connect-mobile:
-    backgroundColor: "{colors.sky}"
-    width: "600px"
-    height: "200px"
+  banner:
+    width: "736px"
+    height: "414px"
+  technology-badge:
+    height: "28px"
+  contact-mark:
+    width: "32px"
+    height: "32px"
 ---
 
-# Design System: Tokyo at Night
+# Design System: Tokyo Night Profile
 
 ## Overview
 
-**Creative North Star: "Tokyo at Night"**
+One black cat watches a moonlit pixel city above a concise developer profile. The supplied image sets the midnight-blue and lavender atmosphere. A centered identity panel introduces Habib Jaudian D.; native About, Tech Stack, Education, and Contact sections carry the profile facts and destinations.
 
-A large back-view calico cat watches a moonlit indigo city from a pixel rooftop. Layered blue buildings, dense cool windows, a lavender stepped moon, and quiet pale lettering establish the identity. A curled tail occasionally changes pose, and a sparse subset of windows briefly dims; the architecture, moon, clouds, and name remain stationary.
+The current surface is [README.md](README.md), with its direction recorded in [.impeccable/surfaces/readme-md.md](.impeccable/surfaces/readme-md.md). Pinned GitHub repositories provide project discovery. This direction supersedes the earlier generated calico hero, three-cat Connect panorama, and Featured Projects section. Those assets and their generators remain available for compatibility.
 
-The system describes the current profile hero, a three-cat Connect panorama, and compact brand/contact marks. The reference image guides the composition and atmosphere; the artwork is original self-contained SVG geometry. GitHub owns surrounding Markdown typography, spacing, link states, and page colors. The scoped `ROOFTOP_NIGHT` dictionary in `scripts/profile_theme.py` owns current scene colors; `CAT_COATS` owns shared black, orange, and calico fur colors. Legacy `AFTER_HOURS` tokens, city/rail helpers, and older artwork remain available with their existing behavior; compact marks retain source colors or established display tints.
+GitHub owns the page background, typography, table border, spacing, and link states. The README uses supported HTML and Markdown, with no custom stylesheet, scripts, font overrides, or fabricated background attributes.
 
-**Key Characteristics:**
+## Artwork and provenance
 
-- Crisp bitmap lettering and integer scene geometry.
-- Three tonal city layers with cool window patterns and sparse warm lights.
-- Seated cats with asymmetric ears, coat-specific rim pixels, warm orange stripes or calico patches, and four discrete tail poses.
-- A stepped crater moon and raised building roofs with coping, deck seams, and windowed façades.
-- Complete static artwork beside native profile content and functional links.
+The only scene referenced by the README is [assets/readme/night-city-cat.jpg](assets/readme/night-city-cat.jpg), a 736 × 414 JPEG supplied by the user as 0ae95a03469fe58971c9c2577579e7d9.jpg. It shows one dark cat, an indigo skyline, and a lavender moon. No artwork was generated or visually edited; decoded pixels match the supplied source. A JPEG comment records its origin without recompressing the image. No creator attribution was supplied.
 
-## Colors
+Source SHA-256: 14513d1b7db936bb0c65b7f30170df2ebcf1df79edf49cef8d38ddc129894acc.
 
-The palette runs from midnight indigo through muted blue façades to pale windows and lavender moonlight. The frontmatter records the exact values from `ROOFTOP_NIGHT`.
+Shipping SHA-256: 2652e77fadd3a4644d84628418c970e15a59bddd3b86a56c5b15614fb8a8ff5b.
 
-### Primary
+The banner displays at the available column width and retains its 16:9 composition. It is static at every viewport, including reduced-motion settings. Its alternative describes the black cat and moonlit city; the person's name and qualification remain native text below the image.
 
-**Cyan** carries the qualification subtitle. **Text** carries the prominent name, keeping the identity distinct from the detailed lower city.
+## Color and typography
 
-### Secondary
+Shields.io technology badges use a #1A1B26 background with #7AA2F7 frontend, #BB9AF7 backend, #7DCFFF database, and #C0CAF5 tools logo accents. White labels retain the service's standard rendering. Java and VS Code use text-only badges. The artwork itself retains the supplied colors.
 
-**Moon**, **moon-light**, and **moon-shade** form the stepped lunar disc and crater pixels. **Cat-edge** gives the black silhouette a narrow lavender rim rather than a glow. Orange and calico coats use their own pale rim colors, shaded fur, ear interiors, and restrained warm patches from `CAT_COATS`; the frontmatter records those exact shared colors.
+The name is a native H1, and BSCS · WEB DEVELOPER uses native inline code. Section and technology-group headings use H2 and H3. Body text and linked labels use GitHub's regular font. Text remains selectable, readable, and useful when artwork or badges do not load.
 
-### Tertiary
+## Layout and content
 
-**Warm** appears in a small share of illuminated windows. The dominant window character remains cool.
+The profile has one column. A full-width banner comes first, followed by a centered single-cell HTML table containing the name, qualification, short introduction, and Portfolio, Repositories, and Email links. The identity wraps naturally on narrow screens.
 
-### Neutral
+About contains the supplied sentence “Building useful software, one project at a time.” and the Computer Science background at Quezon City University. Tech Stack has four unnumbered groups: Frontend (HTML, CSS, JavaScript, Tailwind CSS, Bootstrap), Backend (PHP, Java), Database (MySQL), and Tools (Git, GitHub, Docker, VS Code). Badge rows wrap through normal inline layout.
 
-**Sky** and **sky-low** define two flat sky tones. **Distant**, **mid**, and **front** separate building depth; **edge** is the shared scene-detail token. **Window** and **window-dim** provide readable architectural patterns. **Cat** and **cat-shade** define the silhouette, body details, and cast pixel shadow. **Ledge** and **rail** separate the foreground rooftop from the city.
+Education records BS Computer Science at Quezon City University and NC III Web Development at TESDA. Contact uses centered, individually linked Portfolio, GitHub, LinkedIn, and Email labels with 32px local marks. Two short centered rows fit narrow screens; nonbreaking spaces join each icon to its label. Decorative contact marks have empty alternatives because their adjacent labels name each destination.
 
-These illustration colors do not recolor every technology logo. The portfolio/email marks use the established authored pixel geometry and legacy palette; other compact marks preserve trustworthy upstream silhouettes and display tints.
+The LinkedIn destination is the owner-listed https://www.linkedin.com/in/habib-jaudian-661a9a424/. No achievements, employers, adoption claims, or additional learning priorities are inferred.
 
-## Typography
+## Verification
 
-Hero lettering is authored geometry from `PIXEL_FONT` in `scripts/generate-profile-assets.py`, with no CSS font or external font file. Most uppercase glyphs use five columns and five rows; punctuation and spaces have their own widths.
+GitHub's Markdown API sanitized the current composition; that returned HTML was rendered locally with the open-source github-markdown-css stylesheet. Checks cover 320px, 375px, and 1280px widths, loaded images, readable wrapping, accessible linked labels, and page/table overflow. The twelve Shields.io responses were also retrieved successfully. The finish report and screenshots are in the ignored .impeccable/review/simple-black-cat/ directory.
 
-The desktop name uses 10px cells, producing 50px-high glyphs at source scale. Mobile uses 9px cells and two name lines, producing 45px-high glyphs. The `BSCS · WEB DEVELOPER` subtitle uses 3px cells on desktop and 4px cells on mobile, producing 15px and 20px-high glyphs. These dimensions are SVG source units and scale with the displayed image.
+This verifies a local preview of GitHub-sanitized HTML. It does not establish that this version has been published to the live GitHub profile. GitHub controls its final styling and image caching.
 
-GitHub provides native heading, paragraph, list, and link typography. Background, project context, skill names, and destinations stay in Markdown; decorative scene banners contain no factual section text.
+## Retained generators
 
-## Layout
+The Python artwork tools remain available for earlier SVG scenes and compact marks. The --profile-only option of scripts/generate-profile-assets.py produces the retained set of 28 rooftop assets and icons; it does not generate the supplied JPEG or technology badges. The --hero-only option produces the four legacy heroes, and the full command also generates older sections, project strips, footers, accents, and labeled icons.
 
-Desktop hero artwork is 1200 × 440; mobile is independently composed at 600 × 464. Both start lettering 32 source units from the left. Desktop places the name at y=36 and subtitle at y=104. Mobile places `HABIB` at y=32, `JAUDIAN D.` at y=98, and the subtitle at y=160.
-
-The quiet upper-left sky carries the identity, with the moon at upper right and a large calico seated on a raised foreground building roof. The flat lower-sky band begins at y=142 on desktop and y=208 on mobile. Mobile recomposes the scene and type rather than cropping the desktop source.
-
-Only Connect has a second panorama: 1200 × 200 desktop and 600 × 200 mobile. Black, orange, and calico cats share one raised rooftop. About Me, Current Focus, Tech Stack, and Featured Projects use native text without illustrations. Fixed seeds and shared geometry preserve the city identity across the two scenes. The current README composition lives in `.impeccable/surfaces/readme-md.md`.
-
-The README selects mobile sources at viewport widths up to 600px, after reduced-motion sources. Technology marks display at 40px in four compact labeled groups; contact marks display at 36px beside six linked labels, and project marks remain 18px. Short rows wrap naturally at narrow widths; the email address sits below its linked label. Full-width images adapt to the available host column. Local Chromium previews and the published GitHub profile were inspected at 320px, 375px, and 1280px. Live checks confirmed loaded scenes, mobile/static source selection, larger marks, and no horizontal overflow. Detailed animation timing and CSS-unavailable behavior were verified locally.
-
-## Elevation & Depth
-
-Depth comes from flat tonal layering, architecture occluding distant windows, and the foreground cat and rooftop ledge. Animated lamps remain inside their city layers so nearer buildings still cover them. The cat uses a stepped solid-color shadow, rather than a blurred effect. Current scenes contain no gradients, filters, glow, or atmospheric blur.
-
-## Shapes
-
-Scene geometry uses integer rectangles batched into same-color paths with `shape-rendering="crispEdges"`. The current outer artwork is rectangular. Buildings, cloud steps, moon craters, asymmetric cat ears, tail segments, and checkered parapet edges share hard pixel geometry.
-
-The moon spans 24 stepped rows: 4px cells on desktop, 3px on mobile, and 2px in section panoramas. The cat silhouette is 48 cells high: 3px cells in heroes and 2px in Connect. Hero paws sit 60 source units above the scene bottom; Connect paws sit 44 units above it. Tail and shadow geometry extend onto the roof deck. The Connect trio uses 110-unit spacing on a shared 400-unit roof; hero roof widths are 340 desktop and 284 mobile.
-
-At arbitrary browser widths, source coordinates may map to fractional device pixels. Crisp-edge rendering preserves the intended hard-edged character; it does not guarantee a one-to-one source/device pixel grid.
-
-## Components
-
-### Rooftop hero
-
-Four variants share the scene helper, palette, bitmap font, and tail/light model. Desktop and mobile each have animated and animation-free `-still.svg` editions. The name remains `HABIB JAUDIAN D.` and the subtitle remains `BSCS · WEB DEVELOPER`. The current hero contains no train.
-
-The README's `<picture>` selects reduced-motion still sources before standard mobile selection. Animated SVGs also contain an internal reduced-motion query. The hero image alternative identifies Habib, the qualification, and the moonlit city/cat scene.
-
-### Cat tail and window lights
-
-Four tail groups switch visibility using `steps(1,end)` in a 14-second cycle. The tail rests for most of the cycle, then briefly switches among rise, curl, and return poses before returning to rest. Exactly one pose per cat is visible at a time; there is no smooth rotation of pixel geometry.
-
-A few windows use staggered 11-, 17-, and 23-second cycles with delays of −3, −9, and −15 seconds. Their opacity briefly drops from 1 to 0.22, then returns. Most windows remain stationary, avoiding synchronized whole-scene flashing.
-
-Reduced motion disables tail and window animations. With CSS unavailable, visibility attributes show only the resting tail and all windows remain illuminated. Static editions contain no animation stylesheet and preserve the same complete scene.
-
-### Connect panorama
-
-Connect uses four variants: animated/static × desktop/mobile. Three distinct coats share the same seated silhouette, connected tail geometry, and rooftop. Its image alternative describes the cats; native linked labels communicate the contact destinations. The four middle sections have no panorama references. Legacy section assets and full-generation support remain available for compatibility.
-
-### Compact marks
-
-The current output set contains 28 SVGs: four heroes, four Connect variants, and 20 transparent 28 × 28 brand/contact marks. Inputs from Devicon and Simple Icons are attributed in `assets/README.md`; portfolio and email marks are authored geometry. Compact PHP, Bootstrap, and VS Code marks flatten source gradients and remove filters while retaining upstream silhouettes. Raw inputs and legacy labeled assets remain intact.
-
-### Native text and links
-
-Markdown headings, paragraphs, lists, project links, and the six supplied contact links use GitHub's native rendering and interaction states. Embedded SVGs supply no custom interactive controls. Contribution graphics are omitted because GitHub already displays contribution activity; their generation and data remain available.
-
-## Do's and Don'ts
-
-### Do
-
-- Do change scene colors through `ROOFTOP_NIGHT` and shared fur colors through `CAT_COATS`.
-- Do preserve the resting cat and illuminated city in static and reduced-motion alternatives.
-- Do keep profile facts, technology names, and destinations in native Markdown.
-- Do regenerate current README artwork with `python scripts/generate-profile-assets.py --profile-only`; `--hero-only` remains available for the four heroes.
-
-### Don't
-
-- Don't animate the name, buildings, moon, or clouds.
-- Don't add a train to the current rooftop scene.
-- Don't add gradients, glow, excessive neon, or external image/font dependencies to current scenes.
-- Don't change legacy tokens or artwork as a side effect of current profile edits.
-- Don't claim live GitHub compatibility from local browser screenshots.
+Contribution images and their refresh workflow remain optional and unreferenced by the README. They use verified GitHub data and display snapshot dates. Run python -m unittest discover -s tests -v to check current README references, retained artwork contracts, and contribution integrity. Asset provenance and regeneration commands are documented in [assets/README.md](assets/README.md).

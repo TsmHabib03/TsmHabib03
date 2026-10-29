@@ -270,7 +270,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     scope = parser.add_mutually_exclusive_group()
     scope.add_argument("--hero-only", action="store_true", help="Regenerate only the four Tokyo hero variants")
-    scope.add_argument("--profile-only", action="store_true", help="Regenerate only artwork and icons used by README.md")
+    scope.add_argument("--profile-only", action="store_true", help="Regenerate the retained rooftop artwork and compact icons")
     args = parser.parse_args()
     outputs = profile_assets() if args.profile_only else generate_assets(hero_only=args.hero_only)
     write_assets(outputs)
