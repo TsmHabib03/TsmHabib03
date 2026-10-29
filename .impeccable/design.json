@@ -1,112 +1,78 @@
 {
   "schemaVersion": 2,
   "generatedAt": "2026-10-29",
-  "title": "Design System: Orange Pixel Profile",
+  "title": "Design System: Abstract Pixel GitHub Profile",
   "extensions": {
     "typographyMeta": {
       "display": {
-        "displayName": "Pixel display",
-        "purpose": "Self-hosted Silkscreen hero lettering."
+        "displayName": "Pixel name",
+        "purpose": "Silkscreen outlined into SVG paths at build time; displayed size follows SVG scaling."
       },
-      "body": {
-        "displayName": "Readable prose",
-        "purpose": "Project descriptions and profile facts."
+      "identity": {
+        "displayName": "Pixel identity",
+        "purpose": "Cyan student and developer subtitle."
       },
-      "label": {
-        "displayName": "Pixel labels",
-        "purpose": "12px navigation, tags, and motion controls."
+      "connection": {
+        "displayName": "Connection",
+        "purpose": "Cyan connection invitation heading."
+      },
+      "caption": {
+        "displayName": "Pixel caption",
+        "purpose": "Two-line closing invitation."
       }
     },
     "shadows": [],
     "motion": [
       {
-        "name": "hero-ease",
-        "value": "cubic-bezier(.16, 1, .3, 1)",
-        "purpose": "Banner hover and focus treatment."
-      },
-      {
-        "name": "hero-transition",
-        "value": "700ms",
-        "purpose": "Opacity and filter transitions."
-      },
-      {
-        "name": "pixel-drift",
-        "value": "10s steps(6, end) infinite alternate",
-        "purpose": "Selected image translation from 0 to 12px."
-      },
-      {
-        "name": "pixel-dissolve",
-        "value": "8s ease-in-out infinite alternate",
-        "purpose": "Selected opacity and saturation cycle."
+        "name": "pixel-shift",
+        "value": "9s ease-in-out infinite alternate",
+        "purpose": "Sparse decorative squares change opacity from .7 to 1 and translate vertically from 0 to 6px. Reduced-motion disables animation; all lettering remains static."
       }
     ],
     "breakpoints": [
       {
-        "name": "mobile",
+        "name": "mobile-picture",
         "value": "640px"
       }
     ]
   },
   "components": [
     {
-      "name": "Project action",
-      "kind": "button",
-      "refersTo": "action",
-      "description": "Primary project discovery anchor.",
-      "html": "<a class=\"ds-action\" href=\"#work\">Explore projects &gt;</a>",
-      "css": ".ds-action{display:inline-flex;gap:28px;padding:13px 16px;background:var(--orange,#ff9d38);color:var(--ground,#0d1117);font-family:Silkscreen,monospace;font-size:.75rem;text-decoration:none}.ds-action:hover{background:#ffc078}.ds-action:focus-visible{outline:2px solid var(--cyan,#76d8f0);outline-offset:5px}"
+      "name": "Abstract square geometry",
+      "kind": "custom",
+      "description": "Flat orange squares form the identity banner's edge; geometry example uses the shipped fills and opacity.",
+      "html": "<svg class=\"ds-squares\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 240 120\" role=\"img\" aria-label=\"Orange square scatter\"><rect width=\"240\" height=\"120\" fill=\"#0d1117\"/><rect x=\"160\" width=\"80\" height=\"120\" fill=\"#ff8a00\"/><rect x=\"120\" y=\"0\" width=\"40\" height=\"40\" fill=\"#ffb02e\"/><rect x=\"80\" y=\"40\" width=\"40\" height=\"40\" fill=\"#ff6300\" opacity=\".45\"/><rect x=\"120\" y=\"80\" width=\"40\" height=\"40\" fill=\"#ffc65a\"/></svg>",
+      "css": ".ds-squares{display:block;width:100%;max-width:360px;height:auto}"
     },
     {
-      "name": "Project card",
-      "kind": "card",
-      "refersTo": "project-card",
-      "description": "Bordered project module with selectable content.",
-      "html": "<article class=\"ds-card\"><h3>QCU-Schedule</h3><p>Class schedules, tasks, notes, and Google Calendar integration.</p><a href=\"https://github.com/TsmHabib03/QCU-Schedule-Web-App\">View repository</a></article>",
-      "css": ".ds-card{padding:28px;background:var(--panel,#171c25);border:1px solid var(--line,#343c49);color:var(--muted,#afbccb);font-family:\"Segoe UI\",sans-serif}.ds-card h3{font:400 1.1rem/1.6 Silkscreen,monospace;color:var(--cyan,#76d8f0);margin:0 0 18px}.ds-card p{line-height:1.75;max-width:70ch}.ds-card a{color:var(--orange,#ff9d38);text-underline-offset:.3em}.ds-card a:hover{color:#ffc078}.ds-card a:focus-visible{outline:2px solid var(--cyan,#76d8f0);outline-offset:5px}"
-    },
-    {
-      "name": "Section navigation",
-      "kind": "nav",
-      "description": "Wrapped pixel navigation to the profile sections.",
-      "html": "<nav class=\"ds-nav\" aria-label=\"Profile sections\"><a href=\"#about\">02 / ABOUT</a><a href=\"#work\">03 / WORK</a><a href=\"#contact\">06 / CONTACT</a></nav>",
-      "css": ".ds-nav{display:flex;flex-wrap:wrap;gap:18px 24px;padding:24px 0;border-bottom:1px solid var(--line,#343c49);font:400 .75rem Silkscreen,monospace;color:var(--muted,#afbccb)}.ds-nav a{color:inherit;text-decoration:none}.ds-nav a:hover{color:var(--orange,#ff9d38)}.ds-nav a:focus-visible{outline:2px solid var(--cyan,#76d8f0);outline-offset:5px}"
-    },
-    {
-      "name": "Project tags",
-      "kind": "chip",
-      "description": "Noninteractive colored technology labels.",
-      "html": "<p class=\"ds-tags\"><span>PHP</span><span>MySQL</span></p>",
-      "css": ".ds-tags{display:flex;flex-wrap:wrap;gap:8px 16px;font:400 .75rem Silkscreen,monospace;color:var(--mint,#9ddcb5)}"
-    },
-    {
-      "name": "Motion choices",
-      "kind": "input",
-      "description": "Native radio choices for the banner motion.",
-      "html": "<fieldset class=\"ds-motion\"><legend>Banner motion</legend><label><input type=\"radio\" name=\"ds-motion\" checked> Pixel drift</label><label><input type=\"radio\" name=\"ds-motion\"> Soft dissolve</label><label><input type=\"radio\" name=\"ds-motion\"> Still</label></fieldset>",
-      "css": ".ds-motion{display:flex;flex-wrap:wrap;gap:12px 20px;border:0;padding:0;font:400 .75rem Silkscreen,monospace;color:var(--muted,#afbccb)}.ds-motion label{display:flex;align-items:center;gap:6px;min-height:24px;cursor:pointer}.ds-motion input{accent-color:var(--orange,#ff9d38)}.ds-motion input:focus-visible{outline:2px solid var(--cyan,#76d8f0);outline-offset:5px}"
+      "name": "Education rows",
+      "kind": "custom",
+      "description": "Native table with two rows of profile qualifications.",
+      "html": "<table class=\"ds-education\"><tbody><tr><td><strong>BS Computer Science</strong></td><td>Quezon City University</td></tr><tr><td><strong>NC III — Web Development</strong></td><td>TESDA</td></tr></tbody></table>",
+      "css": ".ds-education{border-collapse:collapse;color:inherit;font:inherit}.ds-education td{padding:6px 13px;border:1px solid #3d444d}"
     }
   ],
   "narrative": {
-    "northStar": "Orange pixel dossier",
-    "overview": "Charcoal surfaces and orange abstract pixels introduce Habib's work. Pixel lettering gives headings character; a regular body face keeps project descriptions readable. Cyan, lavender, amber, and mint distinguish content groups. The supplied city/cat scene anchors the footer.",
+    "northStar": "Abstract pixel frame",
+    "overview": "Orange scattering squares introduce Habib's identity. Blue and cyan modular squares close the profile with a connection invitation. Crisp pixel lettering carries both banners; GitHub's own headings and readable prose carry the information between them.\n\nThe full experience renders in README.md. The supplied references determine the abstract composition and asymmetry. Self-contained SVG geometry adapts their light fields to the requested dark theme without embedding or editing stock JPEGs.",
     "keyCharacteristics": [
-      "Dark tonal panels, thin borders, and square corners.",
-      "Orange pixel hero with native selectable text.",
-      "Pixel display lettering alongside readable prose.",
-      "Three banner motion variations with reduced-motion support.",
-      "Supplied city/cat at the bottom above four contact destinations."
+      "Orange square scatter beside the name.",
+      "Blue modular square edge beside the connection invitation.",
+      "Outlined pixel lettering with no remote font dependency.",
+      "One native GitHub column and naturally wrapping badges.",
+      "Separate mobile banner compositions."
     ],
     "rules": [],
     "dos": [
-      "Do keep facts selectable and project claims tied to verified sources.",
-      "Do retain supplied pixels and provenance; crop and blend through companion CSS.",
-      "Do keep pixel controls readable and support reduced motion.",
-      "Do disclose template inputs and distinguish local previews from published evidence."
+      "Do keep each banner self-contained with outlined lettering and meaningful alternatives.",
+      "Do preserve the supplied abstract square compositions and separate mobile layouts.",
+      "Do keep profile facts as native selectable prose.",
+      "Do keep decorative motion independent from content visibility and respect reduced motion."
     ],
     "donts": [
-      "Don't claim custom CSS or fonts work in GitHub README rendering.",
-      "Don't introduce emojis or generated scene artwork into this requested design.",
-      "Don't publish the raw template as complete while its banner and API destination remain unresolved."
+      "Don't introduce emojis or generated scene artwork.",
+      "Don't restore the cat, Featured Work, missing placeholders or Pages links to this profile.",
+      "Don't promise custom README CSS, fonts or hover controls that GitHub removes."
     ]
   }
 }

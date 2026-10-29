@@ -57,34 +57,34 @@ class HeroContracts(unittest.TestCase):
     def test_readme_structure_and_asset_references(self):
         source = (ROOT / "README.md").read_text(encoding="utf-8")
         self.assertEqual(re.findall(r"<h2><samp>(.+?)</samp></h2>", source), [
-            "01 / HERO", "02 / ABOUT", "03 / FEATURED WORK", "04 / TECH STACK", "05 / EDUCATION", "06 / CONTACT"])
+            "About", "Tech Stack", "Education", "Connection"])
         self.assertNotRegex(source, r"assets/(?:hero|section-|project-|pixel-cat)|<style|\sstyle=|<script")
         for path in re.findall(r'(?:src|srcset)="([^"]+)"', source):
             if path.startswith("https://"):
                 self.assertTrue(path.startswith("https://img.shields.io/badge/"), path)
             else:
-                if path != 'assets/readme/orange-pixel-banner.jpg':
-                    self.assertTrue((ROOT / path).is_file(), path)
-        self.assertEqual(source.count('src="assets/readme/night-city-cat.jpg"'), 1)
-        self.assertEqual(source.count('<table width="100%">'), 5)
-        stack = source.split('04 / TECH STACK')[1].split('05 / EDUCATION')[0]
+                self.assertTrue((ROOT / path).is_file(), path)
+        self.assertNotRegex(source, r'Featured Work|FEATURED WORK|night-city-cat|github\.io|placeholder|profile\.html')
+        self.assertEqual(source.count('<table>'), 1)
+        stack = source.split('<samp>Tech Stack</samp>')[1].split('<samp>Education</samp>')[0]
         self.assertEqual(re.findall(r"<h3>(.+?)</h3>", stack), ["Frontend", "Backend", "Database", "Tools"])
         self.assertEqual(re.findall(r'alt="([^"]+)"', stack), [
             "HTML", "CSS", "JavaScript", "Tailwind CSS", "Bootstrap", "PHP", "Java",
             "MySQL", "Git", "GitHub", "Docker", "VS Code",
         ])
-        contact = source.split('06 / CONTACT')[1]
+        contact = source.split('<samp>Connection</samp>')[1]
         self.assertEqual(contact.count('width="32" height="32"'), 4)
         self.assertIn('https://www.facebook.com/habib.jaudian.1', contact)
         self.assertIn('https://www.instagram.com/tsmhabib03', contact)
-        self.assertLess(contact.index('night-city-cat.jpg'), contact.index('assets/marks/facebook.svg'))
+        self.assertLess(contact.index('connect-banner.svg'), contact.index('assets/marks/facebook.svg'))
 
     def test_retained_profile_assets_are_self_contained(self):
         outputs = profile.profile_assets()
         self.assertEqual(outputs, profile.profile_assets())
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         references = set(re.findall(r'(?:src|srcset)="assets/([^"]+)"', readme))
-        self.assertEqual(references, {"readme/orange-pixel-banner.jpg", "readme/night-city-cat.jpg",
+        self.assertEqual(references, {"readme/profile-banner.svg", "readme/profile-banner-mobile.svg",
+                                      "readme/connect-banner.svg", "readme/connect-banner-mobile.svg",
                                       "marks/facebook.svg", "marks/instagram.svg", "marks/github.svg", "marks/email.svg"})
         for name, source in outputs.items():
             with self.subTest(asset=name):

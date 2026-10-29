@@ -1,74 +1,18 @@
-<!-- GitHub strips CSS, fonts, overlays, and animations. profile.html and profile.css
-     contain the full effects. Replace the hero placeholder with a single orange
-     banner asset; the supplied references contain multiple samples. -->
+<!-- Self-contained SVG source supplies pixel lettering and abstract square geometry.
+     The full profile renders here on GitHub. -->
 
-<h2><samp>01 / HERO</samp></h2>
+<picture>
+  <source media="(max-width: 640px)" srcset="assets/readme/profile-banner-mobile.svg">
+  <img src="assets/readme/profile-banner.svg" width="100%" alt="HABIB JAUDIAN D. | BSCS QCU WEBDEVELOPER — dark orange abstract pixel banner">
+</picture>
 
-<p align="center">
-  <img src="assets/readme/orange-pixel-banner.jpg" width="100%" alt="Orange abstract pixel banner — asset placeholder">
-</p>
-
-<table width="100%">
-  <tr>
-    <td align="center">
-      <h1><samp>HABIB JAUDIAN D.</samp></h1>
-      <p><samp>HABIB JAUDIAN D. | BSCS QCU WEBDEVELOPER</samp></p>
-      <p>
-        <a href="https://tsmhabib03.github.io/TsmHabib03/">View animated profile</a>
-        &nbsp; / &nbsp;
-        <a href="https://my-portfolio.jaudianhabib879.workers.dev/">View portfolio</a>
-        &nbsp; / &nbsp;
-        <a href="#03--featured-work">Explore projects</a>
-        &nbsp; / &nbsp;
-        <a href="mailto:jaudianhabib879@gmail.com">Email me</a>
-      </p>
-    </td>
-  </tr>
-</table>
-
-<h2><samp>02 / ABOUT</samp></h2>
+<h2><samp>About</samp></h2>
 
 <p><strong>Building useful software, one project at a time.</strong></p>
 
-<p>I’m a BSCS student at Quezon City University interested in full-stack web development and software engineering.</p>
+<p>I'm a BSCS student at Quezon City University interested in full-stack web development and software engineering.</p>
 
-<h2><samp>03 / FEATURED WORK</samp></h2>
-
-<table width="100%">
-  <tr>
-    <td>
-      <h3><a href="https://github.com/TsmHabib03/QCU-Schedule-Web-App">QCU-Schedule</a></h3>
-      <p>A responsive QCU student portal for class schedules, tasks, notes, and Google Calendar integration.</p>
-      <p><code>JavaScript</code> &nbsp; <code>Student portal</code></p>
-      <a href="https://github.com/TsmHabib03/QCU-Schedule-Web-App">View repository</a>
-    </td>
-  </tr>
-</table>
-
-<table width="100%">
-  <tr>
-    <td>
-      <h3>FREE-API-PROVIDERS</h3>
-      <p><code>API resources</code></p>
-      <!-- Replace with the verified project URL. The proposed owner/repo returns 404. -->
-      <p><samp>Repository URL pending</samp></p>
-    </td>
-  </tr>
-</table>
-
-<table width="100%">
-  <tr>
-    <td>
-      <h3><a href="https://github.com/TsmHabib03/ASJ-Attendance-Checker">Best Full-Stack Project</a></h3>
-      <p><strong>ASJ Attendance Checker</strong></p>
-      <p>A QR-based attendance management system with role-based dashboards, reports, authentication, and audit trails.</p>
-      <p><code>PHP</code> &nbsp; <code>MySQL</code> &nbsp; <code>QR attendance</code></p>
-      <a href="https://github.com/TsmHabib03/ASJ-Attendance-Checker">View repository</a>
-    </td>
-  </tr>
-</table>
-
-<h2><samp>04 / TECH STACK</samp></h2>
+<h2><samp>Tech Stack</samp></h2>
 
 <h3>Frontend</h3>
 <p>
@@ -98,18 +42,19 @@
   <img src="https://img.shields.io/badge/VS_Code-171C25?style=for-the-badge" alt="VS Code">
 </p>
 
-<h2><samp>05 / EDUCATION</samp></h2>
+<h2><samp>Education</samp></h2>
 
-<table width="100%">
-  <tr><td><strong>BS Computer Science</strong><br>Quezon City University</td></tr>
-  <tr><td><strong>NC III — Web Development</strong><br>TESDA</td></tr>
+<table>
+  <tr><td><strong>BS Computer Science</strong></td><td>Quezon City University</td></tr>
+  <tr><td><strong>NC III — Web Development</strong></td><td>TESDA</td></tr>
 </table>
 
-<h2><samp>06 / CONTACT</samp></h2>
+<h2><samp>Connection</samp></h2>
 
-<p align="center">
-  <img src="assets/readme/night-city-cat.jpg" width="100%" alt="A black cat overlooking a pixel-art city beneath a lavender moon">
-</p>
+<picture>
+  <source media="(max-width: 640px)" srcset="assets/readme/connect-banner-mobile.svg">
+  <img src="assets/readme/connect-banner.svg" width="100%" alt="Connect with Habib — blue and cyan modular pixel banner. Let's build something useful.">
+</picture>
 
 <p align="center">
   <a href="https://www.facebook.com/habib.jaudian.1"><img src="assets/marks/facebook.svg" width="32" height="32" alt="Facebook"></a>
