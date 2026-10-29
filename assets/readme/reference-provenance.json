@@ -1,0 +1,16 @@
+[
+  {
+    "asset": "orange-reference.jpg",
+    "source_filename": "330982eb338215bfe1379446458b8802.jpg",
+    "source_sha256": "42723e657b63cbbe5247d5ba8229b24f70847e4f655cfe98d6fc9c5341d48016",
+    "shipping_sha256": "4d220af68a1879cc1810be951a5bc33f50cc31de81f863fdb37284e837872afe",
+    "processing": "JPEG provenance comment only; no recompression or pixel changes."
+  },
+  {
+    "asset": "modular-reference.jpg",
+    "source_filename": "789c8708e57ef4b55ea26df089f2bcee.jpg",
+    "source_sha256": "bb766bc0074a75008a47d30888277f84be9c26a60f6afaa203d63b3d17b37f1c",
+    "shipping_sha256": "2745f232ddc7aa7eca60e2d2a73926cd3395153c8c1962c39d9b0e6a3a491632",
+    "processing": "JPEG provenance comment only; no recompression or pixel changes."
+  }
+]

@@ -1,29 +1,112 @@
 {
   "schemaVersion": 2,
   "generatedAt": "2026-10-29",
-  "title": "Design System: Tokyo Night Profile",
-  "extensions": {},
-  "components": [],
+  "title": "Design System: Orange Pixel Profile",
+  "extensions": {
+    "typographyMeta": {
+      "display": {
+        "displayName": "Pixel display",
+        "purpose": "Self-hosted Silkscreen hero lettering."
+      },
+      "body": {
+        "displayName": "Readable prose",
+        "purpose": "Project descriptions and profile facts."
+      },
+      "label": {
+        "displayName": "Pixel labels",
+        "purpose": "12px navigation, tags, and motion controls."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "hero-ease",
+        "value": "cubic-bezier(.16, 1, .3, 1)",
+        "purpose": "Banner hover and focus treatment."
+      },
+      {
+        "name": "hero-transition",
+        "value": "700ms",
+        "purpose": "Opacity and filter transitions."
+      },
+      {
+        "name": "pixel-drift",
+        "value": "10s steps(6, end) infinite alternate",
+        "purpose": "Selected image translation from 0 to 12px."
+      },
+      {
+        "name": "pixel-dissolve",
+        "value": "8s ease-in-out infinite alternate",
+        "purpose": "Selected opacity and saturation cycle."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "mobile",
+        "value": "640px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Project action",
+      "kind": "button",
+      "refersTo": "action",
+      "description": "Primary project discovery anchor.",
+      "html": "<a class=\"ds-action\" href=\"#work\">Explore projects &gt;</a>",
+      "css": ".ds-action{display:inline-flex;gap:28px;padding:13px 16px;background:var(--orange,#ff9d38);color:var(--ground,#0d1117);font-family:Silkscreen,monospace;font-size:.75rem;text-decoration:none}.ds-action:hover{background:#ffc078}.ds-action:focus-visible{outline:2px solid var(--cyan,#76d8f0);outline-offset:5px}"
+    },
+    {
+      "name": "Project card",
+      "kind": "card",
+      "refersTo": "project-card",
+      "description": "Bordered project module with selectable content.",
+      "html": "<article class=\"ds-card\"><h3>QCU-Schedule</h3><p>Class schedules, tasks, notes, and Google Calendar integration.</p><a href=\"https://github.com/TsmHabib03/QCU-Schedule-Web-App\">View repository</a></article>",
+      "css": ".ds-card{padding:28px;background:var(--panel,#171c25);border:1px solid var(--line,#343c49);color:var(--muted,#afbccb);font-family:\"Segoe UI\",sans-serif}.ds-card h3{font:400 1.1rem/1.6 Silkscreen,monospace;color:var(--cyan,#76d8f0);margin:0 0 18px}.ds-card p{line-height:1.75;max-width:70ch}.ds-card a{color:var(--orange,#ff9d38);text-underline-offset:.3em}.ds-card a:hover{color:#ffc078}.ds-card a:focus-visible{outline:2px solid var(--cyan,#76d8f0);outline-offset:5px}"
+    },
+    {
+      "name": "Section navigation",
+      "kind": "nav",
+      "description": "Wrapped pixel navigation to the profile sections.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Profile sections\"><a href=\"#about\">02 / ABOUT</a><a href=\"#work\">03 / WORK</a><a href=\"#contact\">06 / CONTACT</a></nav>",
+      "css": ".ds-nav{display:flex;flex-wrap:wrap;gap:18px 24px;padding:24px 0;border-bottom:1px solid var(--line,#343c49);font:400 .75rem Silkscreen,monospace;color:var(--muted,#afbccb)}.ds-nav a{color:inherit;text-decoration:none}.ds-nav a:hover{color:var(--orange,#ff9d38)}.ds-nav a:focus-visible{outline:2px solid var(--cyan,#76d8f0);outline-offset:5px}"
+    },
+    {
+      "name": "Project tags",
+      "kind": "chip",
+      "description": "Noninteractive colored technology labels.",
+      "html": "<p class=\"ds-tags\"><span>PHP</span><span>MySQL</span></p>",
+      "css": ".ds-tags{display:flex;flex-wrap:wrap;gap:8px 16px;font:400 .75rem Silkscreen,monospace;color:var(--mint,#9ddcb5)}"
+    },
+    {
+      "name": "Motion choices",
+      "kind": "input",
+      "description": "Native radio choices for the banner motion.",
+      "html": "<fieldset class=\"ds-motion\"><legend>Banner motion</legend><label><input type=\"radio\" name=\"ds-motion\" checked> Pixel drift</label><label><input type=\"radio\" name=\"ds-motion\"> Soft dissolve</label><label><input type=\"radio\" name=\"ds-motion\"> Still</label></fieldset>",
+      "css": ".ds-motion{display:flex;flex-wrap:wrap;gap:12px 20px;border:0;padding:0;font:400 .75rem Silkscreen,monospace;color:var(--muted,#afbccb)}.ds-motion label{display:flex;align-items:center;gap:6px;min-height:24px;cursor:pointer}.ds-motion input{accent-color:var(--orange,#ff9d38)}.ds-motion input:focus-visible{outline:2px solid var(--cyan,#76d8f0);outline-offset:5px}"
+    }
+  ],
   "narrative": {
-    "northStar": "Tokyo Night Profile",
-    "overview": "One supplied black-cat city banner above a centered native identity panel and concise About, Tech Stack, Education, and Contact sections. GitHub pins provide project discovery.",
+    "northStar": "Orange pixel dossier",
+    "overview": "Charcoal surfaces and orange abstract pixels introduce Habib's work. Pixel lettering gives headings character; a regular body face keeps project descriptions readable. Cyan, lavender, amber, and mint distinguish content groups. The supplied city/cat scene anchors the footer.",
     "keyCharacteristics": [
-      "One unchanged black-cat city image.",
-      "Native GitHub text, table border, and links.",
-      "Twelve Tokyo Night Shields.io badges in four groups.",
-      "Four labeled contact links that wrap with their icons."
+      "Dark tonal panels, thin borders, and square corners.",
+      "Orange pixel hero with native selectable text.",
+      "Pixel display lettering alongside readable prose.",
+      "Three banner motion variations with reduced-motion support.",
+      "Supplied city/cat at the bottom above four contact destinations."
     ],
     "rules": [],
     "dos": [
-      "Keep decoded banner pixels unchanged and retain provenance.",
-      "Keep profile facts in native text.",
-      "Check 320px, 375px, and desktop wrapping.",
-      "Identify local preview evidence separately from published GitHub checks."
+      "Do keep facts selectable and project claims tied to verified sources.",
+      "Do retain supplied pixels and provenance; crop and blend through companion CSS.",
+      "Do keep pixel controls readable and support reduced motion.",
+      "Do disclose template inputs and distinguish local previews from published evidence."
     ],
     "donts": [
-      "Do not reintroduce earlier calico or multi-cat scenes into the README.",
-      "Do not duplicate pinned projects with Featured Work.",
-      "Do not introduce custom README CSS or scripts."
+      "Don't claim custom CSS or fonts work in GitHub README rendering.",
+      "Don't introduce emojis or generated scene artwork into this requested design.",
+      "Don't publish the raw template as complete while its banner and API destination remain unresolved."
     ]
   }
 }

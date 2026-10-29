@@ -1,0 +1,47 @@
+name: Publish profile preview
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "profile.html"
+      - "profile.css"
+      - "assets/readme/**"
+      - "assets/fonts/**"
+      - "assets/marks/**"
+      - ".github/workflows/publish-profile.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: profile-pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - name: Prepare profile files
+        run: |
+          mkdir -p _site/assets/readme _site/assets/fonts _site/assets/marks
+          cp profile.html _site/index.html
+          cp profile.css _site/profile.css
+          cp assets/readme/orange-reference.jpg assets/readme/night-city-cat.jpg _site/assets/readme/
+          cp assets/fonts/silkscreen-latin.ttf assets/fonts/OFL-silkscreen.txt _site/assets/fonts/
+          cp assets/marks/facebook.svg assets/marks/instagram.svg assets/marks/github.svg assets/marks/email.svg _site/assets/marks/
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - name: Deploy preview
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -8,24 +8,26 @@ web
 
 ## Product Purpose
 
-The GitHub profile introduces Habib Jaudian D., a BS Computer Science student at Quezon City University interested in full-stack web development and software engineering. It presents background, twelve technologies, education, and contact links. Pinned repositories provide project discovery.
+Introduce Habib Jaudian D., a BS Computer Science student at Quezon City University interested in full-stack web development and software engineering. Visitors read his background, discover projects, see twelve technologies and education, and reach contact destinations.
 
 ## Users
 
-GitHub visitors exploring Habib's background and work. Recruiters and potential collaborators are a working audience assumption.
+GitHub visitors exploring Habib's background and work. Recruiters and collaborators are a working audience assumption.
 
 ## Capabilities and Constraints
 
-GitHub-rendered Markdown and supported HTML. Native headings, text, links, and one centered identity table. One user-supplied static JPEG banner, Shields.io badges, and local contact marks. No custom page CSS or scripts. Use supplied facts and owner-listed destinations.
+README.md uses GitHub-supported HTML, native text, card tables, Shields.io badges, and local marks. GitHub strips custom CSS, fonts, overlays, transitions and animations. profile.html and profile.css provide those requested effects in a browser. No scene artwork was generated.
+
+The README is a raw template: assets/readme/orange-pixel-banner.jpg is an explicit image placeholder because the supplied reference contains multiple samples that GitHub cannot crop with CSS. The API repository destination remains unresolved because the proposed repository returned 404; its card displays a pending message. ASJ Attendance Checker is the assumed full-stack selection after an unanswered optional question. QCU and ASJ destinations were verified. The animated companion is deployed through GitHub Pages at https://tsmhabib03.github.io/TsmHabib03/.
 
 ## Brand Commitments
 
-A concise Tokyo Night profile with one black cat overlooking an indigo pixel city. Keep the supplied image's pixels unchanged. About, Tech Stack, Education, and Contact are unnumbered. Omit Featured Work, the typing-cat reference, and earlier calico/multi-cat scenes from the README.
+The latest request replaces the city-first design: dark terminal/card surfaces, orange pixel hero, colored pixel display font, six numbered sections, three projects, four technology groups, education, and supplied city/cat footer. Exact identity: HABIB JAUDIAN D. | BSCS QCU WEBDEVELOPER. No emojis or generated artwork. Supplied JPEG decoded pixels remain unchanged.
 
 ## Evidence on Hand
 
-README.md, the approved correction in .impeccable/surfaces/readme-md.md, assets/readme/night-city-cat.jpg, DESIGN.md, and local preview evidence in .impeccable/review/simple-black-cat/. The LinkedIn destination was verified against GitHub's public social_accounts API. Older SVG generation and contribution data remain available.
+README.md, profile.html, profile.css, DESIGN.md, surface brief, supplied references/provenance, and .impeccable/review/orange-pixel/. Local GitHub Markdown API-sanitized previews cover 320px, 375px, and 1280px. Twelve badges were fetched, wrapping and motion states checked, and 22 tests passed. The user authorized publishing this revision on 2026-10-29. The Pages workflow publishes only the companion and its referenced local assets. Review handoffs failed because task packets arrived unreadable; the documented fallback review covers raw-template plus companion scope.
 
 ## Accessibility & Inclusion
 
-Native selectable profile text, meaningful banner and badge alternatives, individually focusable labeled contacts, natural wrapping, and static artwork. Local previews cover 320px, 375px, and desktop; published GitHub evidence must be identified separately.
+Selectable text, meaningful alternatives, labeled native radios, individual contact links, keyboard focus, skip navigation, natural wrapping, and reduced-motion CSS. Longer prose uses a regular body face; pixel control labels remain readable.

@@ -183,8 +183,13 @@ def compact_icon(slug, label):
             p.box(12, 16, 2, 2, c["cyan"])
             p.box(16, 16, 4, 2, c["text"])
         else:
-            p.box(4, 6, 20, 16, c["cyan"])
             p.box(6, 8, 16, 12, c["sky"])
+            # Draw the background first: Pixels groups fills by color, so an
+            # earlier cyan fill would put the envelope folds behind the sky.
+            p.box(4, 6, 20, 2, c["cyan"])
+            p.box(4, 8, 2, 14, c["cyan"])
+            p.box(22, 8, 2, 14, c["cyan"])
+            p.box(6, 20, 16, 2, c["cyan"])
             for x,y in ((6,8),(8,10),(10,12),(12,14),(14,14),(16,12),(18,10),(20,8)):
                 p.box(x,y,2,2,c["cyan"])
         body = '<g shape-rendering="crispEdges">' + p.draw() + '</g>'

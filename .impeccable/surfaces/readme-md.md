@@ -2,36 +2,25 @@
 version: 1
 slug: "readme-md"
 primary_target: "README.md"
-related_targets: ["assets/readme/night-city-cat.jpg"]
+related_targets: ["profile.html","assets/readme/night-city-cat.jpg"]
 ---
 
-# README surface brief
+# Orange pixel README surface
 
-Target: README.md. Mode: Read. The approved plan is executed with the user's correction: remove Featured Work because GitHub pins already provide project discovery, retain only the black cat, and simplify the page. This supersedes earlier calico and multi-cat artwork directions.
+Target: README.md, with profile.html demonstrating the requested CSS. Mode: Experience. The latest explicit brief supersedes the simplified city-first profile. Readers discover Habib's student background and three projects, then reach the contact links.
 
-Content: HABIB JAUDIAN D.; BSCS · WEB DEVELOPER; a short intro and existing quick links; About with the supplied sentence and Quezon City University background; four Shields.io groups; BS Computer Science at QCU and NC III Web Development at TESDA; centered Portfolio, GitHub, LinkedIn, and Email contacts. LinkedIn was verified via the public GitHub social_accounts API: https://www.linkedin.com/in/habib-jaudian-661a9a424/.
-
-Assets: use the supplied 0ae95a03469fe58971c9c2577579e7d9.jpg as assets/readme/night-city-cat.jpg with its decoded pixels unchanged. The JPEG carries an added provenance comment. It contains the single dark black cat and indigo skyline. No image generation. The pale typing-cat reference is omitted to honor the latest black-cat-only correction. Remove all legacy cat illustration references from README.md; retain unreferenced files with existing in-progress changes.
-
-GitHub constraints: supported HTML and Markdown only; no custom CSS, scripts, generated SVGs, font overrides, fake terminal controls, or fabricated background-color attributes. Host typography, panel borders, and native inline-code styling form the identity panel. Shields use Tokyo Night colors. Native text and labeled links remain readable without image delivery.
-
-Acceptance: one black-cat banner; no project section or old cat assets referenced; one identity panel and four unnumbered content sections; all twelve requested technologies; supplied education and About facts; centered labeled contact links; no emoji; inspect 320px, 375px, and desktop for overflow, image loading, and text readability. Distinguish local preview from live GitHub evidence.
+Delivery: code only; no generated artwork or emoji. GitHub receives supported HTML, static banner placeholder, native monospace, cards, and badges. The companion delivers pixel typography, CSS cropping and darkening of the unchanged supplied orange reference, text overlay, and selectable motion. QCU and ASJ links are verified. The API project URL remains a labeled placeholder. ASJ is the default full-stack selection offered to the user.
 
 ## Direction contract
 
-THESIS: A single black cat overlooking a midnight city introduces a concise developer profile; pinned repositories supply the project evidence.
+THESIS: An orange pixel terminal dossier introduces a QCU developer through a six-section reading path and working project links.
 
-OWN-WORLD: Indigo pixel skyline, lavender moon and window light, one unchanged black silhouette. Native GitHub borders and a centered identity panel frame readable text. Badge plates use #1A1B26 with #7AA2F7, #BB9AF7, #7DCFFF, and #C0CAF5 accents.
+OWN-WORLD: Charcoal field, warm orange hero, cyan frontend, lavender backend, amber data, and mint tool accents. Square module corners and compact pixel display text frame readable body copy.
 
-STORY: City and name -> personal background -> practical tools -> education -> contact.
+STORY: Identity -> background -> three projects -> practical tools -> education -> city and contacts.
 
-FIRST VIEWPORT: Full-width 736 × 414 supplied city image at the top, followed by centered HABIB JAUDIAN D., a shaded native-code subtitle, one short intro, and three quick links. No added illustration or decorative cat.
+FIRST VIEWPORT: Wide orange hero with large selectable name and exact BSCS QCU WEBDEVELOPER subtitle; short About immediately follows. Companion overlays text on a darkened CSS view of the supplied first orange sample. GitHub places native text adjacent to its explicit banner placeholder.
 
-FORM: One column, a single HTML identity panel, native unnumbered section headings, wrapping badge rows, and centered labeled contact links. Two centered contact rows fit narrow screens; nonbreaking spaces join icons to labels. Code-led user-pinned execution of the confirmed plan; no concept tournament or generated comp. seed: none (user-pinned).
+FORM: User-pinned terminal/card dossier, third grounded carrier; one column on GitHub, unequal project grid and stacked mobile modules in the companion. Signature motion has three radio-selected variations: stepped drift, soft dissolve, and static. Reduced motion disables all movement. seed:36bb5b4da5e1baae.
 
-FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
-
-
-## Finish result
-
-PASS for local implementation: all 22 tests pass; GitHub-sanitized local previews at 320px, 375px, and 1280px load all 17 images with no page/table overflow. Two centered contact rows keep all icon-label pairs together. Image provenance and current design/product docs are complete. Evidence: .impeccable/review/simple-black-cat/finish-review.md and checks.json. Publication was not performed in this continuation.
+FINISH: ship at raw-template plus companion scope under the disclosed in-thread fallback review (.impeccable/review/orange-pixel/finish-review.md). Seven captures inspected, twelve badges fetched, three motion states and reduced motion verified; 22 tests pass. DESIGN.md and .impeccable/design.json record the replacement. Three supplied rasters retain provenance and unchanged decoded pixels. Hero asset and API URL remain explicit template inputs. The user authorized a push on 2026-10-29; the companion is published through GitHub Pages and linked from the README. The API card uses a pending message rather than an unresolved link.
