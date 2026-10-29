@@ -1,6 +1,7 @@
 """Current README references and retained deterministic artwork contracts."""
 import importlib.util
 from pathlib import Path
+from html import unescape
 import re
 import sys
 import unittest
@@ -68,11 +69,15 @@ class HeroContracts(unittest.TestCase):
             else:
                 self.assertTrue((ROOT / path).is_file(), path)
         self.assertNotRegex(source, r'Featured Work|FEATURED WORK|night-city-cat|github\.io|placeholder|profile\.html')
-        self.assertEqual(source.count('<table '), 1)
+        self.assertNotIn('<table', source)
         self.assertNotIn('<samp>', source)
-        self.assertIn("I'm a BSCS student at Quezon City University who enjoys building web applications and exploring software engineering.", source)
+        plain = unescape(re.sub(r'<[^>]+>', '', source))
+        self.assertIn("I'm a BSCS student at Quezon City University who enjoys building web applications and exploring software engineering.", plain)
+        self.assertIn('<h3>Building useful software, one project at a time.</h3>', source)
+        self.assertEqual(source.count('<strong><ins>Quezon City University</ins></strong>'), 2)
         stack = source.split('<h2>Tech Stack</h2>')[1].split('<h2>Education</h2>')[0]
-        self.assertEqual(re.findall(r'<h3><img[^>]+alt="([^"]+)"', stack), ["Frontend", "Backend", "Database", "Tools"])
+        self.assertNotIn('<h3>', stack)
+        self.assertEqual(stack.count('<p>'), 1)
         self.assertEqual(re.findall(r'<img src="assets/readme/tech-[^>]+alt="([^"]+)"', stack), [
             "HTML", "CSS", "JavaScript", "Tailwind CSS", "Bootstrap", "PHP", "Java",
             "MySQL", "Git", "GitHub", "Docker", "VS Code",
@@ -80,14 +85,16 @@ class HeroContracts(unittest.TestCase):
         education = source.split('<h2>Education</h2>')[1].split('<h2>Connection</h2>')[0]
         self.assertEqual(re.findall(r'<h3><img[^>]+alt="([^"]+)"', education),
                          ["BS Computer Science", "NC III — Web Development"])
-        self.assertIn('<p>Quezon City University</p>', education)
-        self.assertIn('<p>TESDA</p>', education)
+        self.assertIn('<h3><strong><ins>Quezon City University</ins></strong></h3>', education)
+        self.assertIn('<h3><strong><ins>TESDA</ins></strong></h3>', education)
         contact = source.split('<h2>Connection</h2>')[1]
         self.assertEqual(contact.count('<a href='), 4)
-        self.assertEqual(contact.count('<td width="50%"><a href='), 4)
+        self.assertEqual(contact.count('<picture>'), 1)
+        self.assertEqual(contact.count('<img '), 1)
+        self.assertIn('<p align="center">', contact)
         self.assertIn('https://www.facebook.com/habib.jaudian.1', contact)
         self.assertIn('https://www.instagram.com/tsmhabib03', contact)
-        self.assertLess(contact.index('connect-banner.svg'), contact.index('connect-facebook.svg'))
+        self.assertLess(contact.index('connect-banner.svg'), contact.index('<a href='))
         self.assertIn('mailto:jaudianhabib879@gmail.com', contact)
 
     def test_retained_profile_assets_are_self_contained(self):
@@ -96,10 +103,8 @@ class HeroContracts(unittest.TestCase):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         references = set(re.findall(r'(?:src|srcset)="assets/([^"]+)"', readme))
         self.assertEqual(references, {"readme/profile-banner.svg", "readme/profile-banner-mobile.svg",
-                                      "readme/connect-banner.svg", "readme/connect-banner-mobile.svg",
-                                      *[f"readme/connect-{slug}{suffix}.svg" for slug in ('facebook','instagram','github','email')
-                                        for suffix in ('','-mobile')]}
-                         | {f"readme/{name}" for name in stack_assets.assets()})
+                                      "readme/connect-banner.svg", "readme/connect-banner-mobile.svg"}
+                         | {f"readme/{name}" for name in stack_assets.assets() if not name.startswith('heading-')})
         for name, source in stack_assets.assets().items():
             with self.subTest(readme_asset=name):
                 root = ET.fromstring(source)
@@ -112,6 +117,8 @@ class HeroContracts(unittest.TestCase):
                 if name.startswith('tech-'):
                     logo = root.find('{http://www.w3.org/2000/svg}use')
                     self.assertEqual((logo.attrib['width'], logo.attrib['height']), ('48', '48'))
+                if name.startswith('education-'):
+                    self.assertEqual(root.attrib['viewBox'], '0 0 288 64')
         for name, source in outputs.items():
             with self.subTest(asset=name):
                 root = ET.fromstring(source)
@@ -137,6 +144,9 @@ class HeroContracts(unittest.TestCase):
                     self.assertIn('class="variation orange" opacity="1"', source)
                 if name.startswith('connect-') and 'banner' not in name:
                     self.assertEqual(len(re.findall(r'aria-label=', source)), 1)
+                if name.startswith('connect-banner'):
+                    for label in ('Facebook', 'Instagram', 'GitHub', 'Email'):
+                        self.assertIn(f'aria-label="{label}"', source)
 
     def test_cat_motion_has_a_complete_static_alternative(self):
         for section in (None, *city.PROFILE_SECTIONS):

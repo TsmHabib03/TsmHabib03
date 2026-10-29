@@ -55,9 +55,9 @@ def heading(label, color):
 
 
 def qualification(title, first, second, color):
-    return svg(264, 48, title, title,
-               banners.lettering(first, 0, 4, 20, color)
-               + banners.lettering(second, 0, 30, 18, color))
+    return svg(288, 64, title, title,
+               banners.lettering(first, 0, 4, 24, color)
+               + banners.lettering(second, 0, 37, 24, color))
 
 
 def assets():

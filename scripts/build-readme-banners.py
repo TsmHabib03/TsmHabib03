@@ -142,18 +142,48 @@ def connect_ground(height=560):
 
 def connection(mobile=False):
     if mobile:
-        body = '<g transform="scale(.5)">' + connect_ground() + '</g>'
-        body += lettering("LET'S", 20, 40, 35, WHITE, 700) + lettering('CONNECT', 20, 90, 29, WHITE, 700)
-        body += lettering('BUILD SOMETHING', 282, 50, 25, BLACK, 600)
-        body += lettering('USEFUL.', 282, 89, 25, BLACK, 600)
-        return document(600, 160, 'Connect with Habib Jaudian D.',
-                        "Let's connect. Build something useful. Social links are inside the banner below.", body)
-    body = connect_ground() + lettering("LET'S", 28 if mobile else 44, 50, 49, WHITE, 700)
-    body += lettering('CONNECT', 28 if mobile else 44, 120, 45, WHITE, 700)
-    body += lettering('BUILD SOMETHING USEFUL.', 525 if mobile else 570, 83, 27 if mobile else 31, BLACK, 600)
-    body += lettering('Choose a channel and say hello.', 525 if mobile else 570, 135, 22 if mobile else 21, BLACK, 400)
-    return document(1200, 220, 'Connect with Habib Jaudian D.',
-                    "Let's connect. Build something useful. Linked social sections are inside this banner's table.", body)
+        width, height = 600, 440
+        body = '<rect width="600" height="440" fill="white"/>'
+        body += '<g transform="scale(.5)">' + connect_ground(240) + '</g>'
+        body += lettering("LET'S", 22, 25, 35, WHITE, 700)
+        body += lettering('CONNECT', 22, 73, 29, WHITE, 700)
+        body += lettering('BUILD SOMETHING', 282, 31, 25, BLACK, 600)
+        body += lettering('USEFUL.', 282, 70, 25, BLACK, 600)
+        positions = [(170, 153), (450, 153), (170, 295), (450, 295)]
+        icon_size, label_size, label_offset = 80, 30, 92
+    else:
+        width, height = 1200, 310
+        body = connect_ground(height)
+        body += lettering("LET'S", 44, 78, 49, WHITE, 700)
+        body += lettering('CONNECT', 44, 148, 45, WHITE, 700)
+        body += lettering('BUILD SOMETHING USEFUL.', 570, 42, 31, BLACK, 600)
+        body += lettering('Choose a channel and say hello.', 570, 92, 21, BLACK, 400)
+        positions = [(620, 153), (780, 153), (940, 153), (1100, 153)]
+        icon_size, label_size, label_offset = 72, 25, 88
+    for (slug, label), (center, top) in zip(CONTACTS, positions):
+        body += contact_mark(slug, center-icon_size/2, top, icon_size)
+        body += lettering(label, center-label_width(label, label_size)/2,
+                          top+label_offset, label_size, BLACK)
+    return document(width, height, 'Connect with Habib Jaudian D.',
+                    "Let's connect. Build something useful. Facebook, Instagram, GitHub and Email "
+                    'are together in this banner. Use the text links immediately below.', body)
+
+
+CONTACTS = [('facebook', 'Facebook'), ('instagram', 'Instagram'), ('github', 'GitHub'), ('email', 'Email')]
+
+
+def contact_mark(slug, x, y, size):
+    import re
+    raw = (ROOT / 'assets/marks' / f'{slug}.svg').read_text(encoding='utf-8')
+    inner = re.sub(r'^.*?<svg\b[^>]*>', '', raw, count=1, flags=re.S)
+    inner = re.sub(r'<(?:title|desc)\b.*?</(?:title|desc)>', '', inner, flags=re.S)
+    inner = re.sub(r'</svg>\s*$', '', inner)
+    if slug == 'email':
+        inner = '<rect x="3" y="6" width="22" height="16" rx="2" fill="#168bbd"/><path d="M4 7l10 8L24 7" fill="none" stroke="white" stroke-width="1.8"/>'
+    else:
+        tint = {'facebook': '#1877f2', 'instagram': '#a236b4', 'github': BLACK}[slug]
+        inner = re.sub(r'fill="#[0-9a-fA-F]{6}"', f'fill="{tint}"', inner)
+    return f'<svg x="{x}" y="{y}" width="{size}" height="{size}" viewBox="0 0 28 28">{inner}</svg>'
 
 
 def contact(slug, label, column, row, mobile=False):

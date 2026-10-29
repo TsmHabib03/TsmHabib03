@@ -1,6 +1,6 @@
 ---
 name: Reference Square GitHub Profile
-description: Three fading square-field identity variations and a linked modular connection banner on GitHub.
+description: Three fading identity variations, unified technology logos and one continuous connection banner on GitHub.
 colors:
   ink: "#edf2f7"
   white: "#ffffff"
@@ -102,27 +102,23 @@ typography:
     fontWeight: 400
   contact-label:
     fontFamily: "Open Sans"
-    fontSize: "27px"
+    fontSize: "25px"
     fontWeight: 600
   contact-label-mobile:
     fontFamily: "Open Sans"
-    fontSize: "64px"
+    fontSize: "30px"
     fontWeight: 600
   technology-label:
     fontFamily: "Open Sans"
     fontSize: "14px"
     fontWeight: 600
-  group-heading:
-    fontFamily: "Open Sans"
-    fontSize: "20px"
-    fontWeight: 600
   qualification-first-line:
     fontFamily: "Open Sans"
-    fontSize: "20px"
+    fontSize: "24px"
     fontWeight: 600
   qualification-second-line:
     fontFamily: "Open Sans"
-    fontSize: "18px"
+    fontSize: "24px"
     fontWeight: 600
 rounded:
   square: "0px"
@@ -143,26 +139,18 @@ components:
     backgroundColor: "{colors.white}"
     textColor: "{colors.black}"
     width: "1200px"
-    height: "220px"
+    height: "310px"
   connection-mobile:
     backgroundColor: "{colors.white}"
     textColor: "{colors.black}"
     width: "600px"
-    height: "160px"
-  contact-slice:
-    typography: "{typography.contact-label}"
-    width: "600px"
-    height: "170px"
-  contact-slice-mobile:
-    typography: "{typography.contact-label-mobile}"
-    width: "600px"
-    height: "300px"
+    height: "440px"
   contact-icon:
-    width: "56px"
-    height: "56px"
+    width: "72px"
+    height: "72px"
   contact-icon-mobile:
-    width: "140px"
-    height: "140px"
+    width: "80px"
+    height: "80px"
   technology-module:
     textColor: "{colors.ink}"
     typography: "{typography.technology-label}"
@@ -171,36 +159,16 @@ components:
   technology-logo:
     width: "48px"
     height: "48px"
-  group-frontend:
-    textColor: "{colors.cyan}"
-    typography: "{typography.group-heading}"
-    width: "92px"
-    height: "24px"
-  group-backend:
-    textColor: "{colors.stack-orange}"
-    typography: "{typography.group-heading}"
-    width: "86px"
-    height: "24px"
-  group-database:
-    textColor: "{colors.stack-amber}"
-    typography: "{typography.group-heading}"
-    width: "95px"
-    height: "24px"
-  group-tools:
-    textColor: "{colors.lavender}"
-    typography: "{typography.group-heading}"
-    width: "55px"
-    height: "24px"
   qualification-bscs:
     textColor: "{colors.stack-orange}"
     typography: "{typography.qualification-first-line}"
-    width: "264px"
-    height: "48px"
+    width: "288px"
+    height: "64px"
   qualification-tesda:
     textColor: "{colors.cyan}"
     typography: "{typography.qualification-first-line}"
-    width: "264px"
-    height: "48px"
+    width: "288px"
+    height: "64px"
 ---
 
 # Design System: Reference Square GitHub Profile
@@ -209,83 +177,88 @@ components:
 
 **Creative North Star: "Reference square frame"**
 
-White and saturated square fields introduce Habib's identity through three complete orange, blue and purple variations. Smooth sans-serif lettering gives the name and WEB / DEVELOPER hierarchy the character of the user's named reference. A deep navy and white modular connection banner closes the reading sequence with four contacts inside its common table boundary.
+White and saturated square fields introduce Habib's identity through three complete orange, blue and purple variations. Smooth sans-serif lettering gives the name and WEB / DEVELOPER hierarchy the character of the user's named reference. A deep navy and white modular connection banner closes the reading sequence with all four social icons and labels in one continuous image, followed by a compact line of native text links.
 
-The full experience renders in README.md. The primary reference governs the three identity compositions; the second reference governs the modular connection geometry. Authored self-contained SVG paths reproduce their abstract material while GitHub supplies native headings, prose and link behavior. The exact reference typeface is unknown; Open Sans is a licensed visual match.
+The full experience renders in README.md. The primary reference governs the three identity compositions; the second reference governs the modular connection geometry. Authored self-contained SVG paths reproduce their abstract material while GitHub supplies native headings, highlighted prose and link behavior. The exact reference typeface is unknown; Open Sans is a licensed visual match.
 
 **Key Characteristics:**
 
 - Three saturated identity variations with full-banner fades.
 - Smooth outlined sans-serif lettering throughout active SVG assets.
 - Prominent phone identity above the decorative square field.
-- One native GitHub column with independently wrapping logo groups.
-- Stacked qualification titles followed by selectable institution prose.
-- Four independently linked contacts inside a segmented connection banner.
+- One native GitHub column with all twelve technology modules in one wrapping group.
+- Larger selectable About text and bold, underlined institution names.
+- Stacked qualification titles with equally sized lines.
+- One continuous connection image containing every social icon, with compact native links below.
 
 ## Colors
 
-White and black establish the reference's light field and readable foreground. Orange, blue and purple form the identity banner's saturated fields; their pale, middle and deep accents build the scattered square transitions. Blue mirrors the desktop fields. Purple uses white WEB / DEVELOPER lettering to preserve contrast.
+White and black establish the reference's light field and readable foreground. Orange, blue and purple form the identity banner's saturated fields; pale, middle and deep accents build the scattered square transitions. Blue mirrors the desktop fields. Purple uses white WEB / DEVELOPER lettering to preserve contrast.
 
-Deep navy and white form the connection's two fields. Connection blue, cyan and indigo form its repeating modular edge. The native table's padding and borders remain visible between the independently linked slices.
+Deep navy and white form the connection fields. Connection blue, cyan and indigo create the repeating modular edge. Facebook uses its blue tint (#1877f2), Instagram purple (#a236b4), GitHub black and the smooth authored email envelope cyan-blue (#168bbd). These brand-specific tints come from the connection builder.
 
-Transparent technology modules expose GitHub's surrounding canvas. Cyan identifies Frontend, stack orange Backend, stack amber Database, and lavender Tools. Stack orange identifies BS Computer Science and cyan NC III Web Development. Attributed Devicon geometry retains available brand colors and the existing generator's flat display tints. GitHub owns the surrounding page theme and native text colors.
+Transparent technology modules expose GitHub's canvas. Attributed Devicon geometry retains available brand colors and the generator's flat display tints. Stack orange identifies BS Computer Science and cyan identifies NC III Web Development. Retained amber and lavender accents belong to unchanged logo/provenance inputs; there are no active category headings. GitHub owns the surrounding page theme and native text colors.
 
 ## Typography
 
-Open Sans variable font is the build-time source for all active SVG lettering, licensed under SIL OFL. FontTools instantiates the normal-width weight and converts real Bezier glyph outlines into paths. Browser rendering needs no font download, embedded font or raster lettering. Token sizes are generator input sizes in each SVG coordinate system; responsive banners and contact slices scale with their displayed width, while technology modules retain their declared dimensions.
+Open Sans variable font is the build-time source for active SVG lettering, licensed under SIL OFL. FontTools instantiates the normal-width weight and converts real Bezier glyph outlines into paths. Browser rendering needs no font download, embedded font or raster lettering. Frontmatter sizes are generator inputs in SVG coordinates; responsive banners scale with displayed width, while technology and qualification images retain their declared dimensions.
 
-The name and WEB roles are bold; identity subtitles, supporting hero copy and DEVELOPER are regular. Connection opening lines are bold, invitation and contact labels semibold, and supporting connection copy regular. Phone roles increase the name and contact canvas scale for readable responsive output. Technology captions, group headings and qualification titles use smooth semibold outlines. Native section headings and prose use GitHub's typography, with no pixel-font wrappers.
+The name and WEB roles are bold; identity subtitles, supporting hero copy and DEVELOPER are regular. Connection opening lines are bold, invitation and contact labels semibold, and supporting copy regular. Technology captions and both qualification lines use smooth semibold outlines. Native About and institution h3 elements rendered at 20px in the sanitized GitHub preview; strong plus ins preserves bold, underlined institution names. Those native sizes and margins are platform-controlled rather than an authored README stylesheet.
 
-The exact screenshot face is not established. Use the matched Open Sans source without claiming an exact typeface identification. Dormant Silkscreen assets and their license remain part of retained legacy provenance, separate from the active README.
+**The Native Text Rule.** Keep About facts and institution highlights in supported native HTML so they remain selectable and survive GitHub sanitization.
+
+The exact screenshot face is not established. Use the matched Open Sans source without claiming exact identification. Dormant Silkscreen assets and their license remain retained legacy provenance.
 
 ## Layout
 
-README.md uses one column: identity, About, Tech Stack, Education and the connection banner containing four contacts. Each technology paragraph wraps its fixed-size modules independently. Parent-validated 320px and 375px captures show two columns without shrinking logos or labels; the desktop capture shows five Frontend and four Tools modules across. Each qualification title precedes a native school or provider paragraph.
+README.md uses one column: identity, About, one Tech Stack group, Education and Connection. One paragraph holds all twelve technology modules in their approved order. Sanitized previews show two columns at 320px and 375px, five at 768px and six at 1280px without shrinking modules. Each qualification title precedes a native highlighted institution h3.
 
-Picture sources select mobile SVGs at 640px or below. Identity uses the hero and hero-mobile dimensions; desktop places the identity and WEB / DEVELOPER on opposite fields, mirrored in blue. Phone layouts keep the identity above the decorative square field rather than scaling down the wide composition.
+Picture sources select mobile banners at 640px or below. Desktop identity places the name and WEB / DEVELOPER on opposite fields, mirrored in blue. Phone layouts keep the identity above the decorative square field. The connection desktop composition places four icons across the white field; phone places them in a two-by-two layout beneath the modular header, within one image. A centered native paragraph immediately below holds four text-only contact links. GitHub controls section spacing, typography and focus behavior.
 
-Connection uses a full-width header cell above two rows of two contact cells. Each contact is a separate HTML anchor around responsive local SVG images; all sit inside the same table boundary. Desktop and phone slices use their documented canvases before responsive scaling. GitHub controls table padding, borders, section margins and link focus. The visible seams are an observed platform adaptation.
+**The Continuous Banner Rule.** Keep all four social icons in a single responsive image; place working native text links directly below it.
 
 ## Elevation & Depth
 
-The active banners are flat. Overlapping rectangles, saturated fields and opacity create abstract depth. No shadows, gradients, blur or physical-material simulation are used. The three complete identity layers crossfade; individual squares do not drift independently.
+Active banners are flat. Overlapping rectangles, saturated fields and opacity create abstract depth. No shadows, gradients, blur or physical-material simulation are used. Three complete identity layers crossfade; individual squares do not drift independently.
 
 ## Shapes
 
-Rectangular canvases, square identity scatter and rectangular connection modules define the visual language. Identity scatter divides each decorative field into eight rows; mobile applies it only to the lower field. The connection repeats its navy/white ground and blue/cyan/indigo edge across header and contact slices. Brand marks use attributed vector silhouettes; the active email mark is smooth authored rounded-rectangle and envelope-line geometry.
+Rectangular canvases, square identity scatter and rectangular connection modules define the visual language. Identity scatter divides each decorative field into eight rows; mobile applies it only to the lower field. The connection uses one navy/white ground with a repeating blue/cyan/indigo edge. Brand marks use attributed vector silhouettes; email uses smooth authored rounded-rectangle and envelope-line geometry.
 
 ## Components
 
 ### Identity variations
 
-Orange and purple place the identity left and WEB / DEVELOPER right; blue mirrors the desktop fields. Phone identity stays above the geometry in all states. Three full-banner layers run an eighteen-second loop, each holding for five seconds and crossfading for one second with ease-in-out interpolation. Reduced motion disables all three animations and shows the complete orange variation. Embedded SVG images provide no host callbacks for offscreen pausing or README hover controls.
+Orange and purple place identity left and WEB / DEVELOPER right; blue mirrors desktop fields. Phone identity stays above geometry in all states. Three full-banner layers run an eighteen-second loop, each holding five seconds and crossfading one second with ease-in-out interpolation. Reduced motion disables the animations and shows complete orange. Embedded SVG images provide no host callbacks for offscreen pausing or README hover controls.
 
 ### Native information sections
 
-Supported headings and paragraphs carry the profile facts in GitHub's native typography. The exact approved About copy and qualification institution names remain selectable. No custom README stylesheet is required.
+Supported h2 section headings and larger h3 About statements carry the profile facts. Quezon City University in About, Quezon City University in Education and TESDA in Education use strong plus ins. Exact approved text remains selectable. GitHub supplies the native typography, underline, spacing and link states.
 
-### Technology groups and modules
+### Unified technology modules
 
-Each transparent local module places a logo viewport at x=40, y=10 and a centered smooth label beginning at y=72. Supported h3 elements contain local group-title SVGs; paragraphs contain fixed-size modules with meaningful alternatives. All twelve technologies have attributed logos, including Java and VS Code. Open groups wrap through GitHub's native inline image layout without enclosing panels.
+Each transparent local module places its logo viewport at x=40, y=10 and centered smooth label beginning at y=72. One paragraph contains all twelve fixed-size modules with meaningful alternatives. All technologies have attributed logos, including Java and VS Code. Native inline image layout supplies wrapping. Four earlier category-title assets remain generated but unused by README.md.
 
 ### Qualification blocks
 
-Two transparent title images precede selectable school and provider prose. The orange title reads BS COMPUTER / SCIENCE; the cyan title reads NC III / WEB DEVELOPMENT. The two smooth lines start at y=4 and y=30. Following paragraphs read Quezon City University and TESDA. Alternatives carry the full qualification names; no dates, proficiency or graduation claims are added.
+Two transparent title images precede selectable, bold and underlined school/provider text. Orange reads BS COMPUTER / SCIENCE; cyan reads NC III / WEB DEVELOPMENT. Both smooth lines use the same qualification size and begin at y=4 and y=37. Alternatives carry full qualification names; no dates, proficiency or graduation claims are added.
 
-### Linked connection banner
+### Continuous connection banner and links
 
-Deep navy at left and white at right share a modular blue/cyan/indigo edge. The header reads LET'S / CONNECT and a useful-software invitation. Four independently linked contact slices continue that geometry in two columns and two rows: Facebook and Instagram, then GitHub and Email. Actual HTML anchors preserve their destinations and native keyboard focus; links inside one SVG image are not used. Contact canvas and label roles increase on phone before scaling. GitHub's native table seams remain visible; this is a segmented banner, not a seamless image map.
+Deep navy at left and white at right share a modular blue/cyan/indigo edge. The image reads LET'S / CONNECT and a useful-software invitation, with Facebook, Instagram, GitHub and Email icons and labels together. Desktop uses four icons across; phone uses two rows of two within the continuous image. Responsive picture sources choose the appropriate composition.
+
+Four actual HTML text anchors immediately below preserve destinations and native keyboard focus. Image icons are illustrative rather than interactive image maps. Compact text links are explicitly user-approved; no custom touch-target size is claimed. Eight earlier contact slices remain generated for provenance but are unused by the active README.
 
 ## Do's and Don'ts
 
 - Do retain the primary reference's orange, blue and purple compositions and mirrored blue fields.
 - Do use smooth Open Sans Bezier outlines throughout active SVG lettering.
 - Do preserve the complete orange reduced-motion fallback.
-- Do keep technology modules at their declared dimensions and let each group wrap independently.
-- Do keep school/provider and About facts as native selectable prose.
-- Do keep four actual HTML contact links inside the common connection table boundary.
+- Do keep all twelve technology modules together at their declared dimensions and let them wrap.
+- Do keep About facts and highlighted school/provider names as native selectable text.
+- Do keep every social icon inside one continuous connection image and four actual text links immediately below.
 - Do retain attributed brand geometry, local font licenses and unchanged reference provenance.
 - Don't assert the unknown screenshot typeface is exactly Open Sans.
 - Don't add pixel typography, emojis, generated scenes, a cat or Featured Work to the active profile.
-- Don't promise custom README CSS, seamless table slices, SVG image-map links, hover controls or host-driven offscreen pausing.
+- Don't promise custom README CSS, SVG image-map links, hover controls or host-driven offscreen pausing.
 - Don't introduce proficiency, dates or graduation claims.
