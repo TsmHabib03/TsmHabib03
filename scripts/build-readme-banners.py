@@ -1,113 +1,194 @@
-"""Build raw, self-contained SVG geometry for the GitHub profile README.
+"""Build reference-led SVG banners with portable smooth vector lettering.
 
-The supplied collages guide composition; their JPEG pixels and watermarks are
-not edited or embedded. Silkscreen's bitmap lettering is converted into paths.
+Install fonttools and Pillow to rebuild. Open Sans is licensed under SIL OFL.
+Contact slices are individually linked in supported GitHub HTML because links
+inside SVG images cannot act as interactive image maps on a GitHub profile.
 """
-from pathlib import Path
+from functools import lru_cache
 from html import escape
-from PIL import Image, ImageDraw, ImageFont
+from pathlib import Path
+from fontTools.ttLib import TTFont
+from fontTools.varLib.instancer import instantiateVariableFont
+from fontTools.pens.svgPathPen import SVGPathPen
+from fontTools.pens.transformPen import TransformPen
+from fontTools.pens.boundsPen import BoundsPen
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "assets/readme"
-FONT = ROOT / "assets/fonts/silkscreen-latin.ttf"
-GROUND = "#0d1117"
-INK = "#edf2f7"
-ORANGE = "#ff8a00"
-CYAN = "#76d8f0"
+OUT = ROOT / 'assets/readme'
+FONT = ROOT / 'assets/fonts/open-sans-variable.ttf'
+INK = '#edf2f7'
+WHITE = '#ffffff'
+BLACK = '#232323'
+PALETTES = [
+    ('orange', '#ff8000', ['#ffe269', '#ffb528', '#ff9700', '#ff5b00', '#ed2400']),
+    ('blue', '#4098f3', ['#92e4fc', '#58c9f7', '#00dbe7', '#397ae4', '#7154ef']),
+    ('purple', '#a000d9', ['#f290f6', '#da5deb', '#b02ddd', '#8500c3', '#5e0098']),
+]
 
 
-def lettering(value, x, y, size, color=INK):
-    font = ImageFont.truetype(str(FONT), size)
-    bounds = font.getbbox(value)
-    mask = Image.new("L", (int(font.getlength(value)) + 2, bounds[3] - bounds[1] + 2))
-    ImageDraw.Draw(mask).text((0, -bounds[1]), value, font=font, fill=255)
-    runs = []
-    for row in range(mask.height):
-        start = None
-        for col in range(mask.width + 1):
-            on = col < mask.width and mask.getpixel((col, row)) > 127
-            if on and start is None:
-                start = col
-            if not on and start is not None:
-                runs.append(f"M{x+start} {y+row}h{col-start}v1h-{col-start}z")
-                start = None
-    return f'<path fill="{color}" d="{"".join(runs)}" aria-label="{escape(value)}"/>'
+@lru_cache(maxsize=4)
+def face(weight=600):
+    font = instantiateVariableFont(TTFont(FONT), {'wght': weight, 'wdth': 100}, inplace=True)
+    return font, font.getGlyphSet(), font.getBestCmap()
 
 
-def box(x, y, size, color, opacity=1):
-    return f'<rect x="{x}" y="{y}" width="{size}" height="{size}" fill="{color}" opacity="{opacity}"/>'
+def label_width(value, size, weight=600):
+    font, glyphs, cmap = face(weight)
+    return sum(glyphs[cmap[ord(c)]].width for c in value) * size / font['head'].unitsPerEm
 
 
-def document(width, height, title, description, body, motion=""):
+def lettering(value, x, y, size, color=INK, weight=600):
+    """Place true Bezier glyph outlines; y is the top of visible lettering."""
+    font, glyphs, cmap = face(weight)
+    scale = size / font['head'].unitsPerEm
+    top = 0
+    for c in value:
+        bounds = BoundsPen(glyphs)
+        glyphs[cmap[ord(c)]].draw(bounds)
+        if bounds.bounds:
+            top = max(top, bounds.bounds[3])
+    pen = SVGPathPen(glyphs)
+    cursor = x
+    for c in value:
+        glyph = glyphs[cmap[ord(c)]]
+        glyph.draw(TransformPen(pen, (scale, 0, 0, -scale, cursor, y + top * scale)))
+        cursor += glyph.width * scale
+    return f'<path fill="{color}" d="{pen.getCommands()}" aria-label="{escape(value)}"/>'
+
+
+def document(width, height, title, description, body, motion=''):
     return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" '
             f'viewBox="0 0 {width} {height}" role="img" aria-labelledby="title description">\n'
-            f'<title id="title">{escape(title)}</title>\n<desc id="description">{escape(description)}</desc>\n'
-            '<!-- Authored SVG source. Abstract square composition inspired by user-supplied references. '
-            'Lettering derived from Silkscreen under SIL OFL; see assets/fonts/OFL-silkscreen.txt. -->\n'
-            + motion + f'<rect width="{width}" height="{height}" fill="{GROUND}"/>\n'
-            + body + '\n</svg>\n')
+            f'<title id="title">{escape(title)}</title><desc id="description">{escape(description)}</desc>\n'
+            '<!-- Authored rectangular geometry; user reference JPEGs are not embedded or edited. '
+            'Open Sans glyph outlines: SIL OFL, assets/fonts/OFL-open-sans.txt. -->\n'
+            + motion + body + '\n</svg>\n')
+
+
+def scatter(width, height, index):
+    """Overlapping squares from reference 1, mirrored in the blue variation."""
+    name, field, colors = PALETTES[index]
+    unit = height / 8
+    edge = width * .50
+    parts = [f'<rect width="{width}" height="{height}" fill="white"/>',
+             f'<rect x="{edge}" width="{width-edge}" height="{height}" fill="{field}"/>']
+    for row in range(8):
+        for col in range(8):
+            x = edge + (col - 3) * unit
+            if col == 0 and row not in (2, 5, 6):
+                continue
+            if col == 1 and row in (0, 3, 7):
+                continue
+            if (col + row * 3) % 7 == 0:
+                continue
+            opacity = (.38, .58, .72, 1, .9, .8, .5, .25)[col]
+            parts.append(f'<rect x="{x:.2f}" y="{row*unit:.2f}" width="{unit:.2f}" '
+                         f'height="{unit:.2f}" fill="{colors[(row*3+col)%5]}" opacity="{opacity}"/>')
+    shapes = ''.join(parts)
+    return f'<g transform="translate({width} 0) scale(-1 1)">{shapes}</g>' if index == 1 else shapes
 
 
 def hero(mobile=False):
-    w, h = (600, 360) if mobile else (1200, 340)
-    edge = 400 if mobile else 860
-    grid = 40 if mobile else 48
-    parts = [f'<rect x="{edge}" width="{w-edge}" height="{h}" fill="{ORANGE}"/>']
-    # Dense orange dissolves into separated amber squares toward the dark text.
-    palette = ["#ffb02e", "#ff6300", "#e34800", "#ffc65a", "#f99617"]
-    for row in range(8):
-        for col in range(5):
-            x = edge + (col - 3) * grid
-            y = row * grid
-            if x < (350 if mobile else 710) or y >= h:
-                continue
-            if (row + col) % 4 == 0 or (col == 0 and row % 2):
-                continue
-            opacity = [0.15, 0.45, 0.72, 1, 1][col]
-            parts.append(box(x, y, grid, palette[(row * 3 + col) % len(palette)], opacity))
-    parts.append('<g class="pixels">')
-    for x, y, size, shade in ([(320, 48, 20, "#ffb02e"), (360, 288, 24, "#ff6300")]
-                             if mobile else [(644, 58, 24, "#ffb02e"), (686, 240, 24, "#ff6300"), (620, 282, 16, "#ffc65a")]):
-        parts.append(box(x, y, size, shade, .62))
-    parts.append('</g>')
-    parts.append('<g shape-rendering="crispEdges">')
-    if mobile:
-        parts += [lettering("HABIB", 32, 64, 48), lettering("JAUDIAN D.", 32, 126, 40),
-                  lettering("BSCS QCU", 32, 206, 22, CYAN), lettering("WEBDEVELOPER", 32, 244, 22, CYAN)]
-    else:
-        parts += [lettering("HABIB JAUDIAN D.", 56, 106, 48),
-                  lettering("BSCS QCU WEBDEVELOPER", 56, 182, 22, CYAN)]
-    parts.append('</g>')
-    motion = ('<style>.pixels{animation:pixel-shift 9s ease-in-out infinite alternate}'
-              '@keyframes pixel-shift{from{opacity:.7;transform:translateY(0)}to{opacity:1;transform:translateY(6px)}}'
-              '@media(prefers-reduced-motion:reduce){.pixels{animation:none}}</style>\n')
-    return document(w, h, "Habib Jaudian D. | BSCS QCU WEBDEVELOPER",
-                    "Dark orange abstract pixel banner inspired by the first supplied reference. "
-                    "Habib Jaudian D., BSCS student at Quezon City University and web developer.",
-                    '\n'.join(parts), motion)
+    w, h = (600, 400) if mobile else (1200, 384)
+    layers = []
+    for index, (name, field, colors) in enumerate(PALETTES):
+        parts = [scatter(w, h, index)]
+        if mobile:
+            parts = [f'<rect width="{w}" height="{h}" fill="white"/>',
+                     '<g transform="translate(0 210)">' + scatter(w, 190, index) + '</g>']
+            parts += [lettering('HABIB JAUDIAN D.', 32, 38, 43, BLACK, 700),
+                      lettering('BSCS QCU', 34, 106, 26, BLACK, 400),
+                      lettering('Building useful software,', 34, 154, 20, BLACK, 400),
+                      lettering('one project at a time.', 34, 181, 20, BLACK, 400)]
+            tx = 32 if index == 1 else 350
+            parts += [lettering('WEB', tx, 267, 42, WHITE if index == 2 else BLACK, 700),
+                      lettering('DEVELOPER', tx, 321, 25, WHITE if index == 2 else BLACK, 400)]
+        else:
+            x = 678 if index == 1 else 56
+            tx = 56 if index == 1 else 960
+            parts += [lettering('HABIB JAUDIAN D.', x, 76, 40, BLACK, 700),
+                      lettering('BSCS QCU', x, 137, 25, BLACK, 400),
+                      lettering('Building useful software,', x, 203, 19, BLACK, 400),
+                      lettering('one project at a time.', x, 231, 19, BLACK, 400),
+                      lettering('WEB', tx, 179, 46, WHITE if index == 2 else BLACK, 700),
+                      lettering('DEVELOPER', tx, 239, 27, WHITE if index == 2 else BLACK, 400)]
+        layers.append(f'<g class="variation {name}" opacity="{1 if index == 0 else 0}">'
+                      + ''.join(parts) + '</g>')
+    motion = ('<style>.orange{animation:orange-fade 18s ease-in-out infinite}'
+              '.blue{animation:blue-fade 18s ease-in-out infinite}'
+              '.purple{animation:purple-fade 18s ease-in-out infinite}'
+              '@keyframes orange-fade{0%,27.778%,100%{opacity:1}33.333%,94.444%{opacity:0}}'
+              '@keyframes blue-fade{0%,27.778%,66.667%,100%{opacity:0}33.333%,61.111%{opacity:1}}'
+              '@keyframes purple-fade{0%,61.111%,100%{opacity:0}66.667%,94.444%{opacity:1}}'
+              '@media(prefers-reduced-motion:reduce){.variation{animation:none}.orange{opacity:1}'
+              '.blue,.purple{opacity:0}}</style>\n')
+    return document(w, h, 'HABIB JAUDIAN D. | BSCS QCU WEBDEVELOPER',
+                    'Orange, blue and purple square-banner variations fade every six seconds. '
+                    'Habib Jaudian D., BSCS QCU web developer. Building useful software, one project at a time. '
+                    'Reduced motion shows the complete orange variation.', ''.join(layers), motion)
+
+
+def connect_ground(height=560):
+    parts = [f'<rect width="1200" height="{height}" fill="white"/>',
+             f'<rect width="380" height="{height}" fill="#080b1a"/>']
+    pattern = [(0,0,'#468cc8'),(0,1,'#66c9f3'),(1,1,'#394586'),(1,2,'#468cc8'),
+               (2,2,'#66c9f3'),(3,0,'#394586'),(3,1,'#468cc8'),
+               (4,-1,'#394586'),(4,0,'#468cc8'),(4,2,'#468cc8')]
+    for offset in range(0, height, 300):
+        for row, col, color in pattern:
+            parts.append(f'<rect x="{308+col*72}" y="{offset+row*60}" width="72" height="60" fill="{color}"/>')
+    return ''.join(parts)
 
 
 def connection(mobile=False):
-    w, h = (600, 240) if mobile else (1200, 220)
-    edge, unit = (100, 40) if mobile else (320, 44)
-    parts = [f'<rect width="{edge}" height="{h}" fill="#101c30"/>']
-    for row, col, shade, alpha in [(0,0,"#3f83bf",1),(0,1,"#67c7ef",1),(1,1,"#29437c",1),
-                                   (1,2,"#3f83bf",.8),(2,2,"#76d8f0",.68),(3,1,"#67c7ef",.9),
-                                   (4,0,"#29437c",1),(4,1,"#3f83bf",1),(4,2,"#67c7ef",.4)]:
-        parts.append(box(edge + (col - 1) * unit, row * unit, unit, shade, alpha))
-    parts.append('<g shape-rendering="crispEdges">')
-    x = 220 if mobile else 590
-    parts += [lettering("CONNECT", x, 72, 36, CYAN),
-              lettering("LET'S BUILD", x, 134, 18), lettering("SOMETHING USEFUL.", x, 162, 18)]
-    parts.append('</g>')
-    return document(w, h, "Connect with Habib Jaudian D.",
-                    "Blue and cyan modular squares inspired by the second supplied reference. "
-                    "Connect. Let's build something useful. Contact links follow below.", '\n'.join(parts))
+    if mobile:
+        body = '<g transform="scale(.5)">' + connect_ground() + '</g>'
+        body += lettering("LET'S", 20, 40, 35, WHITE, 700) + lettering('CONNECT', 20, 90, 29, WHITE, 700)
+        body += lettering('BUILD SOMETHING', 282, 50, 25, BLACK, 600)
+        body += lettering('USEFUL.', 282, 89, 25, BLACK, 600)
+        return document(600, 160, 'Connect with Habib Jaudian D.',
+                        "Let's connect. Build something useful. Social links are inside the banner below.", body)
+    body = connect_ground() + lettering("LET'S", 28 if mobile else 44, 50, 49, WHITE, 700)
+    body += lettering('CONNECT', 28 if mobile else 44, 120, 45, WHITE, 700)
+    body += lettering('BUILD SOMETHING USEFUL.', 525 if mobile else 570, 83, 27 if mobile else 31, BLACK, 600)
+    body += lettering('Choose a channel and say hello.', 525 if mobile else 570, 135, 22 if mobile else 21, BLACK, 400)
+    return document(1200, 220, 'Connect with Habib Jaudian D.',
+                    "Let's connect. Build something useful. Linked social sections are inside this banner's table.", body)
 
 
-if __name__ == "__main__":
+def contact(slug, label, column, row, mobile=False):
+    import re
+    raw = (ROOT / 'assets/marks' / f'{slug}.svg').read_text(encoding='utf-8')
+    inner = re.sub(r'^.*?<svg\b[^>]*>', '', raw, count=1, flags=re.S)
+    inner = re.sub(r'<(?:title|desc)\b.*?</(?:title|desc)>', '', inner, flags=re.S)
+    inner = re.sub(r'</svg>\s*$', '', inner)
+    color = WHITE if column == 0 else BLACK
+    crop_height = 300 if mobile else 170
+    x, y = column * 600, 220 + row * crop_height
+    center = 178 if column == 0 else 880
+    body = connect_ground(820 if mobile else 560)
+    if slug == 'email':
+        inner = '<rect x="3" y="6" width="22" height="16" rx="2" fill="#168bbd"/><path d="M4 7l10 8L24 7" fill="none" stroke="white" stroke-width="1.8"/>'
+    icon_size, font_size = (140, 64) if mobile else (56, 27)
+    center = (178 if column == 0 else 900) if mobile else center
+    body += f'<svg x="{center-icon_size/2}" y="{y+20}" width="{icon_size}" height="{icon_size}" viewBox="0 0 28 28">{inner}</svg>'
+    body += lettering(label, center-label_width(label, font_size)/2, y+190 if mobile else y+97, font_size, color)
+    return (document(600, crop_height, label, f'Contact Habib on {label}.', body)
+            .replace(f'viewBox="0 0 600 {crop_height}"', f'viewBox="{x} {y} 600 {crop_height}"'))
+
+
+def assets():
+    result = {'profile-banner.svg': hero(), 'profile-banner-mobile.svg': hero(True),
+              'connect-banner.svg': connection(), 'connect-banner-mobile.svg': connection(True)}
+    for slug, label, column, row in [('facebook','Facebook',0,0), ('instagram','Instagram',1,0),
+                                      ('github','GitHub',0,1), ('email','Email',1,1)]:
+        result[f'connect-{slug}.svg'] = contact(slug, label, column, row)
+        result[f'connect-{slug}-mobile.svg'] = contact(slug, label, column, row, True)
+    return result
+
+
+if __name__ == '__main__':
     OUT.mkdir(exist_ok=True)
-    for name, source in {"profile-banner.svg": hero(), "profile-banner-mobile.svg": hero(True),
-                         "connect-banner.svg": connection(), "connect-banner-mobile.svg": connection(True)}.items():
-        (OUT / name).write_text(source, encoding="utf-8")
+    for name, source in assets().items():
+        (OUT / name).write_text(source, encoding='utf-8')
         print(name)

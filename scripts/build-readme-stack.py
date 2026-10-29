@@ -1,8 +1,7 @@
-"""Build transparent, labeled brand logos and pixel headings for the README."""
+"""Build transparent brand logos with smooth Open Sans labels for the README."""
 import importlib.util
 from html import escape
 from pathlib import Path
-from PIL import ImageFont
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -31,12 +30,12 @@ def svg(width, height, title, description, body):
             f'viewBox="0 0 {width} {height}" role="img" aria-labelledby="title description">\n'
             f'<title id="title">{escape(title)}</title><desc id="description">{escape(description)}</desc>\n'
             '<!-- Transparent SVG. Brand sources: assets/icons; attribution: assets/README.md. '
-            'Silkscreen lettering is outlined under SIL OFL. -->\n'
+            'Open Sans lettering is outlined under SIL OFL. -->\n'
             + body + '\n</svg>\n')
 
 
 def label_width(label, size):
-    return ImageFont.truetype(str(banners.FONT), size).getlength(label)
+    return banners.label_width(label, size)
 
 
 def technology(slug, label):
@@ -44,22 +43,21 @@ def technology(slug, label):
     # Exactly 48px logo viewport; the 128px module never scales in the README.
     symbol = brands.icon_symbol(slug, flat=True)
     lettering = banners.lettering(label, round((width-label_width(label, 14))/2), 72, 14)
-    return svg(width, height, label, f"{label} brand logo with pixel lettering.",
+    return svg(width, height, label, f"{label} brand logo with smooth lettering.",
                f'<defs>{symbol}</defs><use href="#icon-{slug}" x="40" y="10" width="48" height="48"/>\n'
-               f'<g shape-rendering="crispEdges">{lettering}</g>')
+               + lettering)
 
 
 def heading(label, color):
     width = int(label_width(label, 20)) + 4
     return svg(width, 24, label, f"{label} technology group.",
-               '<g shape-rendering="crispEdges">' + banners.lettering(label, 0, 4, 20, color) + '</g>')
+               banners.lettering(label, 0, 4, 20, color))
 
 
 def qualification(title, first, second, color):
     return svg(264, 48, title, title,
-               '<g shape-rendering="crispEdges">'
-               + banners.lettering(first, 0, 4, 20, color)
-               + banners.lettering(second, 0, 30, 18, color) + '</g>')
+               banners.lettering(first, 0, 4, 20, color)
+               + banners.lettering(second, 0, 30, 18, color))
 
 
 def assets():

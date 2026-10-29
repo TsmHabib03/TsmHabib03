@@ -1,18 +1,18 @@
-<!-- Self-contained SVG source supplies pixel lettering and abstract square geometry.
+<!-- Self-contained SVG source supplies smooth lettering and abstract square geometry.
      The full profile renders here on GitHub. -->
 
 <picture>
   <source media="(max-width: 640px)" srcset="assets/readme/profile-banner-mobile.svg">
-  <img src="assets/readme/profile-banner.svg" width="100%" alt="HABIB JAUDIAN D. | BSCS QCU WEBDEVELOPER — dark orange abstract pixel banner">
+  <img src="assets/readme/profile-banner.svg" width="100%" alt="HABIB JAUDIAN D. | BSCS QCU WEBDEVELOPER — orange, blue and purple abstract banner variations with a fade transition">
 </picture>
 
-<h2><samp>About</samp></h2>
+<h2>About</h2>
 
 <p><strong>Building useful software, one project at a time.</strong></p>
 
 <p>I'm a BSCS student at Quezon City University who enjoys building web applications and exploring software engineering.</p>
 
-<h2><samp>Tech Stack</samp></h2>
+<h2>Tech Stack</h2>
 
 <h3><img src="assets/readme/heading-frontend.svg" height="24" alt="Frontend"></h3>
 <p>
@@ -42,7 +42,7 @@
   <img src="assets/readme/tech-vscode.svg" width="128" height="94" alt="VS Code">
 </p>
 
-<h2><samp>Education</samp></h2>
+<h2>Education</h2>
 
 <h3><img src="assets/readme/education-bscs.svg" width="264" height="48" alt="BS Computer Science"></h3>
 <p>Quezon City University</p>
@@ -50,19 +50,22 @@
 <h3><img src="assets/readme/education-tesda.svg" width="264" height="48" alt="NC III — Web Development"></h3>
 <p>TESDA</p>
 
-<h2><samp>Connection</samp></h2>
+<h2>Connection</h2>
 
+<!-- A single banner table keeps each social image independently clickable on GitHub. -->
+<table width="100%" cellpadding="0" cellspacing="0">
+<tr><td colspan="2">
 <picture>
   <source media="(max-width: 640px)" srcset="assets/readme/connect-banner-mobile.svg">
-  <img src="assets/readme/connect-banner.svg" width="100%" alt="Connect with Habib — blue and cyan modular pixel banner. Let's build something useful.">
+  <img src="assets/readme/connect-banner.svg" width="100%" alt="Let's connect. Build something useful. Choose a channel and say hello.">
 </picture>
-
-<p align="center">
-  <a href="https://www.facebook.com/habib.jaudian.1"><img src="assets/marks/facebook.svg" width="32" height="32" alt="Facebook"></a>
-  &nbsp;&nbsp;&nbsp;
-  <a href="https://www.instagram.com/tsmhabib03?igsh=MWFoaTBnOXcxZ3dqdg%3D%3D"><img src="assets/marks/instagram.svg" width="32" height="32" alt="Instagram"></a>
-  &nbsp;&nbsp;&nbsp;
-  <a href="https://github.com/TsmHabib03"><img src="assets/marks/github.svg" width="32" height="32" alt="GitHub"></a>
-  &nbsp;&nbsp;&nbsp;
-  <a href="mailto:jaudianhabib879@gmail.com"><img src="assets/marks/email.svg" width="32" height="32" alt="Email"></a>
-</p>
+</td></tr>
+<tr>
+<td width="50%"><a href="https://www.facebook.com/habib.jaudian.1"><picture><source media="(max-width: 640px)" srcset="assets/readme/connect-facebook-mobile.svg"><img src="assets/readme/connect-facebook.svg" width="100%" alt="Facebook"></picture></a></td>
+<td width="50%"><a href="https://www.instagram.com/tsmhabib03?igsh=MWFoaTBnOXcxZ3dqdg%3D%3D"><picture><source media="(max-width: 640px)" srcset="assets/readme/connect-instagram-mobile.svg"><img src="assets/readme/connect-instagram.svg" width="100%" alt="Instagram"></picture></a></td>
+</tr>
+<tr>
+<td width="50%"><a href="https://github.com/TsmHabib03"><picture><source media="(max-width: 640px)" srcset="assets/readme/connect-github-mobile.svg"><img src="assets/readme/connect-github.svg" width="100%" alt="GitHub"></picture></a></td>
+<td width="50%"><a href="mailto:jaudianhabib879@gmail.com"><picture><source media="(max-width: 640px)" srcset="assets/readme/connect-email-mobile.svg"><img src="assets/readme/connect-email.svg" width="100%" alt="Email"></picture></a></td>
+</tr>
+</table>
