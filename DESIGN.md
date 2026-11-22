@@ -1,239 +1,231 @@
 ---
-name: Reference Square GitHub Profile
-description: Three fading identity variations, unified technology logos and one continuous connection banner on GitHub.
+name: Habib Reference Globe GitHub Profile
+description: Stationary Geist identity beside a rotating geographic dot globe, with
+  unified technologies, qualifications and native contact links.
 colors:
-  ink: "#edf2f7"
-  white: "#ffffff"
-  black: "#232323"
-  hero-orange: "#ff8000"
-  hero-blue: "#4098f3"
-  hero-purple: "#a000d9"
-  orange-pale: "#ffe269"
-  orange-light: "#ffb528"
-  orange-middle: "#ff9700"
-  orange-hot: "#ff5b00"
-  orange-deep: "#ed2400"
-  blue-pale: "#92e4fc"
-  blue-light: "#58c9f7"
-  blue-cyan: "#00dbe7"
-  blue-middle: "#397ae4"
-  blue-violet: "#7154ef"
-  purple-pale: "#f290f6"
-  purple-light: "#da5deb"
-  purple-middle: "#b02ddd"
-  purple-deep: "#8500c3"
-  purple-dark: "#5e0098"
-  connection-ground: "#080b1a"
-  connection-blue: "#468cc8"
-  connection-cyan: "#66c9f3"
-  connection-indigo: "#394586"
-  cyan: "#76d8f0"
-  stack-orange: "#ff8a00"
-  lavender: "#c5a0ef"
-  stack-amber: "#f4cd70"
+  ink: '#edf2f7'
+  white: '#ffffff'
+  black: '#232323'
+  connection-ground: '#080b1a'
+  connection-blue: '#468cc8'
+  connection-cyan: '#66c9f3'
+  connection-indigo: '#394586'
+  cyan: '#76d8f0'
+  stack-orange: '#ff8a00'
+  lavender: '#c5a0ef'
+  stack-amber: '#f4cd70'
+  identity-ink: '#0a0a0a'
+  reference-blue: '#2b4ff7'
+  brand-blue: '#5b6ef5'
 typography:
   display:
-    fontFamily: "Open Sans"
-    fontSize: "40px"
-    fontWeight: 700
+    fontFamily: Geist
+    fontSize: 68px
+    fontWeight: 600
   display-mobile:
-    fontFamily: "Open Sans"
-    fontSize: "43px"
-    fontWeight: 700
-  identity:
-    fontFamily: "Open Sans"
-    fontSize: "25px"
+    fontFamily: Geist
+    fontSize: 60px
+    fontWeight: 600
+  identity-role:
+    fontFamily: Geist Mono
+    fontSize: 27px
     fontWeight: 400
-  identity-mobile:
-    fontFamily: "Open Sans"
-    fontSize: "26px"
+  identity-role-mobile:
+    fontFamily: Geist Mono
+    fontSize: 23px
     fontWeight: 400
-  hero-caption:
-    fontFamily: "Open Sans"
-    fontSize: "19px"
+  identity-university:
+    fontFamily: Geist Mono
+    fontSize: 23px
     fontWeight: 400
-  hero-caption-mobile:
-    fontFamily: "Open Sans"
-    fontSize: "20px"
+  identity-university-mobile:
+    fontFamily: Geist Mono
+    fontSize: 18px
     fontWeight: 400
-  web:
-    fontFamily: "Open Sans"
-    fontSize: "46px"
-    fontWeight: 700
-  web-mobile:
-    fontFamily: "Open Sans"
-    fontSize: "42px"
-    fontWeight: 700
-  developer:
-    fontFamily: "Open Sans"
-    fontSize: "27px"
-    fontWeight: 400
-  developer-mobile:
-    fontFamily: "Open Sans"
-    fontSize: "25px"
+  identity-handle:
+    fontFamily: Geist Mono
+    fontSize: 19px
     fontWeight: 400
   connection-first-line:
-    fontFamily: "Open Sans"
-    fontSize: "49px"
+    fontFamily: Open Sans
+    fontSize: 49px
     fontWeight: 700
   connection-second-line:
-    fontFamily: "Open Sans"
-    fontSize: "45px"
+    fontFamily: Open Sans
+    fontSize: 45px
     fontWeight: 700
   connection-mobile-first-line:
-    fontFamily: "Open Sans"
-    fontSize: "35px"
+    fontFamily: Open Sans
+    fontSize: 35px
     fontWeight: 700
   connection-mobile-second-line:
-    fontFamily: "Open Sans"
-    fontSize: "29px"
+    fontFamily: Open Sans
+    fontSize: 29px
     fontWeight: 700
   connection-invitation:
-    fontFamily: "Open Sans"
-    fontSize: "31px"
+    fontFamily: Open Sans
+    fontSize: 31px
     fontWeight: 600
   connection-invitation-mobile:
-    fontFamily: "Open Sans"
-    fontSize: "25px"
+    fontFamily: Open Sans
+    fontSize: 25px
     fontWeight: 600
   connection-caption:
-    fontFamily: "Open Sans"
-    fontSize: "21px"
+    fontFamily: Open Sans
+    fontSize: 21px
     fontWeight: 400
   contact-label:
-    fontFamily: "Open Sans"
-    fontSize: "25px"
+    fontFamily: Open Sans
+    fontSize: 25px
     fontWeight: 600
   contact-label-mobile:
-    fontFamily: "Open Sans"
-    fontSize: "30px"
+    fontFamily: Open Sans
+    fontSize: 30px
     fontWeight: 600
   technology-label:
-    fontFamily: "Open Sans"
-    fontSize: "14px"
+    fontFamily: Open Sans
+    fontSize: 14px
     fontWeight: 600
   qualification-first-line:
-    fontFamily: "Open Sans"
-    fontSize: "24px"
+    fontFamily: Open Sans
+    fontSize: 24px
     fontWeight: 600
   qualification-second-line:
-    fontFamily: "Open Sans"
-    fontSize: "24px"
+    fontFamily: Open Sans
+    fontSize: 24px
     fontWeight: 600
 rounded:
-  square: "0px"
+  square: 0px
 components:
   hero:
-    backgroundColor: "{colors.white}"
-    textColor: "{colors.black}"
-    typography: "{typography.display}"
-    width: "1200px"
-    height: "384px"
+    backgroundColor: '{colors.white}'
+    textColor: '{colors.identity-ink}'
+    typography: '{typography.display}'
+    width: 1200px
+    height: 675px
   hero-mobile:
-    backgroundColor: "{colors.white}"
-    textColor: "{colors.black}"
-    typography: "{typography.display-mobile}"
-    width: "600px"
-    height: "400px"
+    backgroundColor: '{colors.white}'
+    textColor: '{colors.identity-ink}'
+    typography: '{typography.display-mobile}'
+    width: 600px
+    height: 760px
   connection:
-    backgroundColor: "{colors.white}"
-    textColor: "{colors.black}"
-    width: "1200px"
-    height: "310px"
+    backgroundColor: '{colors.white}'
+    textColor: '{colors.black}'
+    width: 1200px
+    height: 310px
   connection-mobile:
-    backgroundColor: "{colors.white}"
-    textColor: "{colors.black}"
-    width: "600px"
-    height: "440px"
+    backgroundColor: '{colors.white}'
+    textColor: '{colors.black}'
+    width: 600px
+    height: 440px
   contact-icon:
-    width: "72px"
-    height: "72px"
+    width: 72px
+    height: 72px
   contact-icon-mobile:
-    width: "80px"
-    height: "80px"
+    width: 80px
+    height: 80px
   technology-module:
-    textColor: "{colors.ink}"
-    typography: "{typography.technology-label}"
-    width: "128px"
-    height: "94px"
+    textColor: '{colors.ink}'
+    typography: '{typography.technology-label}'
+    width: 128px
+    height: 94px
   technology-logo:
-    width: "48px"
-    height: "48px"
+    width: 48px
+    height: 48px
   qualification-bscs:
-    textColor: "{colors.stack-orange}"
-    typography: "{typography.qualification-first-line}"
-    width: "288px"
-    height: "64px"
+    textColor: '{colors.stack-orange}'
+    typography: '{typography.qualification-first-line}'
+    width: 288px
+    height: 64px
   qualification-tesda:
-    textColor: "{colors.cyan}"
-    typography: "{typography.qualification-first-line}"
-    width: "288px"
-    height: "64px"
+    textColor: '{colors.cyan}'
+    typography: '{typography.qualification-first-line}'
+    width: 288px
+    height: 64px
 ---
 
-# Design System: Reference Square GitHub Profile
+# Design System: Habib Reference Globe GitHub Profile
 
 ## Overview
 
-**Creative North Star: "Reference square frame"**
+**Creative North Star: "Reference globe identity"**
 
-White and saturated square fields introduce Habib's identity through three complete orange, blue and purple variations. Smooth sans-serif lettering gives the name and WEB / DEVELOPER hierarchy the character of the user's named reference. A deep navy and white modular connection banner closes the reading sequence with all four social icons and labels in one continuous image, followed by a compact line of native text links.
+Stationary identity and supplied brand marks sit on a white field beside a saturated blue geographic globe. Geist supplies a clear sans-serif name and Geist Mono supplies the compact role, university and handle. Fine open rings describe real land coordinates; their calculated rotation creates the banner's only motion. A deep navy and white modular connection banner retains all four social icons and labels in one continuous image, followed by native text links.
 
-The full experience renders in README.md. The primary reference governs the three identity compositions; the second reference governs the modular connection geometry. Authored self-contained SVG paths reproduce their abstract material while GitHub supplies native headings, highlighted prose and link behavior. The exact reference typeface is unknown; Open Sans is a licensed visual match.
+The complete experience renders in README.md. The user-supplied JPEG and MP4 govern the new identity graphic and motion character; the accepted connection reference remains authoritative for its own component. The identity is rendered from code into responsive GIFs and PNG stills. The remaining self-contained SVG assets retain Open Sans Bezier lettering and attributed logos, while GitHub supplies headings, institution text and link behavior. Geist is a supported reference match; the exact JPEG typeface is unconfirmed.
 
 **Key Characteristics:**
 
-- Three saturated identity variations with full-banner fades.
-- Smooth outlined sans-serif lettering throughout active SVG assets.
-- Prominent phone identity above the decorative square field.
+- Stationary identity with one rotating geographic dot globe.
+- White and saturated blue fields with the supplied favicon and Bitstream h geometry.
+- Geist display lettering and Geist Mono supporting labels in the identity raster.
 - One native GitHub column with all twelve technology modules in one wrapping group.
-- Larger selectable About text and bold, underlined institution names.
-- Stacked qualification titles with equally sized lines.
-- One continuous connection image containing every social icon, with compact native links below.
+- Selectable, bold and underlined institution names below stacked qualification titles.
+- One continuous connection image containing every social icon, with native links below.
+- Responsive GIF delivery with first-priority reduced-motion PNG sources.
 
 ## Colors
 
-White and black establish the reference's light field and readable foreground. Orange, blue and purple form the identity banner's saturated fields; pale, middle and deep accents build the scattered square transitions. Blue mirrors the desktop fields. Purple uses white WEB / DEVELOPER lettering to preserve contrast.
+### Primary
 
-Deep navy and white form the connection fields. Connection blue, cyan and indigo create the repeating modular edge. Facebook uses its blue tint (#1877f2), Instagram purple (#a236b4), GitHub black and the smooth authored email envelope cyan-blue (#168bbd). These brand-specific tints come from the connection builder.
+Reference blue forms the globe field. Brand blue belongs to the supplied favicon; the supplied Bitstream h appears as an approved white variant on the globe field. White remains exact in both PNG and GIF identity grounds, with identity ink carrying all banner lettering. The generator fixes these flat palette entries before GIF encoding.
 
-Transparent technology modules expose GitHub's canvas. Attributed Devicon geometry retains available brand colors and the generator's flat display tints. Stack orange identifies BS Computer Science and cyan identifies NC III Web Development. Retained amber and lavender accents belong to unchanged logo/provenance inputs; there are no active category headings. GitHub owns the surrounding page theme and native text colors.
+### Secondary
+
+Deep navy and white form the unchanged connection fields. Connection blue, cyan and indigo create the repeating modular edge. Facebook uses its blue tint (#1877f2), Instagram purple (#a236b4), GitHub black and the smooth authored email envelope cyan-blue (#168bbd). These brand-specific tints come from the connection builder.
+
+### Tertiary
+
+Stack orange identifies BS Computer Science and cyan identifies NC III Web Development. Retained amber and lavender accents belong to unchanged logo/provenance inputs; there are no active category headings.
+
+### Neutral
+
+White and identity ink establish the banner's light field and readable foreground. Transparent technology modules expose GitHub's canvas. Attributed Devicon geometry retains available brand colors and the generator's flat display tints. GitHub owns the surrounding page theme and native text colors. The frontmatter owns the authored color primitives.
 
 ## Typography
 
-Open Sans variable font is the build-time source for active SVG lettering, licensed under SIL OFL. FontTools instantiates the normal-width weight and converts real Bezier glyph outlines into paths. Browser rendering needs no font download, embedded font or raster lettering. Frontmatter sizes are generator inputs in SVG coordinates; responsive banners scale with displayed width, while technology and qualification images retain their declared dimensions.
+The identity uses local SIL OFL Geist and Geist Mono variable fonts at build time, rasterized with Pillow. The name is semibold; the uppercase role, university and handle are regular mono. Frontmatter sizes are generator inputs in raster coordinates; the whole banner scales with displayed width. Geist matches the reference's lettering character, while exact JPEG font identification remains unconfirmed.
 
-The name and WEB roles are bold; identity subtitles, supporting hero copy and DEVELOPER are regular. Connection opening lines are bold, invitation and contact labels semibold, and supporting copy regular. Technology captions and both qualification lines use smooth semibold outlines. Native About and institution h3 elements rendered at 20px in the sanitized GitHub preview; strong plus ins preserves bold, underlined institution names. Those native sizes and margins are platform-controlled rather than an authored README stylesheet.
+Open Sans remains the build-time source for the existing connection, technology and qualification SVG lettering. FontTools instantiates the normal-width weight and converts real Bezier glyph outlines into paths. These SVGs need no font download or embedded font. Connection opening lines are bold, invitation and contact labels semibold, and supporting copy regular. Technology captions and both qualification lines retain smooth semibold outlines. Technology and qualification images retain their declared dimensions.
 
-**The Native Text Rule.** Keep About facts and institution highlights in supported native HTML so they remain selectable and survive GitHub sanitization.
+Native institution h3 elements retain GitHub typography and strong plus ins for bold, underlined names. Their sizes and margins are platform-controlled rather than an authored README stylesheet. The earlier sanitized preview observed 20px institution text; this banner-only change preserves those elements.
 
-The exact screenshot face is not established. Use the matched Open Sans source without claiming exact identification. Dormant Silkscreen assets and their license remain retained legacy provenance.
+**The Native Text Rule.** Keep institution highlights in supported native HTML so they remain selectable and survive GitHub sanitization.
+
+Dormant Silkscreen and legacy square-identity Open Sans assets remain retained provenance, rather than the active identity type system.
 
 ## Layout
 
-README.md uses one column: identity, About, one Tech Stack group, Education and Connection. One paragraph holds all twelve technology modules in their approved order. Sanitized previews show two columns at 320px and 375px, five at 768px and six at 1280px without shrinking modules. Each qualification title precedes a native highlighted institution h3.
+README.md uses one column: identity, one Tech Stack group, Education and Connection. The user removed About. One paragraph holds all twelve technology modules in their approved order. The earlier sanitized previews established two phone columns, five intermediate and six desktop without shrinking modules; the banner-only redesign preserves that group. Each qualification title precedes a native highlighted institution h3.
 
-Picture sources select mobile banners at 640px or below. Desktop identity places the name and WEB / DEVELOPER on opposite fields, mirrored in blue. Phone layouts keep the identity above the decorative square field. The connection desktop composition places four icons across the white field; phone places them in a two-by-two layout beneath the modular header, within one image. A centered native paragraph immediately below holds four text-only contact links. GitHub controls section spacing, typography and focus behavior.
+Picture sources select mobile banners at 640px or below. Desktop identity uses a 1200 x 675 canvas, with a 670px white field at left and a 530px blue globe field at right. Phone uses a 600 x 760 canvas: 300px white identity above a 460px globe field. The supplied favicon and handle sit above the name; role and university follow below. The supplied white Bitstream h stays in the blue field's lower-right corner.
+
+**The Stationary Identity Rule.** Keep the name, role, university and supplied brand marks still; animate only the geographic globe.
+
+The connection desktop composition places four icons across the white field; phone places them in a two-by-two layout beneath the modular header, within one image. A centered native paragraph immediately below holds four text-only contact links. GitHub controls section spacing, typography and focus behavior.
 
 **The Continuous Banner Rule.** Keep all four social icons in a single responsive image; place working native text links directly below it.
 
 ## Elevation & Depth
 
-Active banners are flat. Overlapping rectangles, saturated fields and opacity create abstract depth. No shadows, gradients, blur or physical-material simulation are used. Three complete identity layers crossfade; individual squares do not drift independently.
+Identity fields are flat, with no shadows or blur. The globe's orthographic projection and depth-faded open rings create spatial depth directly from geographic coordinates; rear rings remain faint and front rings brighter. Antialiased ring edges are rasterized from code. The existing connection uses overlapping rectangles and flat fields for abstract depth. Legacy full-banner square fades are retained generator outputs, unused by the active README.
 
 ## Shapes
 
-Rectangular canvases, square identity scatter and rectangular connection modules define the visual language. Identity scatter divides each decorative field into eight rows; mobile applies it only to the lower field. The connection uses one navy/white ground with a repeating blue/cyan/indigo edge. Brand marks use attributed vector silhouettes; email uses smooth authored rounded-rectangle and envelope-line geometry.
+Rectangular canvases divide white identity and blue globe fields. Staggered open circular rings form the geographic sphere; their computed positions rotate as a single projection. Supplied brand geometry remains exact, including its small rounded fragments. The unchanged connection uses one navy/white ground with a repeating blue/cyan/indigo modular edge. Technology brand marks retain attributed vector silhouettes; email retains smooth authored rounded-rectangle and envelope-line geometry.
 
 ## Components
 
-### Identity variations
+### Globe identity banner
 
-Orange and purple place identity left and WEB / DEVELOPER right; blue mirrors desktop fields. Phone identity stays above geometry in all states. Three full-banner layers run an eighteen-second loop, each holding five seconds and crossfading one second with ease-in-out interpolation. Reduced motion disables the animations and shows complete orange. Embedded SVG images provide no host callbacks for offscreen pausing or README hover controls.
+The exact name is Habib Jaudian D., followed by WEB DEVELOPER and BSCS · QUEZON CITY UNIVERSITY. A local supplied favicon accompanies TSMHABIB03. Geographic sampling of Natural Earth land coordinates feeds the orthographic projection. One full rotation loops in ten seconds across 150 frames at an average 15 fps; GIF delays follow 70/60/70ms to preserve that exact total. Text and marks stay still. The fixed palette preserves exact identity white in every frame.
+
+Two responsive GIFs render directly on GitHub. Picture sources place reduced-motion phone and desktop PNG stills first, ahead of the phone GIF and desktop img fallback. This was verified in the sanitized browser preview. GIF images provide no scripted README controls or host callbacks for offscreen pausing. Every shipping raster carries source/generation provenance, with hashes and licenses recorded alongside the assets.
 
 ### Native information sections
 
-Supported h2 section headings and larger h3 About statements carry the profile facts. Quezon City University in About, Quezon City University in Education and TESDA in Education use strong plus ins. Exact approved text remains selectable. GitHub supplies the native typography, underline, spacing and link states.
+Supported h2 headings carry Tech Stack, Education and Connection. Quezon City University and TESDA in Education use native h3 with strong plus ins. GitHub supplies typography, underline, spacing and link states. No dates, proficiency or graduation claims are added.
 
 ### Unified technology modules
 
@@ -251,14 +243,16 @@ Four actual HTML text anchors immediately below preserve destinations and native
 
 ## Do's and Don'ts
 
-- Do retain the primary reference's orange, blue and purple compositions and mirrored blue fields.
-- Do use smooth Open Sans Bezier outlines throughout active SVG lettering.
-- Do preserve the complete orange reduced-motion fallback.
+- Do preserve the white identity field, reference-blue globe field and supplied brand geometry.
+- Do use Geist and Geist Mono for the identity and retain Open Sans outlines for the existing SVG components.
+- Do keep the identity stationary and render one ten-second full globe rotation.
+- Do place reduced-motion PNG sources before the responsive GIF sources.
 - Do keep all twelve technology modules together at their declared dimensions and let them wrap.
-- Do keep About facts and highlighted school/provider names as native selectable text.
+- Do keep highlighted school/provider names as native selectable text.
 - Do keep every social icon inside one continuous connection image and four actual text links immediately below.
-- Do retain attributed brand geometry, local font licenses and unchanged reference provenance.
-- Don't assert the unknown screenshot typeface is exactly Open Sans.
-- Don't add pixel typography, emojis, generated scenes, a cat or Featured Work to the active profile.
+- Do retain local font licenses, geography attribution and raster provenance.
+- Don't assert the unknown JPEG typeface is exactly Geist.
+- Don't ship reference video frames as globe animation or alter the supplied brand geometry.
+- Don't restore the removed About section or the legacy square identity composition in this approved surface.
 - Don't promise custom README CSS, SVG image-map links, hover controls or host-driven offscreen pausing.
 - Don't introduce proficiency, dates or graduation claims.

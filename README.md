@@ -1,16 +1,11 @@
-<!-- Self-contained SVG source supplies smooth lettering and abstract square geometry.
-     The full profile renders here on GitHub. -->
+<!-- Animated geographic globe rendered from code; GIF works directly on GitHub. -->
 
 <picture>
-  <source media="(max-width: 640px)" srcset="assets/readme/profile-banner-mobile.svg">
-  <img src="assets/readme/profile-banner.svg" width="100%" alt="HABIB JAUDIAN D. | BSCS QCU WEBDEVELOPER — orange, blue and purple abstract banner variations with a fade transition">
+  <source media="(prefers-reduced-motion: reduce) and (max-width: 640px)" srcset="assets/readme/profile-globe-mobile-still.png">
+  <source media="(prefers-reduced-motion: reduce)" srcset="assets/readme/profile-globe-still.png">
+  <source media="(max-width: 640px)" srcset="assets/readme/profile-globe-mobile.gif">
+  <img src="assets/readme/profile-globe.gif" width="100%" alt="Habib Jaudian D. — Web Developer. BSCS · Quezon City University. Rotating dotted globe with Habib’s Bitstream h logo.">
 </picture>
-
-<h2>About</h2>
-
-<h3>Building useful software, one project at a time.</h3>
-
-<h3>I'm a BSCS student at <strong><ins>Quezon City University</ins></strong> who enjoys building web applications and exploring software engineering.</h3>
 
 <h2>Tech Stack</h2>
 

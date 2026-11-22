@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-labelledby="title">
+  <title id="title">Habib Bitstream h logo</title>
+  <g id="symbol" fill="#5B6EF5">
+    <path d="M52 28H100V104H132V88H180V104H204V228H156V140H100V228H52V28Z"/>
+    <rect x="120" y="52" width="24" height="24" rx="3"/>
+    <rect x="156" y="28" width="16" height="16" rx="2"/>
+    <rect x="188" y="56" width="12" height="12" rx="2"/>
+  </g>
+</svg>

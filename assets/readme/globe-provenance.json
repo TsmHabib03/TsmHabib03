@@ -1,0 +1,33 @@
+{
+  "generator": "scripts/build-globe-banner.py",
+  "origin": "Code-rendered by scripts/build-globe-banner.py. Design reference: user-supplied c03cb1d108749ec829ba93a8baa211d9.jpg. Motion reference: user-supplied 7b0ab1b067f947787f822ff863e9a0eb.mp4. Geographic coordinates: Natural Earth ne_110m_land, public domain. Geist/Geist Mono: Google Fonts, SIL OFL. Bitstream h logo and favicon supplied by Habib.",
+  "font_source": "https://github.com/google/fonts/tree/main/ofl/geist",
+  "mono_source": "https://github.com/google/fonts/tree/main/ofl/geistmono",
+  "geography_source": "https://github.com/nvkelso/natural-earth-vector/blob/master/geojson/ne_110m_land.geojson",
+  "geography_license": "https://www.naturalearthdata.com/about/terms-of-use/",
+  "duration_ms": 10000,
+  "frames": 150,
+  "outputs": [
+    {
+      "file": "profile-globe.gif",
+      "bytes": 6906536,
+      "sha256": "fea1530036de3edc46d449eaa9d4eef99f2a8015434ccc073c5802d064897032"
+    },
+    {
+      "file": "profile-globe-still.png",
+      "bytes": 201167,
+      "sha256": "5970fc687008eb6a1fbaa25a322fc03efe7bc5b3481a1b85382243485247edc5"
+    },
+    {
+      "file": "profile-globe-mobile.gif",
+      "bytes": 5539054,
+      "sha256": "cdcc633af3e5b5a320e1efda871344c09e332fed8a6651d763ce52e9ce9d3873"
+    },
+    {
+      "file": "profile-globe-mobile-still.png",
+      "bytes": 157919,
+      "sha256": "1714f44c118dd4bce8a595ef04917de9b2732b795b005706680c23d578873d46"
+    }
+  ],
+  "font_identification": "Geist family matches the Next.js graphic; original JPEG font metadata is unavailable."
+}

@@ -61,7 +61,7 @@ class HeroContracts(unittest.TestCase):
     def test_readme_structure_and_asset_references(self):
         source = (ROOT / "README.md").read_text(encoding="utf-8")
         self.assertEqual(re.findall(r"<h2>(.+?)</h2>", source), [
-            "About", "Tech Stack", "Education", "Connection"])
+            "Tech Stack", "Education", "Connection"])
         self.assertNotRegex(source, r"assets/(?:hero|section-|project-|pixel-cat)|<style|\sstyle=|<script")
         for path in re.findall(r'(?:src|srcset)="([^"]+)"', source):
             if path.startswith("https://"):
@@ -72,9 +72,9 @@ class HeroContracts(unittest.TestCase):
         self.assertNotIn('<table', source)
         self.assertNotIn('<samp>', source)
         plain = unescape(re.sub(r'<[^>]+>', '', source))
-        self.assertIn("I'm a BSCS student at Quezon City University who enjoys building web applications and exploring software engineering.", plain)
-        self.assertIn('<h3>Building useful software, one project at a time.</h3>', source)
-        self.assertEqual(source.count('<strong><ins>Quezon City University</ins></strong>'), 2)
+        self.assertNotIn('<h2>About</h2>', source)
+        self.assertNotIn('Building useful software, one project at a time.', plain)
+        self.assertEqual(source.count('<strong><ins>Quezon City University</ins></strong>'), 1)
         stack = source.split('<h2>Tech Stack</h2>')[1].split('<h2>Education</h2>')[0]
         self.assertNotIn('<h3>', stack)
         self.assertEqual(stack.count('<p>'), 1)
@@ -102,7 +102,8 @@ class HeroContracts(unittest.TestCase):
         self.assertEqual(outputs, profile.profile_assets())
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         references = set(re.findall(r'(?:src|srcset)="assets/([^"]+)"', readme))
-        self.assertEqual(references, {"readme/profile-banner.svg", "readme/profile-banner-mobile.svg",
+        self.assertEqual(references, {"readme/profile-globe.gif", "readme/profile-globe-mobile.gif",
+                                      "readme/profile-globe-still.png", "readme/profile-globe-mobile-still.png",
                                       "readme/connect-banner.svg", "readme/connect-banner-mobile.svg"}
                          | {f"readme/{name}" for name in stack_assets.assets() if not name.startswith('heading-')})
         for name, source in stack_assets.assets().items():
