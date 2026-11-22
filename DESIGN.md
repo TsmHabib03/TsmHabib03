@@ -102,13 +102,13 @@ components:
     textColor: '{colors.identity-ink}'
     typography: '{typography.display}'
     width: 1200px
-    height: 675px
+    height: 320px
   hero-mobile:
     backgroundColor: '{colors.white}'
     textColor: '{colors.identity-ink}'
     typography: '{typography.display-mobile}'
     width: 600px
-    height: 760px
+    height: 440px
   connection:
     backgroundColor: '{colors.white}'
     textColor: '{colors.black}'
@@ -199,7 +199,7 @@ Dormant Silkscreen and legacy square-identity Open Sans assets remain retained p
 
 README.md uses one column: identity, one Tech Stack group, Education and Connection. The user removed About. One paragraph holds all twelve technology modules in their approved order. The earlier sanitized previews established two phone columns, five intermediate and six desktop without shrinking modules; the banner-only redesign preserves that group. Each qualification title precedes a native highlighted institution h3.
 
-Picture sources select mobile banners at 640px or below. Desktop identity uses a 1200 x 675 canvas, with a 670px white field at left and a 530px blue globe field at right. Phone uses a 600 x 760 canvas: 300px white identity above a 460px globe field. The supplied favicon and handle sit above the name; role and university follow below. The supplied white Bitstream h stays in the blue field's lower-right corner.
+Picture sources select mobile banners at 640px or below. Desktop identity uses a 1200 x 320 canvas, with a 670px white field at left and a 530px blue globe field at right. Phone uses a 600 x 440 canvas: 220px white identity above a 220px globe field. The supplied favicon and handle sit above the name; role and university follow below. The supplied white Bitstream h stays in the blue field's lower-right corner. The compact height follows the user's refinement request; type sizes stay unchanged while excess vertical spacing is removed.
 
 **The Stationary Identity Rule.** Keep the name, role, university and supplied brand marks still; animate only the geographic globe.
 

@@ -10,23 +10,23 @@
   "outputs": [
     {
       "file": "profile-globe.gif",
-      "bytes": 6906536,
-      "sha256": "fea1530036de3edc46d449eaa9d4eef99f2a8015434ccc073c5802d064897032"
+      "bytes": 2945664,
+      "sha256": "3f27e3ebe3c319fc4265562869962593536665569f81c5cec5c95918763096d0"
     },
     {
       "file": "profile-globe-still.png",
-      "bytes": 201167,
-      "sha256": "5970fc687008eb6a1fbaa25a322fc03efe7bc5b3481a1b85382243485247edc5"
+      "bytes": 98696,
+      "sha256": "b99f9feb555c029093385203b7e5f8357001c011558d58408d31001ab3b40caa"
     },
     {
       "file": "profile-globe-mobile.gif",
-      "bytes": 5539054,
-      "sha256": "cdcc633af3e5b5a320e1efda871344c09e332fed8a6651d763ce52e9ce9d3873"
+      "bytes": 1832857,
+      "sha256": "afe18c230cf9c15ad9bf25648fff6be8d58ba6a67f08e8c2535585fd99ba5ded"
     },
     {
       "file": "profile-globe-mobile-still.png",
-      "bytes": 157919,
-      "sha256": "1714f44c118dd4bce8a595ef04917de9b2732b795b005706680c23d578873d46"
+      "bytes": 63103,
+      "sha256": "1778e4743e2878d876e3066aabea1fffc1934fd796991a46c940b7a9f94af40b"
     }
   ],
   "font_identification": "Geist family matches the Next.js graphic; original JPEG font metadata is unavailable."

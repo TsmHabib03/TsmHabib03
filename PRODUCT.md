@@ -26,6 +26,8 @@ The unchanged technology, qualification and connection SVGs retain attributed br
 
 The user-supplied JPEG and MP4 govern the approved identity and motion character: white identity ground, saturated blue geographic dot globe, readable stationary type and the supplied favicon and Bitstream h geometry. Geist and Geist Mono are supported reference matches; exact JPEG font identification is unconfirmed. Exact identity: Habib Jaudian D. | WEB DEVELOPER | BSCS · QUEZON CITY UNIVERSITY. The handle is TSMHABIB03. The supplied h keeps its geometry and uses the approved white variant on blue.
 
+The user requested a compact, low-height GitHub hero while retaining the accepted identity and globe motion.
+
 The accepted navy/white modular reference remains authoritative for Connection. The user explicitly approved one banner containing every social icon plus one compact text-only link line below. Required sections following identity are Tech Stack, Education and Connection. All technologies remain one group: HTML, CSS, JavaScript, Tailwind CSS, Bootstrap, PHP, Java, MySQL, Git, GitHub, Docker and VS Code. Education pairs BS Computer Science with Quezon City University and NC III Web Development with TESDA, with qualification titles and native bold, underlined institutions. Entries carry no proficiency, dates or graduation claims.
 
 ## Evidence on Hand
@@ -39,3 +41,6 @@ The initial finish review at .impeccable/review/globe-banner/finish-review.md re
 ## Accessibility & Inclusion
 
 Highlighted institution names remain selectable native text. Banner alternatives describe identity and connection content. Technology alternatives name each technology; qualification alternatives carry full titles. Four native text links below the connection image retain destinations and keyboard focus. The user approved compact links; no minimum target-size claim is made. Fixed-size logos wrap without shrinking. Phone identity stays above the globe, and first-priority reduced-motion sources provide complete PNG stills. The text and supplied marks remain stationary in every animated frame.
+
+
+2026-11-22 compact-height refinement: the user requested a shorter GitHub hero. Desktop is now 1200 x 320 (53% less height) and phone is 600 x 440 (42% less height), with type sizes preserved and the complete globe fitting each blue field. The current eight local animated/reduced captures at 320px, 390px, 768px and 1440px show loaded assets, no overflow and correct PNG selection. All 25 tests pass; the single detector scan returned [] and provenance scan found 6 rasters, 0 missing. Delegated review task payloads were omitted, so the compact finish review was substituted using the degraded reviewer contract and records disposition: ship for this rendered refinement. This evidence is separate from the historical white-ground fix and prior live deployment. The compact publication is pending the subsequent publish step.

@@ -58,7 +58,7 @@ def brand_mark(draw, x, y, size, color):
 
 
 def layout(mobile=False):
-    return ((600,760), (0,300,600,460), (300,530), 194) if mobile else ((1200,675),(670,0,530,675),(935,337.5),226)
+    return ((600,440), (0,220,600,220), (300,330), 92) if mobile else ((1200,320),(670,0,530,320),(935,160),130)
 
 
 def base_image(mobile=False):
@@ -67,19 +67,19 @@ def base_image(mobile=False):
     draw = ImageDraw.Draw(im)
     draw.rectangle((bx*SCALE,by*SCALE,w*SCALE,h*SCALE),fill=BLUE)
     favicon = Image.open(OUT / "habib-favicon.png").convert("RGB")
-    fx,fy,fs = (36,38,28) if mobile else (60,116,28)
+    fx,fy,fs = (36,26,28) if mobile else (60,36,28)
     im.paste(favicon.resize((fs*SCALE,fs*SCALE), Image.Resampling.LANCZOS),(fx*SCALE,fy*SCALE))
     text(draw,"TSMHABIB03",(fx+42,fy+5),19,mono=True)
     if mobile:
-        text(draw,"Habib Jaudian D.",(34,111),60,weight=600)
-        text(draw,"WEB DEVELOPER",(36,205),23,mono=True)
-        text(draw,"BSCS · QUEZON CITY UNIVERSITY",(36,245),18,mono=True)
-        brand_mark(draw,538,710,36,"white")
+        text(draw,"Habib Jaudian D.",(34,78),60,weight=600)
+        text(draw,"WEB DEVELOPER",(36,152),23,mono=True)
+        text(draw,"BSCS · QUEZON CITY UNIVERSITY",(36,190),18,mono=True)
+        brand_mark(draw,548,394,32,"white")
     else:
-        text(draw,"Habib Jaudian D.",(58,249),68,weight=600)
-        text(draw,"WEB DEVELOPER",(62,383),27,mono=True)
-        text(draw,"BSCS · QUEZON CITY UNIVERSITY",(62,428),23,mono=True)
-        brand_mark(draw,1137,606,36,"white")
+        text(draw,"Habib Jaudian D.",(58,112),68,weight=600)
+        text(draw,"WEB DEVELOPER",(62,218),27,mono=True)
+        text(draw,"BSCS · QUEZON CITY UNIVERSITY",(62,262),23,mono=True)
+        brand_mark(draw,1137,264,36,"white")
     return im
 
 

@@ -4,8 +4,8 @@
 
 | Asset | Display | Source |
 | --- | --- | --- |
-| `readme/profile-globe.gif` | 1200 x 675 desktop identity; 6,906,536 bytes | White 670px identity field and blue 530px globe field; coded geographic rotation, stationary Geist/Geist Mono identity and supplied marks |
-| `readme/profile-globe-mobile.gif` | 600 x 760 phone identity; 5,539,054 bytes | 300px white identity above a 460px globe field |
+| `readme/profile-globe.gif` | 1200 x 320 desktop identity; 2,945,664 bytes | White 670px identity field and blue 530px globe field; coded geographic rotation, stationary Geist/Geist Mono identity and supplied marks |
+| `readme/profile-globe-mobile.gif` | 600 x 440 phone identity; 1,832,857 bytes | 220px white identity above a 220px globe field |
 | `readme/profile-globe-still.png`, `readme/profile-globe-mobile-still.png` | Complete desktop/phone reduced-motion frames | First-frame code render with embedded source/generation provenance |
 | `readme/habib-favicon.png`, `readme/habib-logo.svg` | Supplied favicon and Bitstream h geometry | Habib-owned brand inputs; h rendered as approved white variant on blue |
 | `readme/globe-source/ne_110m_land.geojson` | Build-time geographic coordinates | Natural Earth public-domain land polygons; source/license URLs in [globe-provenance.json](readme/globe-provenance.json) |
@@ -50,3 +50,6 @@ Local icon inputs are in `assets/icons/`, stored as raw brand SVGs. Brand marks 
 - **Simple Icons:** Laragon, Google Apps Script, Spring Boot, Instagram, TikTok. [Pinned source](https://github.com/simple-icons/simple-icons/tree/d4e6ba93e48f178898707f0145ec285f28b64b38/icons) and [CC0 license](icons/LICENSE-simple-icons.txt).
 
 Definition IDs are namespaced when combining icons. The README stack uses Devicon geometry through `icon_symbol(..., flat=True)` in the retained profile generator; this removes gradients and filters while preserving the upstream silhouettes. Available brand colors are retained, with display tints defined by `BRAND_TINT` where applicable. Retained portfolio and email mark files contain authored pixel geometry; the active connection builder replaces its email input with smooth authored envelope geometry. Other contact inputs use the attributed sources above.
+
+
+2026-11-22 compact-height refinement: the user requested a shorter GitHub hero. Desktop is now 1200 x 320 (53% less height) and phone is 600 x 440 (42% less height), with type sizes preserved and the complete globe fitting each blue field. The current eight local animated/reduced captures at 320px, 390px, 768px and 1440px show loaded assets, no overflow and correct PNG selection. All 25 tests pass; the single detector scan returned [] and provenance scan found 6 rasters, 0 missing. Delegated review task payloads were omitted, so the compact finish review was substituted using the degraded reviewer contract and records disposition: ship for this rendered refinement. This evidence is separate from the historical white-ground fix and prior live deployment. The compact publication is pending the subsequent publish step.

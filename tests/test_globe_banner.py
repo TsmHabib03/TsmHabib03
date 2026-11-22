@@ -24,7 +24,8 @@ class GlobeDelivery(unittest.TestCase):
                 self.assertLess((ROOT/f"assets/readme/{name}.gif").stat().st_size,8_000_000)
                 first=np.array(im.convert("RGB"))
                 self.assertEqual(tuple(first[0,0]), (255,255,255))
-                blue_pixel = first[310,0] if mobile else first[0,700]
+                _, (bx,by,_,_), _, _ = globe.layout(mobile)
+                blue_pixel = first[by+10,bx+10]
                 self.assertEqual(tuple(blue_pixel), globe.BLUE)
                 total=0
                 for index in range(im.n_frames):
@@ -34,7 +35,7 @@ class GlobeDelivery(unittest.TestCase):
                 last=np.array(im.convert("RGB"))
                 im.seek(75)
                 middle=np.array(im.convert("RGB"))
-                identity=(slice(0,300),slice(None)) if mobile else (slice(None),slice(0,670))
+                identity=(slice(0,220),slice(None)) if mobile else (slice(None),slice(0,670))
                 self.assertTrue(np.array_equal(first[identity],middle[identity]))
                 self.assertTrue(np.array_equal(first[identity],last[identity]))
                 self.assertGreater(np.mean(np.abs(first.astype(float)-middle.astype(float))),1)
