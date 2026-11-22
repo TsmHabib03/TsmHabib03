@@ -10,8 +10,12 @@
 | `readme/habib-favicon.png`, `readme/habib-logo.svg` | Supplied favicon and Bitstream h geometry | Habib-owned brand inputs; h rendered as approved white variant on blue |
 | `readme/globe-source/ne_110m_land.geojson` | Build-time geographic coordinates | Natural Earth public-domain land polygons; source/license URLs in [globe-provenance.json](readme/globe-provenance.json) |
 | `fonts/geist-variable.ttf`, `fonts/geist-mono-variable.ttf` | Build-time identity lettering | Geist/Geist Mono; local OFL licenses. Supported reference match, exact JPEG face unconfirmed |
-| `readme/connect-banner.svg` | One 1200 x 310 connection image; four 72px icon canvases and 25px labels | Navy (#080b1a)/white fields with modular blue (#468cc8), cyan (#66c9f3) and indigo (#394586); Facebook, Instagram, GitHub and Email together |
-| `readme/connect-banner-mobile.svg` | One 600 x 440 phone connection image; 80px icon canvases and 30px labels | Modular header above four contacts in a two-by-two layout inside one image |
+| `readme/connect-banner.gif` | Active 1200 x 240 desktop footer; 56,989 bytes | Electric blue (#001aff), cool pale (#eef2fe), white social silhouettes; one three-second pixel-edge ripple |
+| `readme/connect-banner-mobile.gif` | Active 600 x 320 phone footer; 50,117 bytes | Invitation above two rows of two contacts; same bounded motion |
+| `readme/connect-banner-still.png`, `readme/connect-banner-mobile-still.png` | Complete reduced-motion footer frames; 35,425 / 34,644 bytes | Resting edge and stationary Gruppo/Geist lettering; embedded provenance |
+| `fonts/gruppo-regular.ttf` | Footer display lettering | Licensed visual match for thin rounded reference capitals; [SIL OFL license](fonts/OFL-gruppo.txt); exact reference font unconfirmed |
+| `readme/connect-banner.svg` | Legacy 1200 x 310 connection image, retained unused | Earlier navy/white modular fields; absent from active README |
+| `readme/connect-banner-mobile.svg` | Legacy 600 x 440 phone connection image, retained unused | Earlier modular two-by-two composition; absent from active README |
 | `readme/tech-*.svg` | Twelve transparent 128 x 94px modules; 48px logos and 14px outlined labels | Attributed Devicon geometry: HTML, CSS, JavaScript, Tailwind CSS, Bootstrap, PHP, Java, MySQL, Git, GitHub, Docker, VS Code |
 | `readme/education-bscs.svg`, `readme/education-tesda.svg` | Two transparent 288 x 64px titles; both lines 24px | Orange BS COMPUTER / SCIENCE and cyan NC III / WEB DEVELOPMENT; highlighted institutions remain native README text |
 | `fonts/open-sans-variable.ttf` | Build-time smooth Bezier lettering for existing SVG components | Open Sans variable font; [SIL OFL license](fonts/OFL-open-sans.txt) |
@@ -24,9 +28,13 @@
 
 Rebuild with `python -m pip install -r scripts/requirements-globe.txt`, then `python scripts/build-globe-banner.py`. Local fonts, Natural Earth geometry, Pillow, NumPy and Shapely are build-time inputs. [globe-provenance.json](readme/globe-provenance.json) records source URLs, licenses, frame duration and output hashes. All six shipping rasters carry embedded provenance. Reduced-motion PNG sources come first in the README picture; responsive phone selection is at 640px. GitHub renders the GIF directly without a Pages deployment.
 
-[scripts/build-readme-banners.py](../scripts/build-readme-banners.py) creates the unchanged continuous connection banners and retains earlier square identity outputs and eight contact slices. FontTools instantiates Open Sans at normal width and converts glyph outlines into paths. Local font, FontTools and retained Pillow dependencies are build-time only. These SVGs embed no raster or font. The old square identity eighteen-second fades and complete orange fallback remain legacy behavior, unused by the active README.
+[scripts/build-readme-banners.py](../scripts/build-readme-banners.py) creates the retained unused modular connection SVGs and retains earlier square identity outputs and eight contact slices. FontTools instantiates Open Sans at normal width and converts glyph outlines into paths. Local font, FontTools and retained Pillow dependencies are build-time only. These SVGs embed no raster or font. The old square identity eighteen-second fades and complete orange fallback remain legacy behavior, unused by the active README.
 
-The connection builder places all four contacts inside each responsive banner. Facebook uses #1877f2, Instagram #a236b4, GitHub #232323 and smooth authored email #168bbd. A single picture element chooses the composition at 640px. Four centered text-only HTML links immediately below provide destinations and native keyboard focus. Banner icons are illustrative. No table, separate linked contact images or image-map interaction is used.
+[scripts/build-connect-footer.py](../scripts/build-connect-footer.py) builds the active pixel footer from code. Rebuild with `python -m pip install -r scripts/requirements-footer.txt`, `python -m playwright install chromium`, then `python scripts/build-connect-footer.py`. Pillow draws licensed local Gruppo Regular (68px desktop / 64px phone) and Geist Regular (support 23px / 26px; labels 22px / 25px), while build-time Chromium rasterizes attributed social SVG silhouettes. Icon canvases are 48px desktop / 38px phone. No runtime browser or font download is needed in the README.
+
+The blue/pale boundary uses 12px desktop or 10px phone cells and sparse crosshairs. Forty-five authored frames total exactly 3,000ms; optimization merges identical frames. The GIF has no loop extension and rests on its original boundary. Text and icons remain still. [footer-provenance.json](readme/footer-provenance.json) records the supplied local design reference, font/icon sources, output hashes, bytes and bounded motion. The reference JPEG is a design input; none of its pixels ship. All four footer rasters carry origin metadata.
+
+One picture element selects the phone footer at 640px and gives reduced-motion PNG sources first priority. Four centered native text links immediately below provide destinations and keyboard focus. Banner icons are illustrative. The existing modular connection SVGs and their generator remain unused historical assets.
 
 [scripts/build-readme-stack.py](../scripts/build-readme-stack.py) creates twelve modules, two qualification titles and retained unused category headings. Logo viewports begin at x=40, y=10 and labels at y=72; qualification lines begin at y=4 and y=37. One README paragraph wraps all technologies. Native h3 elements with strong plus ins highlight QCU and TESDA in Education. Transparent SVGs contain no embedded fonts, images, filters or network dependencies.
 
@@ -38,7 +46,7 @@ The earlier supplied JPEGs remain `readme/orange-reference.jpg` and `readme/modu
 
 Earlier city/cat scenes, project strips, square identity SVGs, original reference JPEGs and contribution assets remain for their existing generators and attribution history. The active README does not reference the cat, project strips or legacy scenes. Contribution data and refresh files remain unchanged by this revision.
 
-The dormant `fonts/silkscreen-latin.ttf` and [OFL-silkscreen.txt](fonts/OFL-silkscreen.txt) remain for legacy generators and provenance. Active identity rasters use Geist/Geist Mono; active technology, qualification and connection SVGs retain Open Sans outlines.
+The dormant `fonts/silkscreen-latin.ttf` and [OFL-silkscreen.txt](fonts/OFL-silkscreen.txt) remain for legacy generators and provenance. Active identity rasters use Geist/Geist Mono; active technology and qualification SVGs retain Open Sans outlines. Active footer rasters use Gruppo/Geist.
 
 `python -m unittest discover -s tests -q` checks current README references, retained deterministic assets and contribution integrity.
 
@@ -53,3 +61,6 @@ Definition IDs are namespaced when combining icons. The README stack uses Devico
 
 
 2026-11-22 compact-height refinement: the user requested a shorter GitHub hero. Desktop is now 1200 x 320 (53% less height) and phone is 600 x 440 (42% less height), with type sizes preserved and the complete globe fitting each blue field. The current eight local animated/reduced captures at 320px, 390px, 768px and 1440px show loaded assets, no overflow and correct PNG selection. All 25 tests pass; the single detector scan returned [] and provenance scan found 6 rasters, 0 missing. Delegated review task payloads were omitted, so the compact finish review was substituted using the degraded reviewer contract and records disposition: ship for this rendered refinement. This evidence is separate from the historical white-ground fix and prior live deployment. The compact publication is pending the subsequent publish step.
+
+
+2026-11-22 footer checks: all 26 tests pass; GFM-sanitized previews at 320, 390, 768 and 1440px confirm responsive loading, visible bounded motion, rest, reduced PNGs, no overflow and all four keyboard-focusable links. The single footer detector returned []; scan found 8 rasters, 0 missing provenance, with GIF comments checked separately.

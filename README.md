@@ -35,8 +35,10 @@
 <h2>Connection</h2>
 
 <picture>
-  <source media="(max-width: 640px)" srcset="assets/readme/connect-banner-mobile.svg">
-  <img src="assets/readme/connect-banner.svg" width="100%" alt="Let's connect. Build something useful. Facebook, Instagram, GitHub and Email; use the links below.">
+  <source media="(prefers-reduced-motion: reduce) and (max-width: 640px)" srcset="assets/readme/connect-banner-mobile-still.png">
+  <source media="(prefers-reduced-motion: reduce)" srcset="assets/readme/connect-banner-still.png">
+  <source media="(max-width: 640px)" srcset="assets/readme/connect-banner-mobile.gif">
+  <img src="assets/readme/connect-banner.gif" width="100%" alt="Let's connect. Build something useful. Facebook, Instagram, GitHub and Email; use the links below. Blue pixel edge ripples once, then rests.">
 </picture>
 
 <p align="center"><a href="https://www.facebook.com/habib.jaudian.1">Facebook</a> · <a href="https://www.instagram.com/tsmhabib03?igsh=MWFoaTBnOXcxZ3dqdg%3D%3D">Instagram</a> · <a href="https://github.com/TsmHabib03">GitHub</a> · <a href="mailto:jaudianhabib879@gmail.com">Email</a></p>

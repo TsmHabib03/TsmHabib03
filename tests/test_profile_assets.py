@@ -94,7 +94,7 @@ class HeroContracts(unittest.TestCase):
         self.assertIn('<p align="center">', contact)
         self.assertIn('https://www.facebook.com/habib.jaudian.1', contact)
         self.assertIn('https://www.instagram.com/tsmhabib03', contact)
-        self.assertLess(contact.index('connect-banner.svg'), contact.index('<a href='))
+        self.assertLess(contact.index('connect-banner.gif'), contact.index('<a href='))
         self.assertIn('mailto:jaudianhabib879@gmail.com', contact)
 
     def test_retained_profile_assets_are_self_contained(self):
@@ -104,7 +104,8 @@ class HeroContracts(unittest.TestCase):
         references = set(re.findall(r'(?:src|srcset)="assets/([^"]+)"', readme))
         self.assertEqual(references, {"readme/profile-globe.gif", "readme/profile-globe-mobile.gif",
                                       "readme/profile-globe-still.png", "readme/profile-globe-mobile-still.png",
-                                      "readme/connect-banner.svg", "readme/connect-banner-mobile.svg"}
+                                      "readme/connect-banner.gif", "readme/connect-banner-mobile.gif",
+                                      "readme/connect-banner-still.png", "readme/connect-banner-mobile-still.png"}
                          | {f"readme/{name}" for name in stack_assets.assets() if not name.startswith('heading-')})
         for name, source in stack_assets.assets().items():
             with self.subTest(readme_asset=name):

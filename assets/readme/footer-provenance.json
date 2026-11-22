@@ -1,0 +1,33 @@
+{
+  "generator": "scripts/build-connect-footer.py",
+  "origin": "Code-rendered by scripts/build-connect-footer.py. Design reference: Habib-supplied 3a1c06422d22325cff077bd3ba93e87b.jpg. Original computed pixel-boundary motion. Gruppo and Geist: Google Fonts, SIL OFL. Facebook/GitHub silhouettes: Devicon, MIT. Instagram: Simple Icons, CC0. Email envelope authored in this generator.",
+  "reference": "User-supplied 3a1c06422d22325cff077bd3ba93e87b.jpg; design only, no reference pixels ship",
+  "font_source": "https://github.com/google/fonts/tree/main/ofl/gruppo",
+  "font_identification": "Gruppo is a licensed visual match; exact reference face is unconfirmed.",
+  "support_font_source": "https://github.com/google/fonts/tree/main/ofl/geist",
+  "icon_attribution": "assets/icons/LICENSE-devicon.txt (MIT), assets/icons/LICENSE-simple-icons.txt (CC0)",
+  "duration_ms": 3000,
+  "repeat": false,
+  "outputs": [
+    {
+      "file": "connect-banner.gif",
+      "bytes": 56989,
+      "sha256": "8a7ae6e06d21e417cc8e8dfa31c6ba6853d2b044f7dce635c0d7269148deb0a9"
+    },
+    {
+      "file": "connect-banner-still.png",
+      "bytes": 35425,
+      "sha256": "71af859925088f325d319b524d95b07e8b3921d7627b6526430f72a80ba8927d"
+    },
+    {
+      "file": "connect-banner-mobile.gif",
+      "bytes": 50117,
+      "sha256": "f66a6ede5bd3af041b0119cb8f7c2b6d4ae4ac542b8cf8df00ecefba8baca6f8"
+    },
+    {
+      "file": "connect-banner-mobile-still.png",
+      "bytes": 34644,
+      "sha256": "ce7911144ebc629beab9b68d31b86a03282f59ce27b256574adf2fe7ea494aaa"
+    }
+  ]
+}
